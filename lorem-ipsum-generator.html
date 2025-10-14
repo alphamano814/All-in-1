@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorem Ipsum Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 1000px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .generator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- CONTROLS GRID --------- */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1rem;
+    }
+
+    /* --------- OPTIONS SECTION --------- */
+    .options-section {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      background: var(--card-bg);
+      transition: all 0.3s ease;
+    }
+
+    .option-item:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-2px);
+    }
+
+    .option-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+    }
+
+    .option-item label {
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .custom-wordlist-group {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .custom-wordlist-group.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .toggle-label {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-lighter);
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+
+    /* --------- BUTTONS --------- */
+    .button-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #0da271;
+      transform: translateY(-3px);
+    }
+
+    .btn-warning {
+      background: var(--warning);
+      color: white;
+    }
+
+    .btn-warning:hover {
+      background: #d97706;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-light);
+      transform: translateY(-3px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --------- PREVIEW SECTION --------- */
+    .preview-section {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .preview-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .preview-text {
+      font-family: Georgia, serif;
+      line-height: 1.5;
+      color: var(--text);
+      font-style: italic;
+      max-height: 4.5em;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preview-text::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 30%;
+      height: 1.5em;
+      background: linear-gradient(to right, transparent, var(--bg-light));
+    }
+
+    /* --------- OUTPUT SECTION --------- */
+    .output-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .output-title {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .output-stats {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .stat-badge {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .stat-badge strong {
+      color: var(--primary);
+    }
+
+    .text-output {
+      width: 100%;
+      min-height: 300px;
+      padding: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      resize: vertical;
+      font-family: Georgia, serif;
+      line-height: 1.6;
+    }
+
+    .text-output:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- MESSAGE TOAST --------- */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .button-group {
+        grid-template-columns: 1fr;
+      }
+
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .output-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .output-stats {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .generator-card {
+        padding: 1.5rem;
+      }
+
+      .output-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="generator-card">
+      <div class="card-header">
+        <i class="fas fa-text-height"></i>
+        <h2>Lorem Ipsum Generator</h2>
+        <p>Generate placeholder text for your designs and mockups</p>
+      </div>
+
+      <div class="controls-grid">
+        <div class="form-group">
+          <label for="modeSelect">Output Type</label>
+          <select id="modeSelect" class="form-control">
+            <option value="paragraphs">Paragraphs</option>
+            <option value="sentences">Sentences</option>
+            <option value="words">Words</option>
+            <option value="bytes">Bytes</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quantityInput">Quantity</label>
+          <input type="number" id="quantityInput" class="form-control" min="1" max="200" value="5">
+        </div>
+
+        <div class="form-group">
+          <label for="languageSelect">Language/Style</label>
+          <select id="languageSelect" class="form-control">
+            <option value="classic">Classic Latin</option>
+            <option value="short">Short (Concise)</option>
+            <option value="hipster">Hipster (Modern)</option>
+            <option value="tech">Tech (Technology)</option>
+            <option value="custom">Custom Wordlist</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="options-section">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">Generation Options</h3>
+        <div class="options-grid">
+          <div class="option-item">
+            <input type="checkbox" id="startClassic" checked>
+            <label for="startClassic">Start with "Lorem ipsum..."</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" id="includePunctuation" checked>
+            <label for="includePunctuation">Include punctuation</label>
+          </div>
+        </div>
+
+        <div class="custom-wordlist-group" id="customWordlistGroup">
+          <label for="customWordlist" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Custom Word List</label>
+          <textarea 
+            id="customWordlist" 
+            class="form-control" 
+            placeholder="Enter your custom words separated by commas..."
+            rows="4"
+          ></textarea>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+            Separate words with commas. These will be used to generate the text.
+          </div>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-switch">
+            <input type="checkbox" id="liveMode">
+            <span class="toggle-slider"></span>
+          </div>
+          <label for="liveMode" class="toggle-label">Live Mode (generate as you change settings)</label>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" id="generateBtn">
+          <i class="fas fa-magic"></i> Generate
+        </button>
+        <button class="btn btn-warning" id="randomizeBtn">
+          <i class="fas fa-random"></i> Randomize
+        </button>
+        <button class="btn btn-success" id="copyBtn">
+          <i class="fas fa-copy"></i> Copy Text
+        </button>
+        <button class="btn btn-success" id="downloadBtn">
+          <i class="fas fa-download"></i> Download .txt
+        </button>
+        <button class="btn btn-secondary" id="resetBtn">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+        <button class="btn btn-secondary" id="clearPrefsBtn">
+          <i class="fas fa-trash"></i> Clear Preferences
+        </button>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-label">Preview</div>
+        <div class="preview-text" id="previewText">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...
+        </div>
+      </div>
+
+      <div class="output-section">
+        <div class="output-header">
+          <div class="output-title">Generated Text</div>
+          <div class="output-stats">
+            <div class="stat-badge"><strong id="wordCount">0</strong> words</div>
+            <div class="stat-badge"><strong id="charCount">0</strong> characters</div>
+            <div class="stat-badge"><strong id="paraCount">0</strong> paragraphs</div>
+          </div>
+        </div>
+        <textarea 
+          id="textOutput" 
+          class="text-output" 
+          placeholder="Your generated text will appear here..."
+          readonly
+        ></textarea>
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="copyToast">
+    <i class="fas fa-check-circle"></i>
+    <span>Text copied to clipboard!</span>
+  </div>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const modeSelect = document.getElementById('modeSelect');
+    const quantityInput = document.getElementById('quantityInput');
+    const languageSelect = document.getElementById('languageSelect');
+    const startClassic = document.getElementById('startClassic');
+    const includePunctuation = document.getElementById('includePunctuation');
+    const customWordlistGroup = document.getElementById('customWordlistGroup');
+    const customWordlist = document.getElementById('customWordlist');
+    const liveMode = document.getElementById('liveMode');
+    const generateBtn = document.getElementById('generateBtn');
+    const randomizeBtn = document.getElementById('randomizeBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const clearPrefsBtn = document.getElementById('clearPrefsBtn');
+    const previewText = document.getElementById('previewText');
+    const textOutput = document.getElementById('textOutput');
+    const wordCount = document.getElementById('wordCount');
+    const charCount = document.getElementById('charCount');
+    const paraCount = document.getElementById('paraCount');
+    const copyToast = document.getElementById('copyToast');
+
+    // ---------- WORD LISTS ----------
+    const wordLists = {
+      classic: [
+        'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 
+        'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 
+        'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud', 
+        'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo', 
+        'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate', 
+        'velit', 'esse', 'cillum', 'eu', 'fugiat', 'nulla', 'pariatur', 'excepteur', 
+        'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 
+        'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'
+      ],
+      short: [
+        'design', 'mock', 'content', 'layout', 'text', 'user', 'interface', 'experience',
+        'web', 'mobile', 'app', 'site', 'page', 'section', 'header', 'footer', 'nav',
+        'button', 'link', 'image', 'icon', 'color', 'font', 'size', 'space', 'margin',
+        'padding', 'border', 'shadow', 'gradient', 'animation', 'transition', 'effect'
+      ],
+      hipster: [
+        'artisan', 'craft', 'bespoke', 'sustainable', 'organic', 'locavore', 'vinyl',
+        'aesthetic', 'authentic', 'minimal', 'retro', 'vintage', 'curated', 'handmade',
+        'small-batch', 'farm-to-table', 'pour-over', 'cold-brew', 'mustache', 'flannel',
+        'fixie', 'bicycle', 'tattoo', 'polaroid', 'meggings', 'hashtag', 'selfies'
+      ],
+      tech: [
+        'algorithm', 'blockchain', 'cloud', 'data', 'encryption', 'firewall', 'gateway',
+        'hash', 'interface', 'javascript', 'kernel', 'latency', 'microservice', 'node',
+        'optimization', 'protocol', 'query', 'runtime', 'scalability', 'token',
+        'uptime', 'virtualization', 'workflow', 'xml', 'yaml', 'zero-trust', 'api'
+      ]
+    };
+
+    const punctuation = ['.', ',', ';', ':', '!', '?'];
+    const sentenceEnders = ['.', '!', '?'];
+
+    // ---------- INITIALIZATION ----------
+    function initializeGenerator() {
+      // Load saved preferences
+      loadPreferences();
+      
+      // Set up event listeners
+      modeSelect.addEventListener('change', handleModeChange);
+      languageSelect.addEventListener('change', handleLanguageChange);
+      generateBtn.addEventListener('click', generateText);
+      randomizeBtn.addEventListener('click', randomizeSettings);
+      copyBtn.addEventListener('click', copyToClipboard);
+      downloadBtn.addEventListener('click', downloadText);
+      resetBtn.addEventListener('click', resetSettings);
+      clearPrefsBtn.addEventListener('click', clearPreferences);
+      
+      // Live mode listeners
+      const liveInputs = [modeSelect, quantityInput, languageSelect, startClassic, includePunctuation, customWordlist];
+      liveInputs.forEach(input => {
+        input.addEventListener('change', handleLiveMode);
+      });
+      customWordlist.addEventListener('input', handleLiveMode);
+      
+      // Initial generation
+      updateQuantityLimits();
+      generateText();
+    }
+
+    function handleModeChange() {
+      updateQuantityLimits();
+      if (liveMode.checked) {
+        generateText();
+      }
+    }
+
+    function handleLanguageChange() {
+      const isCustom = languageSelect.value === 'custom';
+      customWordlistGroup.classList.toggle('active', isCustom);
+      
+      if (liveMode.checked) {
+        generateText();
+      }
+    }
+
+    function handleLiveMode() {
+      if (liveMode.checked) {
+        generateText();
+      }
+    }
+
+    function updateQuantityLimits() {
+      const mode = modeSelect.value;
+      switch (mode) {
+        case 'paragraphs':
+          quantityInput.min = 1;
+          quantityInput.max = 200;
+          quantityInput.value = Math.min(parseInt(quantityInput.value) || 5, 200);
+          break;
+        case 'sentences':
+          quantityInput.min = 1;
+          quantityInput.max = 1000;
+          quantityInput.value = Math.min(parseInt(quantityInput.value) || 10, 1000);
+          break;
+        case 'words':
+          quantityInput.min = 1;
+          quantityInput.max = 5000;
+          quantityInput.value = Math.min(parseInt(quantityInput.value) || 100, 5000);
+          break;
+        case 'bytes':
+          quantityInput.min = 10;
+          quantityInput.max = 10000;
+          quantityInput.value = Math.min(parseInt(quantityInput.value) || 500, 10000);
+          break;
+      }
+    }
+
+    // ---------- TEXT GENERATION ----------
+    function generateText() {
+      const mode = modeSelect.value;
+      const quantity = parseInt(quantityInput.value);
+      const language = languageSelect.value;
+      const useClassicStart = startClassic.checked;
+      const usePunctuation = includePunctuation.checked;
+      
+      // Validate inputs
+      if (!validateInputs(quantity, language)) {
+        return;
+      }
+      
+      let generatedText = '';
+      
+      switch (mode) {
+        case 'paragraphs':
+          generatedText = generateParagraphs(quantity, language, useClassicStart, usePunctuation);
+          break;
+        case 'sentences':
+          generatedText = generateSentences(quantity, language, useClassicStart, usePunctuation);
+          break;
+        case 'words':
+          generatedText = generateWords(quantity, language, usePunctuation);
+          break;
+        case 'bytes':
+          generatedText = generateBytes(quantity, language, usePunctuation);
+          break;
+      }
+      
+      // Update UI
+      textOutput.value = generatedText;
+      updatePreview(generatedText);
+      updateStats(generatedText);
+      
+      // Save preferences
+      savePreferences();
+    }
+
+    function validateInputs(quantity, language) {
+      if (isNaN(quantity) || quantity < parseInt(quantityInput.min) || quantity > parseInt(quantityInput.max)) {
+        showStatus(`Please enter a quantity between ${quantityInput.min} and ${quantityInput.max}`, 'error');
+        return false;
+      }
+      
+      if (language === 'custom' && (!customWordlist.value || customWordlist.value.trim().length === 0)) {
+        showStatus('Please provide a custom word list', 'error');
+        return false;
+      }
+      
+      return true;
+    }
+
+    function generateParagraphs(count, language, useClassicStart, usePunctuation) {
+      const paragraphs = [];
+      
+      for (let i = 0; i < count; i++) {
+        let sentenceCount = getRandomInt(3, 8);
+        let paragraph = '';
+        
+        // First paragraph with classic start if enabled
+        if (i === 0 && useClassicStart) {
+          paragraph = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ';
+          sentenceCount = Math.max(1, sentenceCount - 1);
+        }
+        
+        // Generate sentences for the paragraph
+        const sentences = [];
+        for (let j = 0; j < sentenceCount; j++) {
+          sentences.push(generateSentence(language, usePunctuation));
+        }
+        
+        paragraph += sentences.join(' ');
+        paragraphs.push(paragraph);
+      }
+      
+      return paragraphs.join('\n\n');
+    }
+
+    function generateSentences(count, language, useClassicStart, usePunctuation) {
+      const sentences = [];
+      
+      for (let i = 0; i < count; i++) {
+        if (i === 0 && useClassicStart) {
+          sentences.push('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+        } else {
+          sentences.push(generateSentence(language, usePunctuation));
+        }
+      }
+      
+      return sentences.join(' ');
+    }
+
+    function generateWords(count, language, usePunctuation) {
+      const words = getWordList(language);
+      const result = [];
+      
+      for (let i = 0; i < count; i++) {
+        const word = words[getRandomInt(0, words.length - 1)];
+        result.push(word);
+        
+        // Occasionally add punctuation for readability
+        if (usePunctuation && i < count - 1 && Math.random() < 0.1) {
+          result.push(punctuation[getRandomInt(0, punctuation.length - 2)]); // Avoid sentence enders
+        }
+      }
+      
+      return result.join(' ');
+    }
+
+    function generateBytes(targetBytes, language, usePunctuation) {
+      const words = getWordList(language);
+      let result = '';
+      
+      while (new TextEncoder().encode(result).length < targetBytes) {
+        const word = words[getRandomInt(0, words.length - 1)];
+        result += (result ? ' ' : '') + word;
+        
+        // Add punctuation occasionally
+        if (usePunctuation && Math.random() < 0.2) {
+          result += punctuation[getRandomInt(0, punctuation.length - 1)];
+        }
+      }
+      
+      // Trim to approximate byte count
+      const encoder = new TextEncoder();
+      let encoded = encoder.encode(result);
+      
+      while (encoded.length > targetBytes) {
+        result = result.slice(0, -1);
+        encoded = encoder.encode(result);
+      }
+      
+      return result;
+    }
+
+    function generateSentence(language, usePunctuation) {
+      const words = getWordList(language);
+      const wordCount = getRandomInt(5, 20);
+      const sentenceWords = [];
+      
+      for (let i = 0; i < wordCount; i++) {
+        sentenceWords.push(words[getRandomInt(0, words.length - 1)]);
+      }
+      
+      // Capitalize first word
+      if (sentenceWords.length > 0) {
+        sentenceWords[0] = sentenceWords[0].charAt(0).toUpperCase() + sentenceWords[0].slice(1);
+      }
+      
+      let sentence = sentenceWords.join(' ');
+      
+      // Add punctuation
+      if (usePunctuation) {
+        // Add commas occasionally
+        const words = sentence.split(' ');
+        if (words.length > 3 && Math.random() < 0.3) {
+          const commaPos = getRandomInt(2, words.length - 2);
+          words[commaPos] += ',';
+          sentence = words.join(' ');
+        }
+        
+        // End with sentence punctuation
+        sentence += sentenceEnders[getRandomInt(0, sentenceEnders.length - 1)];
+      }
+      
+      return sentence;
+    }
+
+    function getWordList(language) {
+      if (language === 'custom') {
+        // Parse custom wordlist
+        const customWords = customWordlist.value.split(',')
+          .map(word => word.trim())
+          .filter(word => word.length > 0);
+        
+        return customWords.length > 0 ? customWords : wordLists.classic;
+      }
+      
+      return wordLists[language] || wordLists.classic;
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function getRandomInt(min, max) {
+      const randomBuffer = new Uint32Array(1);
+      crypto.getRandomValues(randomBuffer);
+      return min + (randomBuffer[0] % (max - min + 1));
+    }
+
+    function updatePreview(text) {
+      const preview = text.substring(0, 120);
+      previewText.textContent = preview + (text.length > 120 ? '...' : '');
+    }
+
+    function updateStats(text) {
+      const words = text.split(/\s+/).filter(word => word.length > 0);
+      const paragraphs = text.split(/\n\n/).filter(para => para.trim().length > 0);
+      
+      wordCount.textContent = words.length;
+      charCount.textContent = text.length;
+      paraCount.textContent = paragraphs.length;
+    }
+
+    function randomizeSettings() {
+      // Random mode
+      const modes = ['paragraphs', 'sentences', 'words', 'bytes'];
+      modeSelect.value = modes[getRandomInt(0, modes.length - 1)];
+      
+      // Random quantity based on mode
+      updateQuantityLimits();
+      const min = parseInt(quantityInput.min);
+      const max = parseInt(quantityInput.max);
+      quantityInput.value = getRandomInt(min, Math.min(min + 50, max));
+      
+      // Random language (excluding custom for simplicity)
+      const languages = ['classic', 'short', 'hipster', 'tech'];
+      languageSelect.value = languages[getRandomInt(0, languages.length - 1)];
+      handleLanguageChange();
+      
+      // Random options
+      startClassic.checked = Math.random() > 0.5;
+      includePunctuation.checked = Math.random() > 0.3;
+      
+      // Generate with new settings
+      generateText();
+    }
+
+    function copyToClipboard() {
+      if (!textOutput.value) return;
+      
+      navigator.clipboard.writeText(textOutput.value).then(() => {
+        copyToast.classList.add('show');
+        setTimeout(() => {
+          copyToast.classList.remove('show');
+        }, 3000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+
+    function downloadText() {
+      if (!textOutput.value) return;
+      
+      const blob = new Blob([textOutput.value], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'lorem-ipsum.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      copyToast.querySelector('span').textContent = 'Text downloaded!';
+      copyToast.classList.add('show');
+      setTimeout(() => {
+        copyToast.classList.remove('show');
+        copyToast.querySelector('span').textContent = 'Text copied to clipboard!';
+      }, 3000);
+    }
+
+    function resetSettings() {
+      modeSelect.value = 'paragraphs';
+      quantityInput.value = 5;
+      languageSelect.value = 'classic';
+      startClassic.checked = true;
+      includePunctuation.checked = true;
+      customWordlist.value = '';
+      handleLanguageChange();
+      updateQuantityLimits();
+      generateText();
+    }
+
+    function clearPreferences() {
+      if (confirm('Are you sure you want to clear all saved preferences?')) {
+        localStorage.removeItem('loremIpsumPreferences');
+        resetSettings();
+        showStatus('Preferences cleared', 'info');
+      }
+    }
+
+    // ---------- PREFERENCE MANAGEMENT ----------
+    function savePreferences() {
+      const preferences = {
+        mode: modeSelect.value,
+        quantity: quantityInput.value,
+        language: languageSelect.value,
+        startClassic: startClassic.checked,
+        includePunctuation: includePunctuation.checked,
+        customWordlist: customWordlist.value,
+        liveMode: liveMode.checked
+      };
+      
+      localStorage.setItem('loremIpsumPreferences', JSON.stringify(preferences));
+    }
+
+    function loadPreferences() {
+      const saved = localStorage.getItem('loremIpsumPreferences');
+      
+      if (saved) {
+        try {
+          const preferences = JSON.parse(saved);
+          
+          modeSelect.value = preferences.mode || 'paragraphs';
+          quantityInput.value = preferences.quantity || 5;
+          languageSelect.value = preferences.language || 'classic';
+          startClassic.checked = preferences.startClassic !== false;
+          includePunctuation.checked = preferences.includePunctuation !== false;
+          customWordlist.value = preferences.customWordlist || '';
+          liveMode.checked = preferences.liveMode || false;
+          
+          handleLanguageChange();
+          updateQuantityLimits();
+        } catch (e) {
+          console.error('Error loading preferences:', e);
+        }
+      }
+    }
+
+    function showStatus(message, type) {
+      // Simple console log for status - could be enhanced with a proper toast system
+      console.log(`${type}: ${message}`);
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    // Initialize the generator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeGenerator);
+  </script>
+</body>
+</html>

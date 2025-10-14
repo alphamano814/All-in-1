@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discount Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .calculator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input, .input-with-icon select {
+      padding-left: 3rem;
+    }
+
+    .input-with-icon .input-symbol {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-option {
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-option:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .toggle-option.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+    }
+
+    .checkbox-group label {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    .buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .calculate-btn, .reset-btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .calculate-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .calculate-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .reset-btn {
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-3px);
+    }
+
+    /* --------- RESULT SECTION --------- */
+    .result-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .result-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .result-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+    }
+
+    .result-title {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .discounted-price {
+      color: var(--success);
+    }
+
+    .savings-amount {
+      color: var(--secondary);
+    }
+
+    .savings-percent {
+      color: var(--primary);
+    }
+
+    .total-price {
+      color: var(--warning);
+    }
+
+    .breakdown-section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .breakdown-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .breakdown-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .breakdown-step {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .breakdown-label {
+      color: var(--text-muted);
+    }
+
+    .breakdown-value {
+      font-weight: 600;
+    }
+
+    .helper-text {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-style: italic;
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .buttons-row {
+        grid-template-columns: 1fr;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .result-value {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="calculator-card">
+      <div class="card-header">
+        <i class="fas fa-percentage"></i>
+        <h2>Discount Calculator</h2>
+        <p>Calculate your savings with single or multiple discounts</p>
+      </div>
+
+      <div class="form-group">
+        <label for="originalPrice">Original Price <span class="required">*</span></label>
+        <div class="input-with-icon">
+          <i class="fas fa-tag"></i>
+          <input type="number" id="originalPrice" class="form-control" placeholder="Enter original price" min="0.01" step="0.01">
+          <span class="input-symbol" id="currencySymbol">$</span>
+        </div>
+        <div class="error-message" id="priceError"></div>
+      </div>
+
+      <div class="form-group">
+        <label>First Discount</label>
+        <div class="toggle-group">
+          <div class="toggle-option active" data-type="percentage" data-discount="first">
+            <i class="fas fa-percent"></i> Percentage
+          </div>
+          <div class="toggle-option" data-type="fixed" data-discount="first">
+            <i class="fas fa-dollar-sign"></i> Fixed Amount
+          </div>
+        </div>
+        <div class="input-with-icon">
+          <i class="fas fa-percent"></i>
+          <input type="number" id="firstDiscount" class="form-control" placeholder="Enter discount value" min="0" step="0.01" value="10">
+          <span class="input-symbol" id="firstDiscountSymbol">%</span>
+        </div>
+        <div class="error-message" id="firstDiscountError"></div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="enableSecondDiscount">
+        <label for="enableSecondDiscount">Apply Additional Discount</label>
+      </div>
+
+      <div class="form-group" id="secondDiscountGroup" style="display: none;">
+        <label>Second Discount</label>
+        <div class="toggle-group">
+          <div class="toggle-option active" data-type="percentage" data-discount="second">
+            <i class="fas fa-percent"></i> Percentage
+          </div>
+          <div class="toggle-option" data-type="fixed" data-discount="second">
+            <i class="fas fa-dollar-sign"></i> Fixed Amount
+          </div>
+        </div>
+        <div class="input-with-icon">
+          <i class="fas fa-percent"></i>
+          <input type="number" id="secondDiscount" class="form-control" placeholder="Enter discount value" min="0" step="0.01" value="5">
+          <span class="input-symbol" id="secondDiscountSymbol">%</span>
+        </div>
+        <div class="error-message" id="secondDiscountError"></div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="enableTax">
+        <label for="enableTax">Include Sales Tax</label>
+      </div>
+
+      <div class="form-group" id="taxGroup" style="display: none;">
+        <label for="taxRate">Tax Rate</label>
+        <div class="input-with-icon">
+          <i class="fas fa-receipt"></i>
+          <input type="number" id="taxRate" class="form-control" placeholder="Enter tax rate" min="0" step="0.01" value="8">
+          <span class="input-symbol">%</span>
+        </div>
+        <div class="error-message" id="taxError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <div class="input-with-icon">
+          <i class="fas fa-cubes"></i>
+          <input type="number" id="quantity" class="form-control" placeholder="Enter quantity" min="1" step="1" value="1">
+        </div>
+        <div class="error-message" id="quantityError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="currency">Currency</label>
+        <div class="input-with-icon">
+          <i class="fas fa-money-bill-wave"></i>
+          <select id="currency" class="form-control">
+            <option value="$">USD ($)</option>
+            <option value="€">EUR (€)</option>
+            <option value="₹">INR (₹)</option>
+            <option value="Rs">NPR (Rs)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="buttons-row">
+        <button class="calculate-btn" id="calculateBtn">
+          <i class="fas fa-calculator"></i> Calculate Discount
+        </button>
+        <button class="reset-btn" id="resetBtn">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+      </div>
+
+      <div class="result-container" id="resultContainer">
+        <div class="result-label">Discount Calculation Results</div>
+        <div class="result-grid">
+          <div class="result-card">
+            <div class="result-title">Discounted Price</div>
+            <div class="result-value discounted-price" id="discountedPrice">-</div>
+            <div class="result-details">Per item</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Total Price</div>
+            <div class="result-value total-price" id="totalPrice">-</div>
+            <div class="result-details">For all items</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">You Save</div>
+            <div class="result-value savings-amount" id="savingsAmount">-</div>
+            <div class="result-details">Total savings</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Savings</div>
+            <div class="result-value savings-percent" id="savingsPercent">-</div>
+            <div class="result-details">Percentage saved</div>
+          </div>
+        </div>
+
+        <div class="breakdown-section">
+          <div class="breakdown-title">Price Breakdown</div>
+          <div class="breakdown-steps" id="breakdownSteps">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <div class="helper-text">
+        Enter original price and discount to see savings. You can apply an additional discount and tax if needed.
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const originalPriceInput = document.getElementById('originalPrice');
+    const firstDiscountInput = document.getElementById('firstDiscount');
+    const secondDiscountInput = document.getElementById('secondDiscount');
+    const taxRateInput = document.getElementById('taxRate');
+    const quantityInput = document.getElementById('quantity');
+    const currencySelect = document.getElementById('currency');
+    const calculateBtn = document.getElementById('calculateBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const enableSecondDiscount = document.getElementById('enableSecondDiscount');
+    const enableTax = document.getElementById('enableTax');
+    const secondDiscountGroup = document.getElementById('secondDiscountGroup');
+    const taxGroup = document.getElementById('taxGroup');
+    const discountedPrice = document.getElementById('discountedPrice');
+    const totalPrice = document.getElementById('totalPrice');
+    const savingsAmount = document.getElementById('savingsAmount');
+    const savingsPercent = document.getElementById('savingsPercent');
+    const breakdownSteps = document.getElementById('breakdownSteps');
+    const resultContainer = document.getElementById('resultContainer');
+    const currencySymbol = document.getElementById('currencySymbol');
+    const firstDiscountSymbol = document.getElementById('firstDiscountSymbol');
+    const secondDiscountSymbol = document.getElementById('secondDiscountSymbol');
+    
+    // Error message elements
+    const priceError = document.getElementById('priceError');
+    const firstDiscountError = document.getElementById('firstDiscountError');
+    const secondDiscountError = document.getElementById('secondDiscountError');
+    const taxError = document.getElementById('taxError');
+    const quantityError = document.getElementById('quantityError');
+
+    // ---------- DISCOUNT TYPES ----------
+    let firstDiscountType = 'percentage';
+    let secondDiscountType = 'percentage';
+
+    // ---------- INITIALIZATION ----------
+    function initializeCalculator() {
+      // Add event listeners
+      calculateBtn.addEventListener('click', calculateDiscount);
+      resetBtn.addEventListener('click', resetCalculator);
+      enableSecondDiscount.addEventListener('change', toggleSecondDiscount);
+      enableTax.addEventListener('change', toggleTax);
+      currencySelect.addEventListener('change', updateCurrencySymbol);
+      
+      // Add event listeners to toggle options
+      document.querySelectorAll('.toggle-option').forEach(option => {
+        option.addEventListener('click', toggleDiscountType);
+      });
+      
+      // Add real-time calculation on input change
+      originalPriceInput.addEventListener('input', calculateDiscount);
+      firstDiscountInput.addEventListener('input', calculateDiscount);
+      secondDiscountInput.addEventListener('input', calculateDiscount);
+      taxRateInput.addEventListener('input', calculateDiscount);
+      quantityInput.addEventListener('input', calculateDiscount);
+      
+      // Initialize currency symbol
+      updateCurrencySymbol();
+      
+      // Perform initial calculation
+      calculateDiscount();
+    }
+
+    // ---------- TOGGLE DISCOUNT TYPE ----------
+    function toggleDiscountType(e) {
+      const option = e.currentTarget;
+      const discountType = option.dataset.type;
+      const discount = option.dataset.discount;
+      
+      // Update active state
+      document.querySelectorAll(`.toggle-option[data-discount="${discount}"]`).forEach(opt => {
+        opt.classList.remove('active');
+      });
+      option.classList.add('active');
+      
+      // Update discount type
+      if (discount === 'first') {
+        firstDiscountType = discountType;
+        firstDiscountSymbol.textContent = discountType === 'percentage' ? '%' : currencySymbol.textContent;
+      } else {
+        secondDiscountType = discountType;
+        secondDiscountSymbol.textContent = discountType === 'percentage' ? '%' : currencySymbol.textContent;
+      }
+      
+      // Recalculate
+      calculateDiscount();
+    }
+
+    // ---------- TOGGLE SECOND DISCOUNT ----------
+    function toggleSecondDiscount() {
+      if (enableSecondDiscount.checked) {
+        secondDiscountGroup.style.display = 'block';
+      } else {
+        secondDiscountGroup.style.display = 'none';
+      }
+      calculateDiscount();
+    }
+
+    // ---------- TOGGLE TAX ----------
+    function toggleTax() {
+      if (enableTax.checked) {
+        taxGroup.style.display = 'block';
+      } else {
+        taxGroup.style.display = 'none';
+      }
+      calculateDiscount();
+    }
+
+    // ---------- UPDATE CURRENCY SYMBOL ----------
+    function updateCurrencySymbol() {
+      const symbol = currencySelect.value;
+      currencySymbol.textContent = symbol;
+      
+      // Update discount symbols if they are in fixed amount mode
+      if (firstDiscountType === 'fixed') {
+        firstDiscountSymbol.textContent = symbol;
+      }
+      if (secondDiscountType === 'fixed') {
+        secondDiscountSymbol.textContent = symbol;
+      }
+      
+      calculateDiscount();
+    }
+
+    // ---------- CALCULATE DISCOUNT ----------
+    function calculateDiscount() {
+      // Clear previous errors
+      clearErrors();
+      
+      // Get input values
+      const originalPrice = parseFloat(originalPriceInput.value);
+      const firstDiscountValue = parseFloat(firstDiscountInput.value) || 0;
+      const secondDiscountValue = parseFloat(secondDiscountInput.value) || 0;
+      const taxRate = parseFloat(taxRateInput.value) || 0;
+      const quantity = parseInt(quantityInput.value) || 1;
+      const currency = currencySelect.value;
+      
+      // Validate inputs
+      if (!validateInputs(originalPrice, firstDiscountValue, secondDiscountValue, taxRate, quantity)) {
+        return;
+      }
+      
+      // Calculate discounts
+      let priceAfterFirstDiscount = applyDiscount(originalPrice, firstDiscountValue, firstDiscountType);
+      let priceAfterSecondDiscount = priceAfterFirstDiscount;
+      
+      if (enableSecondDiscount.checked) {
+        priceAfterSecondDiscount = applyDiscount(priceAfterFirstDiscount, secondDiscountValue, secondDiscountType);
+      }
+      
+      let finalPrice = priceAfterSecondDiscount;
+      
+      // Apply tax if enabled
+      if (enableTax.checked) {
+        finalPrice = applyTax(priceAfterSecondDiscount, taxRate);
+      }
+      
+      // Calculate totals
+      const totalOriginalPrice = originalPrice * quantity;
+      const totalFinalPrice = finalPrice * quantity;
+      const totalSavings = totalOriginalPrice - totalFinalPrice;
+      const savingsPercentage = (totalSavings / totalOriginalPrice) * 100;
+      
+      // Display results
+      displayResults(finalPrice, totalFinalPrice, totalSavings, savingsPercentage, currency);
+      
+      // Display breakdown
+      displayBreakdown(
+        originalPrice, 
+        priceAfterFirstDiscount, 
+        priceAfterSecondDiscount, 
+        finalPrice, 
+        totalOriginalPrice, 
+        totalFinalPrice, 
+        currency
+      );
+    }
+
+    // ---------- APPLY DISCOUNT ----------
+    function applyDiscount(price, discountValue, discountType) {
+      if (discountType === 'percentage') {
+        return price * (1 - discountValue / 100);
+      } else {
+        // Fixed amount discount
+        return Math.max(0, price - discountValue);
+      }
+    }
+
+    // ---------- APPLY TAX ----------
+    function applyTax(price, taxRate) {
+      return price * (1 + taxRate / 100);
+    }
+
+    // ---------- VALIDATE INPUTS ----------
+    function validateInputs(originalPrice, firstDiscountValue, secondDiscountValue, taxRate, quantity) {
+      let isValid = true;
+      
+      // Validate original price
+      if (isNaN(originalPrice) || originalPrice <= 0) {
+        priceError.textContent = 'Please enter a valid original price';
+        priceError.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Validate first discount
+      if (isNaN(firstDiscountValue) || firstDiscountValue < 0) {
+        firstDiscountError.textContent = 'Please enter a valid discount value';
+        firstDiscountError.style.display = 'block';
+        isValid = false;
+      } else if (firstDiscountType === 'percentage' && firstDiscountValue > 100) {
+        firstDiscountError.textContent = 'Discount percentage cannot exceed 100%';
+        firstDiscountError.style.display = 'block';
+        isValid = false;
+      } else if (firstDiscountType === 'fixed' && firstDiscountValue > originalPrice) {
+        firstDiscountError.textContent = 'Fixed discount cannot exceed original price';
+        firstDiscountError.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Validate second discount if enabled
+      if (enableSecondDiscount.checked) {
+        if (isNaN(secondDiscountValue) || secondDiscountValue < 0) {
+          secondDiscountError.textContent = 'Please enter a valid discount value';
+          secondDiscountError.style.display = 'block';
+          isValid = false;
+        } else if (secondDiscountType === 'percentage' && secondDiscountValue > 100) {
+          secondDiscountError.textContent = 'Discount percentage cannot exceed 100%';
+          secondDiscountError.style.display = 'block';
+          isValid = false;
+        }
+      }
+      
+      // Validate tax rate if enabled
+      if (enableTax.checked && (isNaN(taxRate) || taxRate < 0)) {
+        taxError.textContent = 'Please enter a valid tax rate';
+        taxError.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Validate quantity
+      if (isNaN(quantity) || quantity < 1) {
+        quantityError.textContent = 'Please enter a valid quantity';
+        quantityError.style.display = 'block';
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    // ---------- CLEAR ERRORS ----------
+    function clearErrors() {
+      priceError.style.display = 'none';
+      firstDiscountError.style.display = 'none';
+      secondDiscountError.style.display = 'none';
+      taxError.style.display = 'none';
+      quantityError.style.display = 'none';
+    }
+
+    // ---------- DISPLAY RESULTS ----------
+    function displayResults(finalPrice, totalFinalPrice, totalSavings, savingsPercentage, currency) {
+      const formatter = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      
+      discountedPrice.textContent = `${currency}${formatter.format(finalPrice)}`;
+      totalPrice.textContent = `${currency}${formatter.format(totalFinalPrice)}`;
+      savingsAmount.textContent = `${currency}${formatter.format(totalSavings)}`;
+      savingsPercent.textContent = `${formatter.format(savingsPercentage)}%`;
+      
+      resultContainer.classList.add('active');
+    }
+
+    // ---------- DISPLAY BREAKDOWN ----------
+    function displayBreakdown(originalPrice, priceAfterFirstDiscount, priceAfterSecondDiscount, finalPrice, totalOriginalPrice, totalFinalPrice, currency) {
+      const formatter = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      
+      let breakdownHTML = '';
+      
+      // Original price
+      breakdownHTML += `
+        <div class="breakdown-step">
+          <span class="breakdown-label">Original Price</span>
+          <span class="breakdown-value">${currency}${formatter.format(originalPrice)}</span>
+        </div>
+      `;
+      
+      // First discount
+      if (firstDiscountInput.value && parseFloat(firstDiscountInput.value) > 0) {
+        breakdownHTML += `
+          <div class="breakdown-step">
+            <span class="breakdown-label">After First Discount</span>
+            <span class="breakdown-value">${currency}${formatter.format(priceAfterFirstDiscount)}</span>
+          </div>
+        `;
+      }
+      
+      // Second discount
+      if (enableSecondDiscount.checked && secondDiscountInput.value && parseFloat(secondDiscountInput.value) > 0) {
+        breakdownHTML += `
+          <div class="breakdown-step">
+            <span class="breakdown-label">After Second Discount</span>
+            <span class="breakdown-value">${currency}${formatter.format(priceAfterSecondDiscount)}</span>
+          </div>
+        `;
+      }
+      
+      // Tax
+      if (enableTax.checked && taxRateInput.value && parseFloat(taxRateInput.value) > 0) {
+        breakdownHTML += `
+          <div class="breakdown-step">
+            <span class="breakdown-label">After Tax</span>
+            <span class="breakdown-value">${currency}${formatter.format(finalPrice)}</span>
+          </div>
+        `;
+      }
+      
+      // Totals
+      breakdownHTML += `
+        <div class="breakdown-step" style="border-top: 2px solid var(--primary); padding-top: 1rem;">
+          <span class="breakdown-label"><strong>Total Original Price</strong></span>
+          <span class="breakdown-value"><strong>${currency}${formatter.format(totalOriginalPrice)}</strong></span>
+        </div>
+        <div class="breakdown-step">
+          <span class="breakdown-label"><strong>Total Final Price</strong></span>
+          <span class="breakdown-value"><strong>${currency}${formatter.format(totalFinalPrice)}</strong></span>
+        </div>
+      `;
+      
+      breakdownSteps.innerHTML = breakdownHTML;
+    }
+
+    // ---------- RESET CALCULATOR ----------
+    function resetCalculator() {
+      originalPriceInput.value = '';
+      firstDiscountInput.value = '10';
+      secondDiscountInput.value = '5';
+      taxRateInput.value = '8';
+      quantityInput.value = '1';
+      enableSecondDiscount.checked = false;
+      enableTax.checked = false;
+      secondDiscountGroup.style.display = 'none';
+      taxGroup.style.display = 'none';
+      currencySelect.value = '$';
+      
+      // Reset discount types
+      firstDiscountType = 'percentage';
+      secondDiscountType = 'percentage';
+      document.querySelectorAll('.toggle-option').forEach(option => {
+        if (option.dataset.type === 'percentage') {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+      
+      updateCurrencySymbol();
+      clearErrors();
+      resultContainer.classList.remove('active');
+      originalPriceInput.focus();
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    // Initialize the calculator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeCalculator);
+  </script>
+</body>
+</html>
