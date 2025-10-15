@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Background Remover</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- UPLOAD AREA --------- */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .upload-area.active {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .upload-area i {
+      font-size: 4rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-area h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .upload-area p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .upload-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    /* --------- PREVIEW AREA --------- */
+    .preview-container {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .preview-container.active {
+      display: grid;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @media (max-width: 768px) {
+      .preview-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .preview-box {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-light);
+    }
+
+    .preview-header {
+      padding: 1rem;
+      background: var(--bg-lighter);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .preview-content {
+      position: relative;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .preview-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .preview-canvas {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+    }
+
+    /* --------- CONTROLS --------- */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .control-btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .control-btn.primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .control-btn.secondary {
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .control-btn.secondary:hover {
+      background: var(--bg-light);
+      transform: translateY(-2px);
+    }
+
+    .control-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* --------- PROGRESS INDICATOR --------- */
+    .progress-container {
+      display: none;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .progress-container.active {
+      display: block;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--bg-lighter);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* --------- TOAST NOTIFICATION --------- */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--success);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error {
+      background: var(--error);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .control-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="tool-card">
+      <div class="card-header">
+        <i class="fas fa-image"></i>
+        <h2>Background Remover</h2>
+        <p>Upload an image to automatically remove its background - all processing happens locally in your browser</p>
+      </div>
+
+      <div class="upload-area" id="uploadArea">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h3>Upload an Image</h3>
+        <p>Drag & drop an image here or click to browse</p>
+        <p>Supports: PNG, JPG, JPEG, WebP</p>
+        <button class="upload-btn" id="uploadBtn">
+          <i class="fas fa-folder-open"></i> Choose File
+        </button>
+        <input type="file" id="fileInput" class="file-input" accept="image/png,image/jpeg,image/jpg,image/webp">
+      </div>
+
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">Processing image...</div>
+      </div>
+
+      <div class="preview-container" id="previewContainer">
+        <div class="preview-box">
+          <div class="preview-header">Original Image</div>
+          <div class="preview-content">
+            <img id="originalPreview" class="preview-image" alt="Original image preview">
+          </div>
+        </div>
+        <div class="preview-box">
+          <div class="preview-header">Background Removed</div>
+          <div class="preview-content">
+            <canvas id="processedCanvas" class="preview-canvas"></canvas>
+            <img id="processedPreview" class="preview-image" alt="Processed image preview" style="display: none;">
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn primary" id="removeBgBtn" disabled>
+          <i class="fas fa-magic"></i> Remove Background
+        </button>
+        <button class="control-btn secondary" id="downloadPngBtn" disabled>
+          <i class="fas fa-download"></i> Download PNG
+        </button>
+        <button class="control-btn secondary" id="downloadJpgBtn" disabled>
+          <i class="fas fa-download"></i> Download JPG
+        </button>
+        <button class="control-btn secondary" id="copyClipboardBtn" disabled>
+          <i class="fas fa-copy"></i> Copy to Clipboard
+        </button>
+        <button class="control-btn secondary" id="resetBtn">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const originalPreview = document.getElementById('originalPreview');
+    const processedPreview = document.getElementById('processedPreview');
+    const processedCanvas = document.getElementById('processedCanvas');
+    const previewContainer = document.getElementById('previewContainer');
+    const removeBgBtn = document.getElementById('removeBgBtn');
+    const downloadPngBtn = document.getElementById('downloadPngBtn');
+    const downloadJpgBtn = document.getElementById('downloadJpgBtn');
+    const copyClipboardBtn = document.getElementById('copyClipboardBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const toast = document.getElementById('toast');
+
+    // ---------- STATE VARIABLES ----------
+    let originalImage = null;
+    let processedImageData = null;
+    let worker = null;
+
+    // ---------- INITIALIZATION ----------
+    function initializeApp() {
+      // Set up event listeners
+      uploadArea.addEventListener('click', () => fileInput.click());
+      uploadArea.addEventListener('dragover', handleDragOver);
+      uploadArea.addEventListener('drop', handleDrop);
+      uploadBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', handleFileSelect);
+      removeBgBtn.addEventListener('click', removeBackground);
+      downloadPngBtn.addEventListener('click', downloadPng);
+      downloadJpgBtn.addEventListener('click', downloadJpg);
+      copyClipboardBtn.addEventListener('click', copyToClipboard);
+      resetBtn.addEventListener('click', resetApp);
+
+      // Create Web Worker for background removal
+      createWorker();
+    }
+
+    // ---------- FILE HANDLING ----------
+    function handleDragOver(e) {
+      e.preventDefault();
+      uploadArea.classList.add('active');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('active');
+      
+      const files = e.dataTransfer.files;
+      if (files.length > 0 && isImageFile(files[0])) {
+        loadImage(files[0]);
+      } else {
+        showToast('Please drop a valid image file', true);
+      }
+    }
+
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (file && isImageFile(file)) {
+        loadImage(file);
+      }
+    }
+
+    function isImageFile(file) {
+      return file.type.startsWith('image/') && 
+             ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'].includes(file.type);
+    }
+
+    function loadImage(file) {
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        originalImage = new Image();
+        originalImage.onload = function() {
+          originalPreview.src = e.target.result;
+          previewContainer.classList.add('active');
+          removeBgBtn.disabled = false;
+          resetOutputButtons();
+        };
+        originalImage.src = e.target.result;
+      };
+      
+      reader.readAsDataURL(file);
+    }
+
+    // ---------- BACKGROUND REMOVAL ----------
+    function removeBackground() {
+      if (!originalImage) return;
+      
+      showProgress(0, 'Starting background removal...');
+      removeBgBtn.disabled = true;
+      
+      // Use Web Worker for processing
+      worker.postMessage({
+        imageData: getImageData(originalImage),
+        width: originalImage.width,
+        height: originalImage.height
+      });
+    }
+
+    function getImageData(img) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      return ctx.getImageData(0, 0, canvas.width, canvas.height);
+    }
+
+    function createWorker() {
+      const workerCode = `
+        self.addEventListener('message', function(e) {
+          const { imageData, width, height } = e.data;
+          const result = removeBackgroundWorker(imageData, width, height);
+          self.postMessage(result);
+        });
+
+        function removeBackgroundWorker(imageData, width, height) {
+          const data = imageData.data;
+          const newData = new Uint8ClampedArray(data.length);
+          
+          // Simple background removal algorithm
+          // This is a simplified version - real implementation would be more complex
+          const backgroundColor = estimateBackgroundColor(data, width, height);
+          const threshold = 30;
+          
+          for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            const a = data[i + 3];
+            
+            // Calculate color distance from background
+            const distance = colorDistance([r, g, b], backgroundColor);
+            
+            if (distance < threshold) {
+              // Make pixel transparent
+              newData[i] = 0;
+              newData[i + 1] = 0;
+              newData[i + 2] = 0;
+              newData[i + 3] = 0;
+            } else {
+              // Keep original pixel
+              newData[i] = r;
+              newData[i + 1] = g;
+              newData[i + 2] = b;
+              newData[i + 3] = a;
+            }
+            
+            // Update progress periodically
+            if (i % (width * 4 * 10) === 0) {
+              const progress = (i / data.length) * 100;
+              self.postMessage({ type: 'progress', progress: Math.min(progress, 99) });
+            }
+          }
+          
+          return { 
+            type: 'complete', 
+            imageData: new ImageData(newData, width, height) 
+          };
+        }
+
+        function estimateBackgroundColor(data, width, height) {
+          // Sample corners to estimate background color
+          const corners = [
+            getPixel(data, width, 0, 0), // top-left
+            getPixel(data, width, width - 1, 0), // top-right
+            getPixel(data, width, 0, height - 1), // bottom-left
+            getPixel(data, width, width - 1, height - 1) // bottom-right
+          ];
+          
+          // Average the corner colors
+          let avgR = 0, avgG = 0, avgB = 0;
+          corners.forEach(pixel => {
+            avgR += pixel[0];
+            avgG += pixel[1];
+            avgB += pixel[2];
+          });
+          
+          return [
+            Math.round(avgR / corners.length),
+            Math.round(avgG / corners.length),
+            Math.round(avgB / corners.length)
+          ];
+        }
+
+        function getPixel(data, width, x, y) {
+          const index = (y * width + x) * 4;
+          return [data[index], data[index + 1], data[index + 2]];
+        }
+
+        function colorDistance(color1, color2) {
+          const dr = color1[0] - color2[0];
+          const dg = color1[1] - color2[1];
+          const db = color1[2] - color2[2];
+          return Math.sqrt(dr * dr + dg * dg + db * db);
+        }
+      `;
+      
+      const blob = new Blob([workerCode], { type: 'application/javascript' });
+      worker = new Worker(URL.createObjectURL(blob));
+      
+      worker.onmessage = function(e) {
+        const data = e.data;
+        
+        if (data.type === 'progress') {
+          showProgress(data.progress, `Processing: ${Math.round(data.progress)}%`);
+        } else if (data.type === 'complete') {
+          showProgress(100, 'Processing complete!');
+          processedImageData = data.imageData;
+          displayProcessedImage();
+          enableOutputButtons();
+          removeBgBtn.disabled = false;
+          
+          setTimeout(() => {
+            progressContainer.classList.remove('active');
+          }, 1000);
+        }
+      };
+    }
+
+    function displayProcessedImage() {
+      if (!processedImageData) return;
+      
+      const ctx = processedCanvas.getContext('2d');
+      processedCanvas.width = processedImageData.width;
+      processedCanvas.height = processedImageData.height;
+      ctx.putImageData(processedImageData, 0, 0);
+      
+      processedCanvas.style.display = 'block';
+      processedPreview.style.display = 'none';
+    }
+
+    // ---------- OUTPUT FUNCTIONS ----------
+    function downloadPng() {
+      if (!processedImageData) return;
+      
+      processedCanvas.toBlob(function(blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'background-removed.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showToast('PNG downloaded successfully!');
+      }, 'image/png');
+    }
+
+    function downloadJpg() {
+      if (!processedImageData) return;
+      
+      // Create a temporary canvas with white background for JPG
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCanvas.width = processedImageData.width;
+      tempCanvas.height = processedImageData.height;
+      
+      // Fill with white background
+      tempCtx.fillStyle = 'white';
+      tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+      
+      // Draw the processed image
+      tempCtx.drawImage(processedCanvas, 0, 0);
+      
+      tempCanvas.toBlob(function(blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'background-removed.jpg';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showToast('JPG downloaded successfully!');
+      }, 'image/jpeg', 0.9);
+    }
+
+    function copyToClipboard() {
+      if (!processedImageData) return;
+      
+      processedCanvas.toBlob(function(blob) {
+        navigator.clipboard.write([
+          new ClipboardItem({
+            'image/png': blob
+          })
+        ]).then(() => {
+          showToast('Image copied to clipboard!');
+        }).catch(err => {
+          showToast('Failed to copy image', true);
+        });
+      });
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function showProgress(percent, text) {
+      progressContainer.classList.add('active');
+      progressFill.style.width = percent + '%';
+      progressText.textContent = text;
+    }
+
+    function showToast(message, isError = false) {
+      toast.textContent = message;
+      toast.className = 'toast' + (isError ? ' error' : '');
+      toast.classList.add('active');
+      
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+
+    function resetOutputButtons() {
+      downloadPngBtn.disabled = true;
+      downloadJpgBtn.disabled = true;
+      copyClipboardBtn.disabled = true;
+    }
+
+    function enableOutputButtons() {
+      downloadPngBtn.disabled = false;
+      downloadJpgBtn.disabled = false;
+      copyClipboardBtn.disabled = false;
+    }
+
+    function resetApp() {
+      originalImage = null;
+      processedImageData = null;
+      originalPreview.src = '';
+      processedCanvas.style.display = 'none';
+      processedPreview.style.display = 'none';
+      previewContainer.classList.remove('active');
+      fileInput.value = '';
+      resetOutputButtons();
+      removeBgBtn.disabled = true;
+      progressContainer.classList.remove('active');
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    // Initialize the app when the page loads
+    document.addEventListener('DOMContentLoaded', initializeApp);
+  </script>
+</body>
+</html>

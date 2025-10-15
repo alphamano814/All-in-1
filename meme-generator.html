@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meme Generator</title>
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 1400px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .generator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .generator-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .generator-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --------- CONTROLS PANEL --------- */
+    .controls-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .panel-section {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .panel-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* --------- UPLOAD AREA --------- */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .upload-area.active {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .upload-icon {
+      font-size: 3rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-text h3 {
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-text p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .url-input {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .url-input input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    .url-input button {
+      padding: 0.8rem 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* --------- TEMPLATE GALLERY --------- */
+    .template-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .template-item {
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .template-item:hover {
+      transform: scale(1.05);
+      border-color: var(--primary);
+    }
+
+    .template-item img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .template-name {
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    /* --------- TEXT CONTROLS --------- */
+    .text-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .text-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .text-input-group label {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .text-input {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-lighter);
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .text-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .text-style-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .form-control {
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    .color-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .color-control input[type="color"] {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .color-control input[type="text"] {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .slider {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--bg-lighter);
+      outline: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+    }
+
+    .slider-value {
+      min-width: 3rem;
+      text-align: center;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+    }
+
+    /* --------- IMAGE CONTROLS --------- */
+    .image-controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .transform-controls {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .transform-btn {
+      flex: 1;
+      min-width: 80px;
+      padding: 0.8rem;
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .transform-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .filter-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* --------- PREVIEW AREA --------- */
+    .preview-area {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .preview-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      background-image: 
+        linear-gradient(45deg, var(--bg-lighter) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--bg-lighter) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--bg-lighter) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--bg-lighter) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    #memeCanvas {
+      display: block;
+      max-width: 100%;
+      max-height: 400px;
+      margin: 0 auto;
+    }
+
+    .canvas-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .canvas-btn {
+      padding: 0.8rem 1rem;
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .canvas-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .canvas-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .canvas-btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* --------- EXPORT CONTROLS --------- */
+    .export-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .export-format {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .format-btn {
+      flex: 1;
+      padding: 0.8rem;
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .format-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .export-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .action-btn.secondary {
+      background: var(--accent);
+    }
+
+    .action-btn.secondary:hover {
+      background: #8b5cf6;
+    }
+
+    /* --------- TOAST NOTIFICATIONS --------- */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.3s ease;
+      max-width: 350px;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .toast-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .toast-error {
+      background: var(--error);
+      color: white;
+    }
+
+    .toast-warning {
+      background: var(--warning);
+      color: white;
+    }
+
+    .toast i {
+      font-size: 1.2rem;
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .text-style-controls,
+      .image-controls-grid,
+      .export-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .template-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .transform-controls {
+        flex-direction: column;
+      }
+
+      .export-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="generator-card">
+      <div class="card-header">
+        <i class="fas fa-laugh-squint"></i>
+        <h2>Meme Generator</h2>
+        <p>Create hilarious memes in seconds with our easy-to-use tool</p>
+      </div>
+
+      <div class="generator-layout">
+        <div class="controls-panel">
+          <!-- Upload Section -->
+          <div class="panel-section">
+            <div class="panel-title">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Upload Image</span>
+            </div>
+            <div class="upload-area" id="uploadArea">
+              <div class="upload-icon">
+                <i class="fas fa-images"></i>
+              </div>
+              <div class="upload-text">
+                <h3>Drag & Drop Image</h3>
+                <p>or click to browse</p>
+                <button class="upload-btn" id="fileInputBtn">
+                  <i class="fas fa-folder-open"></i> Choose Image
+                </button>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+              </div>
+              <div class="url-input">
+                <input type="text" id="imageUrl" placeholder="Or paste image URL">
+                <button id="loadUrlBtn">Load</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Templates Section -->
+          <div class="panel-section">
+            <div class="panel-title">
+              <i class="fas fa-th-large"></i>
+              <span>Meme Templates</span>
+            </div>
+            <div class="template-gallery" id="templateGallery">
+              <!-- Templates will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Text Controls -->
+          <div class="panel-section">
+            <div class="panel-title">
+              <i class="fas fa-font"></i>
+              <span>Text Controls</span>
+            </div>
+            <div class="text-controls">
+              <div class="text-input-group">
+                <label for="topText">Top Text</label>
+                <input type="text" id="topText" class="text-input" placeholder="Enter top text">
+              </div>
+              <div class="text-input-group">
+                <label for="bottomText">Bottom Text</label>
+                <input type="text" id="bottomText" class="text-input" placeholder="Enter bottom text">
+              </div>
+
+              <div class="text-style-controls">
+                <div class="form-group">
+                  <label for="fontFamily">Font Family</label>
+                  <select id="fontFamily" class="form-control">
+                    <option value="Impact">Impact</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="fontSize">Font Size</label>
+                  <div class="slider-container">
+                    <input type="range" id="fontSize" class="slider" min="10" max="100" value="40">
+                    <span id="fontSizeValue" class="slider-value">40px</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="textColor">Text Color</label>
+                  <div class="color-control">
+                    <input type="color" id="textColor" value="#ffffff">
+                    <input type="text" id="textColorHex" value="#ffffff">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="strokeColor">Stroke Color</label>
+                  <div class="color-control">
+                    <input type="color" id="strokeColor" value="#000000">
+                    <input type="text" id="strokeColorHex" value="#000000">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="strokeWidth">Stroke Width</label>
+                  <div class="slider-container">
+                    <input type="range" id="strokeWidth" class="slider" min="0" max="10" value="2">
+                    <span id="strokeWidthValue" class="slider-value">2px</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="textAlign">Text Alignment</label>
+                  <select id="textAlign" class="form-control">
+                    <option value="center">Center</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Controls -->
+          <div class="panel-section">
+            <div class="panel-title">
+              <i class="fas fa-sliders-h"></i>
+              <span>Image Controls</span>
+            </div>
+            <div class="image-controls-grid">
+              <div class="transform-controls">
+                <button class="transform-btn" id="rotateLeftBtn">
+                  <i class="fas fa-undo"></i> Rotate Left
+                </button>
+                <button class="transform-btn" id="rotateRightBtn">
+                  <i class="fas fa-redo"></i> Rotate Right
+                </button>
+                <button class="transform-btn" id="flipHorizontalBtn">
+                  <i class="fas fa-arrows-alt-h"></i> Flip H
+                </button>
+                <button class="transform-btn" id="flipVerticalBtn">
+                  <i class="fas fa-arrows-alt-v"></i> Flip V
+                </button>
+              </div>
+              <div class="filter-controls">
+                <div class="form-group">
+                  <label for="brightness">Brightness</label>
+                  <div class="slider-container">
+                    <input type="range" id="brightness" class="slider" min="0" max="200" value="100">
+                    <span id="brightnessValue" class="slider-value">100%</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="contrast">Contrast</label>
+                  <div class="slider-container">
+                    <input type="range" id="contrast" class="slider" min="0" max="200" value="100">
+                    <span id="contrastValue" class="slider-value">100%</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="saturation">Saturation</label>
+                  <div class="slider-container">
+                    <input type="range" id="saturation" class="slider" min="0" max="200" value="100">
+                    <span id="saturationValue" class="slider-value">100%</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="blur">Blur</label>
+                  <div class="slider-container">
+                    <input type="range" id="blur" class="slider" min="0" max="10" value="0">
+                    <span id="blurValue" class="slider-value">0px</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-area">
+          <!-- Preview Section -->
+          <div class="panel-section preview-container">
+            <div class="canvas-container">
+              <canvas id="memeCanvas" width="600" height="400"></canvas>
+            </div>
+            <div class="canvas-controls">
+              <button class="canvas-btn" id="resetBtn">
+                <i class="fas fa-redo"></i> Reset
+              </button>
+              <button class="canvas-btn" id="addTextBtn">
+                <i class="fas fa-text-height"></i> Add Text
+              </button>
+              <button class="canvas-btn" id="clearTextBtn">
+                <i class="fas fa-eraser"></i> Clear Text
+              </button>
+            </div>
+          </div>
+
+          <!-- Export Controls -->
+          <div class="panel-section">
+            <div class="panel-title">
+              <i class="fas fa-download"></i>
+              <span>Export & Share</span>
+            </div>
+            <div class="export-controls">
+              <div class="export-format">
+                <button class="format-btn active" data-format="png">PNG</button>
+                <button class="format-btn" data-format="jpeg">JPEG</button>
+                <button class="format-btn" data-format="webp">WebP</button>
+              </div>
+              <div class="export-actions">
+                <button class="action-btn" id="downloadBtn">
+                  <i class="fas fa-download"></i> Download
+                </button>
+                <button class="action-btn secondary" id="shareBtn">
+                  <i class="fas fa-share-alt"></i> Share
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const fileInputBtn = document.getElementById('fileInputBtn');
+    const imageUrl = document.getElementById('imageUrl');
+    const loadUrlBtn = document.getElementById('loadUrlBtn');
+    const templateGallery = document.getElementById('templateGallery');
+    const topText = document.getElementById('topText');
+    const bottomText = document.getElementById('bottomText');
+    const fontFamily = document.getElementById('fontFamily');
+    const fontSize = document.getElementById('fontSize');
+    const fontSizeValue = document.getElementById('fontSizeValue');
+    const textColor = document.getElementById('textColor');
+    const textColorHex = document.getElementById('textColorHex');
+    const strokeColor = document.getElementById('strokeColor');
+    const strokeColorHex = document.getElementById('strokeColorHex');
+    const strokeWidth = document.getElementById('strokeWidth');
+    const strokeWidthValue = document.getElementById('strokeWidthValue');
+    const textAlign = document.getElementById('textAlign');
+    const rotateLeftBtn = document.getElementById('rotateLeftBtn');
+    const rotateRightBtn = document.getElementById('rotateRightBtn');
+    const flipHorizontalBtn = document.getElementById('flipHorizontalBtn');
+    const flipVerticalBtn = document.getElementById('flipVerticalBtn');
+    const brightness = document.getElementById('brightness');
+    const brightnessValue = document.getElementById('brightnessValue');
+    const contrast = document.getElementById('contrast');
+    const contrastValue = document.getElementById('contrastValue');
+    const saturation = document.getElementById('saturation');
+    const saturationValue = document.getElementById('saturationValue');
+    const blur = document.getElementById('blur');
+    const blurValue = document.getElementById('blurValue');
+    const memeCanvas = document.getElementById('memeCanvas');
+    const resetBtn = document.getElementById('resetBtn');
+    const addTextBtn = document.getElementById('addTextBtn');
+    const clearTextBtn = document.getElementById('clearTextBtn');
+    const formatBtns = document.querySelectorAll('.format-btn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const toastContainer = document.getElementById('toastContainer');
+
+    // ---------- GLOBAL VARIABLES ----------
+    let ctx = memeCanvas.getContext('2d');
+    let currentImage = null;
+    let currentRotation = 0;
+    let currentScale = 1;
+    let isFlippedHorizontal = false;
+    let isFlippedVertical = false;
+    let exportFormat = 'png';
+    let textElements = [];
+
+    // ---------- INITIALIZATION ----------
+    function initializeMemeGenerator() {
+      // Set up event listeners
+      fileInputBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', handleFileSelect);
+      loadUrlBtn.addEventListener('click', loadImageFromUrl);
+      
+      // Drag and drop events
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('active');
+      });
+      
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('active');
+      });
+      
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('active');
+        handleFileDrop(e.dataTransfer.files);
+      });
+      
+      // Text control events
+      topText.addEventListener('input', renderMeme);
+      bottomText.addEventListener('input', renderMeme);
+      fontFamily.addEventListener('change', renderMeme);
+      fontSize.addEventListener('input', updateFontSize);
+      textColor.addEventListener('input', updateTextColor);
+      textColorHex.addEventListener('input', updateTextColorHex);
+      strokeColor.addEventListener('input', updateStrokeColor);
+      strokeColorHex.addEventListener('input', updateStrokeColorHex);
+      strokeWidth.addEventListener('input', updateStrokeWidth);
+      textAlign.addEventListener('change', renderMeme);
+      
+      // Image control events
+      rotateLeftBtn.addEventListener('click', () => rotateImage(-90));
+      rotateRightBtn.addEventListener('click', () => rotateImage(90));
+      flipHorizontalBtn.addEventListener('click', flipHorizontal);
+      flipVerticalBtn.addEventListener('click', flipVertical);
+      brightness.addEventListener('input', updateBrightness);
+      contrast.addEventListener('input', updateContrast);
+      saturation.addEventListener('input', updateSaturation);
+      blur.addEventListener('input', updateBlur);
+      
+      // Canvas control events
+      resetBtn.addEventListener('click', resetCanvas);
+      addTextBtn.addEventListener('click', addTextElement);
+      clearTextBtn.addEventListener('click', clearTextElements);
+      
+      // Export events
+      formatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          formatBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          exportFormat = btn.dataset.format;
+        });
+      });
+      
+      downloadBtn.addEventListener('click', downloadMeme);
+      shareBtn.addEventListener('click', shareMeme);
+      
+      // Clipboard paste
+      document.addEventListener('paste', handlePaste);
+      
+      // Initialize with default template
+      loadDefaultTemplates();
+      renderMeme();
+      
+      // Check for browser support
+      checkBrowserSupport();
+    }
+
+    // ---------- TEMPLATE MANAGEMENT ----------
+    function loadDefaultTemplates() {
+      const templates = [
+        { name: 'Drake', url: 'https://i.imgflip.com/30b1gx.jpg' },
+        { name: 'Distracted Boyfriend', url: 'https://i.imgflip.com/1ur9b0.jpg' },
+        { name: 'Two Buttons', url: 'https://i.imgflip.com/1g8my4.jpg' },
+        { name: 'Change My Mind', url: 'https://i.imgflip.com/24y43o.jpg' },
+        { name: 'Left Exit 12', url: 'https://i.imgflip.com/22bdq6.jpg' },
+        { name: 'Running Away Balloon', url: 'https://i.imgflip.com/261o3j.jpg' }
+      ];
+      
+      templateGallery.innerHTML = '';
+      
+      templates.forEach(template => {
+        const templateItem = document.createElement('div');
+        templateItem.className = 'template-item';
+        templateItem.innerHTML = `
+          <img src="${template.url}" alt="${template.name}" loading="lazy">
+          <div class="template-name">${template.name}</div>
+        `;
+        templateItem.addEventListener('click', () => loadTemplate(template.url));
+        templateGallery.appendChild(templateItem);
+      });
+    }
+
+    function loadTemplate(url) {
+      loadImage(url);
+      showToast(`Loaded ${url.split('/').pop()} template`, 'success');
+    }
+
+    // ---------- IMAGE HANDLING ----------
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadImageFromFile(file);
+      }
+    }
+
+    function handleFileDrop(files) {
+      if (files.length > 0) {
+        loadImageFromFile(files[0]);
+      }
+    }
+
+    function handlePaste(e) {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const file = items[i].getAsFile();
+          if (file) {
+            loadImageFromFile(file);
+            showToast('Image pasted from clipboard', 'success');
+            break;
+          }
+        }
+      }
+    }
+
+    function loadImageFromFile(file) {
+      if (!file.type.startsWith('image/')) {
+        showToast('Please select an image file', 'error');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        loadImage(e.target.result);
+        showToast(`Loaded ${file.name}`, 'success');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function loadImageFromUrl() {
+      const url = imageUrl.value.trim();
+      if (!url) {
+        showToast('Please enter an image URL', 'error');
+        return;
+      }
+      
+      loadImage(url);
+      imageUrl.value = '';
+    }
+
+    function loadImage(src) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        currentImage = img;
+        resetTransformations();
+        renderMeme();
+      };
+      img.onerror = () => {
+        showToast('Failed to load image', 'error');
+      };
+      img.src = src;
+    }
+
+    // ---------- TEXT CONTROLS ----------
+    function updateFontSize() {
+      fontSizeValue.textContent = `${fontSize.value}px`;
+      renderMeme();
+    }
+
+    function updateTextColor() {
+      textColorHex.value = textColor.value;
+      renderMeme();
+    }
+
+    function updateTextColorHex() {
+      textColor.value = textColorHex.value;
+      renderMeme();
+    }
+
+    function updateStrokeColor() {
+      strokeColorHex.value = strokeColor.value;
+      renderMeme();
+    }
+
+    function updateStrokeColorHex() {
+      strokeColor.value = strokeColorHex.value;
+      renderMeme();
+    }
+
+    function updateStrokeWidth() {
+      strokeWidthValue.textContent = `${strokeWidth.value}px`;
+      renderMeme();
+    }
+
+    // ---------- IMAGE CONTROLS ----------
+    function rotateImage(degrees) {
+      currentRotation += degrees;
+      renderMeme();
+    }
+
+    function flipHorizontal() {
+      isFlippedHorizontal = !isFlippedHorizontal;
+      renderMeme();
+    }
+
+    function flipVertical() {
+      isFlippedVertical = !isFlippedVertical;
+      renderMeme();
+    }
+
+    function updateBrightness() {
+      brightnessValue.textContent = `${brightness.value}%`;
+      renderMeme();
+    }
+
+    function updateContrast() {
+      contrastValue.textContent = `${contrast.value}%`;
+      renderMeme();
+    }
+
+    function updateSaturation() {
+      saturationValue.textContent = `${saturation.value}%`;
+      renderMeme();
+    }
+
+    function updateBlur() {
+      blurValue.textContent = `${blur.value}px`;
+      renderMeme();
+    }
+
+    function resetTransformations() {
+      currentRotation = 0;
+      currentScale = 1;
+      isFlippedHorizontal = false;
+      isFlippedVertical = false;
+      brightness.value = 100;
+      brightnessValue.textContent = '100%';
+      contrast.value = 100;
+      contrastValue.textContent = '100%';
+      saturation.value = 100;
+      saturationValue.textContent = '100%';
+      blur.value = 0;
+      blurValue.textContent = '0px';
+    }
+
+    // ---------- CANVAS CONTROLS ----------
+    function resetCanvas() {
+      if (confirm('Are you sure you want to reset the canvas? This will clear all changes.')) {
+        currentImage = null;
+        textElements = [];
+        topText.value = '';
+        bottomText.value = '';
+        resetTransformations();
+        renderMeme();
+        showToast('Canvas reset', 'success');
+      }
+    }
+
+    function addTextElement() {
+      const text = prompt('Enter text for the new element:');
+      if (text) {
+        textElements.push({
+          text: text,
+          x: memeCanvas.width / 2,
+          y: memeCanvas.height / 2,
+          fontFamily: fontFamily.value,
+          fontSize: parseInt(fontSize.value),
+          color: textColor.value,
+          strokeColor: strokeColor.value,
+          strokeWidth: parseInt(strokeWidth.value),
+          align: textAlign.value
+        });
+        renderMeme();
+        showToast('Text element added', 'success');
+      }
+    }
+
+    function clearTextElements() {
+      if (textElements.length > 0 && confirm('Clear all text elements?')) {
+        textElements = [];
+        renderMeme();
+        showToast('All text elements cleared', 'success');
+      }
+    }
+
+    // ---------- RENDERING ----------
+    function renderMeme() {
+      // Clear canvas
+      ctx.clearRect(0, 0, memeCanvas.width, memeCanvas.height);
+      
+      // Draw background if no image
+      if (!currentImage) {
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(0, 0, memeCanvas.width, memeCanvas.height);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Upload an image or select a template to get started', memeCanvas.width / 2, memeCanvas.height / 2);
+        return;
+      }
+      
+      // Save context state
+      ctx.save();
+      
+      // Apply transformations
+      ctx.translate(memeCanvas.width / 2, memeCanvas.height / 2);
+      ctx.rotate((currentRotation * Math.PI) / 180);
+      
+      let scaleX = isFlippedHorizontal ? -currentScale : currentScale;
+      let scaleY = isFlippedVertical ? -currentScale : currentScale;
+      ctx.scale(scaleX, scaleY);
+      
+      // Apply filters
+      ctx.filter = `
+        brightness(${brightness.value}%) 
+        contrast(${contrast.value}%) 
+        saturate(${saturation.value}%) 
+        blur(${blur.value}px)
+      `;
+      
+      // Draw image centered
+      const imgAspect = currentImage.width / currentImage.height;
+      const canvasAspect = memeCanvas.width / memeCanvas.height;
+      
+      let renderableWidth, renderableHeight, xStart, yStart;
+      
+      if (imgAspect > canvasAspect) {
+        renderableWidth = memeCanvas.width;
+        renderableHeight = memeCanvas.width / imgAspect;
+        xStart = 0;
+        yStart = (memeCanvas.height - renderableHeight) / 2;
+      } else {
+        renderableWidth = memeCanvas.height * imgAspect;
+        renderableHeight = memeCanvas.height;
+        xStart = (memeCanvas.width - renderableWidth) / 2;
+        yStart = 0;
+      }
+      
+      ctx.drawImage(currentImage, -memeCanvas.width / 2, -memeCanvas.height / 2, memeCanvas.width, memeCanvas.height);
+      
+      // Restore context (remove transformations and filters for text)
+      ctx.restore();
+      
+      // Draw text elements
+      drawTextElements();
+    }
+
+    function drawTextElements() {
+      // Draw top text
+      if (topText.value) {
+        drawText(
+          topText.value,
+          memeCanvas.width / 2,
+          50,
+          fontFamily.value,
+          parseInt(fontSize.value),
+          textColor.value,
+          strokeColor.value,
+          parseInt(strokeWidth.value),
+          textAlign.value
+        );
+      }
+      
+      // Draw bottom text
+      if (bottomText.value) {
+        drawText(
+          bottomText.value,
+          memeCanvas.width / 2,
+          memeCanvas.height - 50,
+          fontFamily.value,
+          parseInt(fontSize.value),
+          textColor.value,
+          strokeColor.value,
+          parseInt(strokeWidth.value),
+          textAlign.value
+        );
+      }
+      
+      // Draw additional text elements
+      textElements.forEach(element => {
+        drawText(
+          element.text,
+          element.x,
+          element.y,
+          element.fontFamily,
+          element.fontSize,
+          element.color,
+          element.strokeColor,
+          element.strokeWidth,
+          element.align
+        );
+      });
+    }
+
+    function drawText(text, x, y, fontFamily, fontSize, color, strokeColor, strokeWidth, align) {
+      ctx.font = `${fontSize}px ${fontFamily}`;
+      ctx.textAlign = align;
+      ctx.textBaseline = 'middle';
+      
+      // Draw stroke
+      if (strokeWidth > 0) {
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = strokeWidth;
+        ctx.strokeText(text, x, y);
+      }
+      
+      // Draw fill
+      ctx.fillStyle = color;
+      ctx.fillText(text, x, y);
+    }
+
+    // ---------- EXPORT & SHARE ----------
+    function downloadMeme() {
+      if (!currentImage) {
+        showToast('Please add an image first', 'error');
+        return;
+      }
+      
+      const link = document.createElement('a');
+      let mimeType, extension;
+      
+      switch (exportFormat) {
+        case 'jpeg':
+          mimeType = 'image/jpeg';
+          extension = 'jpg';
+          break;
+        case 'webp':
+          mimeType = 'image/webp';
+          extension = 'webp';
+          break;
+        default:
+          mimeType = 'image/png';
+          extension = 'png';
+      }
+      
+      // Create a temporary canvas for export with higher quality
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = currentImage.naturalWidth || memeCanvas.width;
+      exportCanvas.height = currentImage.naturalHeight || memeCanvas.height;
+      const exportCtx = exportCanvas.getContext('2d');
+      
+      // Draw image on export canvas
+      if (currentImage) {
+        exportCtx.drawImage(currentImage, 0, 0, exportCanvas.width, exportCanvas.height);
+        
+        // Draw text on export canvas (scaled)
+        const scaleX = exportCanvas.width / memeCanvas.width;
+        const scaleY = exportCanvas.height / memeCanvas.height;
+        
+        // Draw top text
+        if (topText.value) {
+          exportCtx.font = `${parseInt(fontSize.value) * scaleX}px ${fontFamily.value}`;
+          exportCtx.textAlign = textAlign.value;
+          exportCtx.textBaseline = 'middle';
+          
+          if (parseInt(strokeWidth.value) > 0) {
+            exportCtx.strokeStyle = strokeColor.value;
+            exportCtx.lineWidth = parseInt(strokeWidth.value) * scaleX;
+            exportCtx.strokeText(topText.value, exportCanvas.width / 2, 50 * scaleY);
+          }
+          
+          exportCtx.fillStyle = textColor.value;
+          exportCtx.fillText(topText.value, exportCanvas.width / 2, 50 * scaleY);
+        }
+        
+        // Draw bottom text
+        if (bottomText.value) {
+          exportCtx.font = `${parseInt(fontSize.value) * scaleX}px ${fontFamily.value}`;
+          exportCtx.textAlign = textAlign.value;
+          exportCtx.textBaseline = 'middle';
+          
+          if (parseInt(strokeWidth.value) > 0) {
+            exportCtx.strokeStyle = strokeColor.value;
+            exportCtx.lineWidth = parseInt(strokeWidth.value) * scaleX;
+            exportCtx.strokeText(bottomText.value, exportCanvas.width / 2, exportCanvas.height - 50 * scaleY);
+          }
+          
+          exportCtx.fillStyle = textColor.value;
+          exportCtx.fillText(bottomText.value, exportCanvas.width / 2, exportCanvas.height - 50 * scaleY);
+        }
+      }
+      
+      // Get data URL and trigger download
+      const dataURL = exportCanvas.toDataURL(mimeType, 0.95);
+      link.href = dataURL;
+      link.download = `meme-${Date.now()}.${extension}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showToast(`Meme downloaded as ${extension.toUpperCase()}`, 'success');
+    }
+
+    function shareMeme() {
+      if (!currentImage) {
+        showToast('Please add an image first', 'error');
+        return;
+      }
+      
+      if (navigator.share) {
+        memeCanvas.toBlob(blob => {
+          const file = new File([blob], 'meme.png', { type: 'image/png' });
+          navigator.share({
+            title: 'Check out this meme I created!',
+            files: [file]
+          })
+          .then(() => showToast('Meme shared successfully', 'success'))
+          .catch(error => {
+            if (error.name !== 'AbortError') {
+              showToast('Failed to share meme', 'error');
+            }
+          });
+        });
+      } else {
+        showToast('Web Share API not supported in your browser', 'warning');
+      }
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function showToast(message, type) {
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      
+      let icon = 'info-circle';
+      if (type === 'success') icon = 'check-circle';
+      if (type === 'error') icon = 'exclamation-circle';
+      if (type === 'warning') icon = 'exclamation-triangle';
+      
+      toast.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        toast.remove();
+      }, 5000);
+    }
+
+    function checkBrowserSupport() {
+      // Check for WebP support
+      const webpSupport = document.createElement('canvas')
+        .toDataURL('image/webp')
+        .indexOf('data:image/webp') === 0;
+      
+      if (!webpSupport) {
+        const webpBtn = document.querySelector('[data-format="webp"]');
+        webpBtn.disabled = true;
+        webpBtn.title = 'WebP not supported in this browser';
+      }
+      
+      // Check for Web Share API support
+      if (!navigator.share) {
+        shareBtn.disabled = true;
+        shareBtn.title = 'Web Share API not supported in this browser';
+      }
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    // Initialize the meme generator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeMemeGenerator);
+  </script>
+</body>
+</html>
