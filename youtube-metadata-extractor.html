@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>YouTube Metadata Extractor | Free Video Info Tool - Prabin's Toolbox</title>
+  <meta name="description" content="Extract YouTube video metadata instantly with Prabin's Toolbox. Get title, description, channel, upload date, and more from any YouTube URL.">
+  <meta name="keywords" content="youtube metadata extractor, video info, youtube video details, youtube info tool, free youtube metadata, get youtube title and description, online youtube info extractor">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/youtube-metadata-extractor.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="YouTube Metadata Extractor | Free Video Info Tool - Prabin's Toolbox">
+  <meta property="og:description" content="Get YouTube video metadata instantly. Browser-based, free, and no signup required.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/youtube-metadata-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/youtube-metadata-extractor.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YouTube Metadata Extractor - Prabin's Toolbox">
+  <meta name="twitter:description" content="Extract YouTube video metadata like title, description, channel, upload date, and more instantly online.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/youtube-metadata-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "YouTube Metadata Extractor",
+    "description": "Extract YouTube video metadata instantly with Prabin's Toolbox. Get title, description, channel, upload date, and more from any YouTube URL.",
+    "url": "https://www.prabinpokhrel1.com.np/youtube-metadata-extractor.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .extractor-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input {
+      padding-left: 3rem;
+    }
+
+    .extract-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .extract-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .extract-btn:active {
+      transform: translateY(0);
+    }
+
+    .extract-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --------- RESULT SECTION --------- */
+    .result-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .result-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .result-container.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    }
+
+    .result-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .metadata-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .metadata-card h3 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .metadata-item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metadata-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .metadata-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .metadata-value {
+      font-size: 1rem;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .metadata-value.description {
+      max-height: 150px;
+      overflow-y: auto;
+      line-height: 1.5;
+    }
+
+    .copy-btn {
+      padding: 0.7rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    .copy-btn.copied {
+      background: var(--success);
+    }
+
+    .thumbnail-preview {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .metadata-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="extractor-card">
+        <div class="card-header">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+          <h1>YouTube Metadata Extractor</h1>
+          <p>Extract video metadata including title, description, channel info, and more from any YouTube video</p>
+        </div>
+
+        <div class="form-group">
+          <label for="youtubeUrl">YouTube Video URL <span class="required">*</span></label>
+          <div class="input-with-icon">
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+            <input type="url" id="youtubeUrl" class="form-control" placeholder="https://www.youtube.com/watch?v=..." required>
+          </div>
+        </div>
+
+        <button class="extract-btn" id="extractBtn" aria-label="Extract metadata">
+          <i class="fas fa-code" aria-hidden="true"></i> Extract Metadata
+        </button>
+
+        <div class="result-container" id="resultContainer" aria-live="polite">
+          <div class="result-label">Video Metadata</div>
+          <div class="metadata-grid" id="metadataGrid">
+            <!-- Will be populated by JavaScript -->
+          </div>
+          
+          <button class="copy-btn" id="copyBtn" aria-label="Copy metadata as JSON">
+            <i class="fas fa-copy" aria-hidden="true"></i> Copy as JSON
+          </button>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This YouTube Metadata Extractor</h2>
+      <p>Our YouTube Metadata Extractor is a powerful tool that allows you to extract comprehensive information from any YouTube video. Simply paste the video URL, and our tool will retrieve detailed metadata including title, description, channel information, and more.</p>
+      
+      <h3>How to Use the YouTube Metadata Extractor</h3>
+      <p>Using our metadata extractor is simple:</p>
+      <ul>
+        <li>Copy the URL of the YouTube video you want to analyze</li>
+        <li>Paste the URL into the input field above</li>
+        <li>Click the "Extract Metadata" button</li>
+        <li>View all available video information in an organized layout</li>
+        <li>Copy the metadata as JSON for further use if needed</li>
+      </ul>
+      
+      <h3>What This Tool Does</h3>
+      <p>This browser-based tool extracts metadata directly from YouTube using the oEmbed API and other techniques. It's perfect for:</p>
+      <ul>
+        <li>Content creators analyzing video performance</li>
+        <li>Researchers studying YouTube content and trends</li>
+        <li>Developers needing video metadata for applications</li>
+        <li>Marketers analyzing competitor videos</li>
+        <li>Anyone who needs quick access to YouTube video details</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="youtube-thumbnail-downloader.html" class="tool-link" aria-label="YouTube Thumbnail Downloader">
+          <i class="fab fa-youtube" aria-hidden="true"></i> Thumbnail Downloader
+        </a>
+        <a href="screen-recorder.html" class="tool-link" aria-label="Screen Recorder">
+          <i class="fas fa-video" aria-hidden="true"></i> Screen Recorder
+        </a>
+        <a href="age-calculator.html" class="tool-link" aria-label="Age Calculator">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i> Age Calculator
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>How does the YouTube Metadata Extractor work?</h3>
+        <p>Our tool uses YouTube's oEmbed API to retrieve basic video information and additional techniques to extract more detailed metadata. The process happens entirely in your browser - no data is sent to our servers.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>What metadata can I extract with this tool?</h3>
+        <p>You can extract video title, description, channel name, channel URL, thumbnail URLs, video duration, upload date, and when available, view counts and other engagement metrics.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is this tool free to use?</h3>
+        <p>Yes, our YouTube Metadata Extractor is completely free to use with no registration required. You can use it as many times as you need without any limitations.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I extract metadata from private or age-restricted videos?</h3>
+        <p>No, this tool can only extract metadata from publicly available YouTube videos. Private, unlisted, or age-restricted videos require authentication to access their metadata.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Why can't I see view counts or like counts for some videos?</h3>
+        <p>Some video metadata, particularly view counts and engagement metrics, may not be available through the public API for all videos. This depends on YouTube's API limitations and the video's privacy settings.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I use the extracted metadata for commercial purposes?</h3>
+        <p>The metadata extracted belongs to the video creator and YouTube. You should respect copyright laws and YouTube's terms of service when using extracted metadata.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const youtubeUrlInput = document.getElementById('youtubeUrl');
+    const extractBtn = document.getElementById('extractBtn');
+    const resultContainer = document.getElementById('resultContainer');
+    const metadataGrid = document.getElementById('metadataGrid');
+    const copyBtn = document.getElementById('copyBtn');
+
+    // ---------- INITIALIZATION ----------
+    function initializeExtractor() {
+      // Add event listeners
+      extractBtn.addEventListener('click', extractMetadata);
+      youtubeUrlInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') extractMetadata();
+      });
+      
+      copyBtn.addEventListener('click', copyMetadataAsJSON);
+      
+      // Initially hide the result container
+      resultContainer.classList.remove('active');
+    }
+
+    // ---------- EXTRACT METADATA ----------
+    async function extractMetadata() {
+      const youtubeUrl = youtubeUrlInput.value.trim();
+      
+      // Validate input
+      if (!youtubeUrl) {
+        showError('Please enter a YouTube URL');
+        return;
+      }
+      
+      // Extract video ID from URL
+      const videoId = getYouTubeVideoId(youtubeUrl);
+      
+      if (!videoId) {
+        showError('Please enter a valid YouTube URL');
+        return;
+      }
+      
+      // Show loading state
+      extractBtn.disabled = true;
+      extractBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Extracting...';
+      
+      try {
+        // Use oEmbed API to get basic metadata
+        const oEmbedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(youtubeUrl)}&format=json`;
+        const response = await fetch(oEmbedUrl);
+        
+        if (!response.ok) {
+          throw new Error('Video not found or inaccessible');
+        }
+        
+        const oEmbedData = await response.json();
+        
+        // Get additional metadata using other techniques
+        const additionalData = await getAdditionalMetadata(videoId);
+        
+        // Combine all metadata
+        const metadata = {
+          ...oEmbedData,
+          ...additionalData,
+          videoId: videoId,
+          videoUrl: youtubeUrl
+        };
+        
+        // Display metadata
+        displayMetadata(metadata);
+        
+        // Show result container
+        resultContainer.classList.remove('error');
+        resultContainer.classList.add('active');
+        
+      } catch (error) {
+        console.error('Error extracting metadata:', error);
+        showError('Failed to extract metadata. The video might be private, unavailable, or the URL is incorrect.');
+      } finally {
+        // Reset button state
+        extractBtn.disabled = false;
+        extractBtn.innerHTML = '<i class="fas fa-code" aria-hidden="true"></i> Extract Metadata';
+      }
+    }
+
+    // ---------- GET YOUTUBE VIDEO ID ----------
+    function getYouTubeVideoId(url) {
+      // Regular expressions to match various YouTube URL formats
+      const regexes = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?#/]+)/,
+        /youtube\.com\/watch\?.*v=([^&?#/]+)/,
+        /youtu\.be\/([^&?#/]+)/
+      ];
+      
+      for (const regex of regexes) {
+        const match = url.match(regex);
+        if (match && match[1]) {
+          return match[1];
+        }
+      }
+      
+      return null;
+    }
+
+    // ---------- GET ADDITIONAL METADATA ----------
+    async function getAdditionalMetadata(videoId) {
+      const additionalData = {};
+      
+      try {
+        // Try to get video info from YouTube's get_video_info endpoint
+        const videoInfoUrl = `https://www.youtube.com/get_video_info?video_id=${videoId}&el=embedded&ps=default`;
+        const response = await fetch(videoInfoUrl);
+        
+        if (response.ok) {
+          const text = await response.text();
+          const urlParams = new URLSearchParams(text);
+          const playerResponse = urlParams.get('player_response');
+          
+          if (playerResponse) {
+            const playerData = JSON.parse(playerResponse);
+            
+            // Extract additional metadata from player response
+            if (playerData.videoDetails) {
+              additionalData.description = playerData.videoDetails.shortDescription || '';
+              additionalData.duration = formatDuration(playerData.videoDetails.lengthSeconds);
+              additionalData.viewCount = formatNumber(playerData.videoDetails.viewCount) || 'Not available';
+            }
+            
+            if (playerData.microformat && playerData.microformat.playerMicroformatRenderer) {
+              additionalData.uploadDate = formatDate(playerData.microformat.playerMicroformatRenderer.uploadDate);
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('Could not fetch additional metadata:', error);
+      }
+      
+      // Generate thumbnail URLs
+      additionalData.thumbnails = {
+        maxres: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+        sd: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+        hq: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+        mq: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+        default: `https://img.youtube.com/vi/${videoId}/default.jpg`
+      };
+      
+      return additionalData;
+    }
+
+    // ---------- DISPLAY METADATA ----------
+    function displayMetadata(metadata) {
+      metadataGrid.innerHTML = '';
+      
+      // Basic Information Card
+      const basicInfoCard = document.createElement('div');
+      basicInfoCard.className = 'metadata-card';
+      basicInfoCard.innerHTML = `
+        <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Basic Information</h3>
+        <div class="metadata-item">
+          <div class="metadata-label">Video Title</div>
+          <div class="metadata-value">${metadata.title || 'Not available'}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Channel Name</div>
+          <div class="metadata-value">${metadata.author_name || 'Not available'}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Channel URL</div>
+          <div class="metadata-value">${metadata.author_url || 'Not available'}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Video Duration</div>
+          <div class="metadata-value">${metadata.duration || 'Not available'}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Upload Date</div>
+          <div class="metadata-value">${metadata.uploadDate || 'Not available'}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">View Count</div>
+          <div class="metadata-value">${metadata.viewCount || 'Not available'}</div>
+        </div>
+      `;
+      metadataGrid.appendChild(basicInfoCard);
+      
+      // Description Card
+      const descriptionCard = document.createElement('div');
+      descriptionCard.className = 'metadata-card';
+      descriptionCard.innerHTML = `
+        <h3><i class="fas fa-align-left" aria-hidden="true"></i> Description</h3>
+        <div class="metadata-item">
+          <div class="metadata-value description">${metadata.description || 'No description available'}</div>
+        </div>
+      `;
+      metadataGrid.appendChild(descriptionCard);
+      
+      // Thumbnails Card
+      const thumbnailsCard = document.createElement('div');
+      thumbnailsCard.className = 'metadata-card';
+      thumbnailsCard.innerHTML = `
+        <h3><i class="fas fa-image" aria-hidden="true"></i> Thumbnails</h3>
+        <div class="metadata-item">
+          <div class="metadata-label">Highest Quality</div>
+          <div class="metadata-value">
+            <a href="${metadata.thumbnails.maxres}" target="_blank">${metadata.thumbnails.maxres}</a>
+          </div>
+          <img src="${metadata.thumbnails.maxres}" class="thumbnail-preview" alt="Max resolution thumbnail" onerror="this.style.display='none'">
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Standard Quality</div>
+          <div class="metadata-value">
+            <a href="${metadata.thumbnails.sd}" target="_blank">${metadata.thumbnails.sd}</a>
+          </div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">High Quality</div>
+          <div class="metadata-value">
+            <a href="${metadata.thumbnails.hq}" target="_blank">${metadata.thumbnails.hq}</a>
+          </div>
+        </div>
+      `;
+      metadataGrid.appendChild(thumbnailsCard);
+      
+      // Technical Information Card
+      const technicalCard = document.createElement('div');
+      technicalCard.className = 'metadata-card';
+      technicalCard.innerHTML = `
+        <h3><i class="fas fa-cog" aria-hidden="true"></i> Technical Information</h3>
+        <div class="metadata-item">
+          <div class="metadata-label">Video ID</div>
+          <div class="metadata-value">${metadata.videoId}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Video URL</div>
+          <div class="metadata-value">
+            <a href="${metadata.videoUrl}" target="_blank">${metadata.videoUrl}</a>
+          </div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Provider Name</div>
+          <div class="metadata-value">${metadata.provider_name || 'YouTube'}</div>
+        </div>
+        <div class="metadata-item">
+          <div class="metadata-label">Provider URL</div>
+          <div class="metadata-value">${metadata.provider_url || 'https://www.youtube.com/'}</div>
+        </div>
+      `;
+      metadataGrid.appendChild(technicalCard);
+      
+      // Store metadata for copying
+      metadataGrid.dataset.metadata = JSON.stringify(metadata);
+    }
+
+    // ---------- COPY METADATA AS JSON ----------
+    function copyMetadataAsJSON() {
+      const metadata = metadataGrid.dataset.metadata;
+      
+      if (!metadata) {
+        alert('No metadata available to copy');
+        return;
+      }
+      
+      // Format JSON for better readability
+      const formattedMetadata = JSON.stringify(JSON.parse(metadata), null, 2);
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(formattedMetadata)
+        .then(() => {
+          // Show success feedback
+          copyBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Copied!';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy" aria-hidden="true"></i> Copy as JSON';
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+          alert('Failed to copy metadata to clipboard');
+        });
+    }
+
+    // ---------- HELPER FUNCTIONS ----------
+    function formatDuration(seconds) {
+      if (!seconds) return 'Not available';
+      
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = Math.floor(seconds % 60);
+      
+      if (hours > 0) {
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      } else {
+        return `${minutes}:${secs.toString().padStart(2, '0')}`;
+      }
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return 'Not available';
+      
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    function formatNumber(num) {
+      if (!num) return null;
+      
+      return parseInt(num).toLocaleString();
+    }
+
+    // ---------- SHOW ERROR ----------
+    function showError(message) {
+      resultContainer.innerHTML = `
+        <div class="result-label">Error</div>
+        <p>${message}</p>
+      `;
+      resultContainer.classList.remove('active');
+      resultContainer.classList.add('error');
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the extractor when the page loads
+    document.addEventListener('DOMContentLoaded', initializeExtractor);
+  </script>
+</body>
+</html>

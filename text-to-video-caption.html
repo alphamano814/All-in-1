@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Text to Video Caption Generator | Add Captions Online - Prabin's Toolbox</title>
+  <meta name="description" content="Add text captions to your videos online for free with Prabin's Toolbox. Upload a video, overlay captions, preview, and download instantly.">
+  <meta name="keywords" content="text to video, video caption generator, add captions to video, online video captions, free video text overlay, caption editor, browser-based video caption tool">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/text-to-video-caption.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Text to Video Caption Generator | Add Captions Online - Prabin's Toolbox">
+  <meta property="og:description" content="Add text captions to your videos instantly online. Free, browser-based, and easy to use.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/text-to-video-caption-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/text-to-video-caption.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text to Video Caption Generator - Prabin's Toolbox">
+  <meta name="twitter:description" content="Overlay text captions on videos instantly online. Preview and download your captioned video easily.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/text-to-video-caption-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text to Video Caption Generator",
+    "description": "Add text captions to your videos online for free with Prabin's Toolbox. Upload a video, overlay captions, preview, and download instantly.",
+    "url": "https://www.prabinpokhrel1.com.np/text-to-video-caption.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <!-- FFmpeg.wasm -->
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .caption-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- UPLOAD SECTION --------- */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: var(--bg-light);
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: var(--bg-lighter);
+    }
+
+    .upload-area.active {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .upload-area i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .upload-area h3 {
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-area p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .upload-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .file-info {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .file-info.hidden {
+      display: none;
+    }
+
+    /* --------- VIDEO PREVIEW --------- */
+    .video-preview-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .video-preview-container.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .preview-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .video-preview {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 8px;
+      background: var(--bg);
+      aspect-ratio: 16/9;
+      margin: 0 auto;
+    }
+
+    .video-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .control-btn {
+      padding: 0.7rem 1.2rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .control-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .control-btn:disabled:hover {
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    /* --------- CAPTIONS EDITOR --------- */
+    .captions-editor {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .captions-editor.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .editor-header h3 {
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .add-caption-btn {
+      padding: 0.7rem 1.2rem;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .add-caption-btn:hover {
+      background: #0da271;
+      transform: translateY(-2px);
+    }
+
+    .captions-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .caption-item {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .caption-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .caption-time {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .delete-caption {
+      background: var(--error);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .delete-caption:hover {
+      background: #dc2626;
+      transform: scale(1.1);
+    }
+
+    .caption-text {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .caption-text:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .time-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .time-input {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .time-input label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .time-input input {
+      padding: 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .time-input input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* --------- PROCESSING CONTROLS --------- */
+    .processing-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .processing-controls.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .process-btn {
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .process-btn:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .process-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .process-btn:disabled:hover {
+      transform: none;
+    }
+
+    .download-btn {
+      padding: 1rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .download-btn:hover:not(:disabled) {
+      background: #0da271;
+      transform: translateY(-3px);
+    }
+
+    .download-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .download-btn:disabled:hover {
+      transform: none;
+    }
+
+    /* --------- PROGRESS INDICATOR --------- */
+    .progress-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .progress-container.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .progress-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: var(--bg-lighter);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .time-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .processing-controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .process-btn, .download-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="caption-card">
+        <div class="card-header">
+          <i class="fas fa-closed-captioning" aria-hidden="true"></i>
+          <h1>Text to Video Caption Generator</h1>
+          <p>Upload your video, add text captions with timing, and download the captioned video</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+          <i class="fas fa-file-video" aria-hidden="true"></i>
+          <h3>Upload Video File</h3>
+          <p>Supported formats: MP4, WebM, MOV, AVI</p>
+          <button class="upload-btn" id="uploadBtn">
+            <i class="fas fa-upload" aria-hidden="true"></i> Choose File
+          </button>
+          <input type="file" id="fileInput" accept="video/*" hidden>
+          <div class="file-info hidden" id="fileInfo">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="video-preview-container" id="videoPreviewContainer">
+          <div class="preview-label">Video Preview</div>
+          <video class="video-preview" id="videoPreview" controls></video>
+          <div class="video-controls">
+            <button class="control-btn" id="playBtn">
+              <i class="fas fa-play" aria-hidden="true"></i> Play
+            </button>
+            <button class="control-btn" id="pauseBtn">
+              <i class="fas fa-pause" aria-hidden="true"></i> Pause
+            </button>
+            <button class="control-btn" id="currentTimeBtn">
+              <i class="fas fa-clock" aria-hidden="true"></i> Use Current Time
+            </button>
+          </div>
+        </div>
+
+        <div class="captions-editor" id="captionsEditor">
+          <div class="editor-header">
+            <h3>Video Captions</h3>
+            <button class="add-caption-btn" id="addCaptionBtn">
+              <i class="fas fa-plus" aria-hidden="true"></i> Add Caption
+            </button>
+          </div>
+          <div class="captions-list" id="captionsList">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-label" id="progressLabel">Processing Video</div>
+          <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+          </div>
+          <div class="progress-text" id="progressText">0%</div>
+        </div>
+
+        <div class="processing-controls" id="processingControls">
+          <button class="process-btn" id="processBtn" disabled>
+            <i class="fas fa-cogs" aria-hidden="true"></i> Generate Captioned Video
+          </button>
+          <button class="download-btn" id="downloadBtn" disabled>
+            <i class="fas fa-download" aria-hidden="true"></i> Download Video
+          </button>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This Video Caption Generator</h2>
+      <p>Our Text to Video Caption Generator is a powerful tool that allows you to add professional text captions to your videos directly in your browser. Whether you're creating content for social media, educational videos, or presentations, this tool makes it easy to add timed captions without any software installation.</p>
+      
+      <h3>How to Use the Video Caption Generator</h3>
+      <p>Using our caption generator is simple:</p>
+      <ul>
+        <li>Click "Choose File" to upload your video (MP4, WebM, MOV, AVI)</li>
+        <li>Preview your video and use the controls to navigate to specific times</li>
+        <li>Click "Add Caption" to create a new caption entry</li>
+        <li>Set the start and end times for when the caption should appear</li>
+        <li>Enter your caption text in the provided field</li>
+        <li>Click "Generate Captioned Video" to process your video</li>
+        <li>Download the final captioned video when processing is complete</li>
+      </ul>
+      
+      <h3>What This Tool Does</h3>
+      <p>This browser-based tool uses FFmpeg.wasm to process your video files and overlay text captions at the specified times. It's perfect for:</p>
+      <ul>
+        <li>Creating subtitles for videos</li>
+        <li>Adding text overlays for social media content</li>
+        <li>Creating educational videos with text explanations</li>
+        <li>Adding captions to marketing videos</li>
+        <li>Making videos more accessible with text descriptions</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="audio-volume-booster.html" class="tool-link" aria-label="Audio Volume Booster">
+          <i class="fas fa-volume-up" aria-hidden="true"></i> Audio Volume Booster
+        </a>
+        <a href="youtube-metadata-extractor.html" class="tool-link" aria-label="YouTube Metadata Extractor">
+          <i class="fab fa-youtube" aria-hidden="true"></i> YouTube Metadata Extractor
+        </a>
+        <a href="screen-recorder.html" class="tool-link" aria-label="Screen Recorder">
+          <i class="fas fa-video" aria-hidden="true"></i> Screen Recorder
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>How does the Video Caption Generator work?</h3>
+        <p>Our tool uses FFmpeg.wasm, a WebAssembly port of the popular FFmpeg multimedia framework, to process your videos directly in your browser. When you add captions, the tool creates a subtitle file and uses FFmpeg to overlay the text onto your video at the specified times.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>What video formats are supported?</h3>
+        <p>The tool supports most common video formats including MP4, WebM, MOV, and AVI. The browser's capabilities and FFmpeg.wasm determine which formats can be processed, but most modern formats are supported.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is there a file size limit?</h3>
+        <p>There's no hard limit, but very large files may take longer to process and could impact browser performance. For best results, we recommend videos under 500MB.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is this tool free to use?</h3>
+        <p>Yes, our Video Caption Generator is completely free to use with no registration required. You can use it as many times as you need without any limitations.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I customize the caption appearance?</h3>
+        <p>Currently, the tool uses a standard caption style with white text and a black background for maximum readability. Future updates may include more customization options.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>How long does processing take?</h3>
+        <p>Processing time depends on your video's length, resolution, and the number of captions. Short videos typically process in under a minute, while longer, higher-resolution videos may take several minutes.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+    const videoPreview = document.getElementById('videoPreview');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const currentTimeBtn = document.getElementById('currentTimeBtn');
+    const captionsEditor = document.getElementById('captionsEditor');
+    const captionsList = document.getElementById('captionsList');
+    const addCaptionBtn = document.getElementById('addCaptionBtn');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressLabel = document.getElementById('progressLabel');
+    const progress = document.getElementById('progress');
+    const progressText = document.getElementById('progressText');
+    const processingControls = document.getElementById('processingControls');
+    const processBtn = document.getElementById('processBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    // ---------- APPLICATION STATE ----------
+    let currentVideoFile = null;
+    let captions = [];
+    let ffmpeg = null;
+    let isProcessing = false;
+    let processedVideoUrl = null;
+
+    // ---------- INITIALIZATION ----------
+    function initializeCaptionGenerator() {
+      // Add event listeners
+      uploadBtn.addEventListener('click', () => fileInput.click());
+      uploadArea.addEventListener('dragover', handleDragOver);
+      uploadArea.addEventListener('drop', handleDrop);
+      fileInput.addEventListener('change', handleFileSelect);
+      
+      playBtn.addEventListener('click', () => videoPreview.play());
+      pauseBtn.addEventListener('click', () => videoPreview.pause());
+      currentTimeBtn.addEventListener('click', useCurrentTime);
+      
+      addCaptionBtn.addEventListener('click', addCaption);
+      
+      processBtn.addEventListener('click', processVideo);
+      downloadBtn.addEventListener('click', downloadVideo);
+      
+      // Initialize FFmpeg
+      initializeFFmpeg();
+    }
+
+    // ---------- FFMPEG INITIALIZATION ----------
+    async function initializeFFmpeg() {
+      try {
+        // Create FFmpeg instance
+        ffmpeg = new FFmpeg();
+        
+        // Load FFmpeg
+        await ffmpeg.load();
+        console.log('FFmpeg loaded successfully');
+      } catch (error) {
+        console.error('Error loading FFmpeg:', error);
+        alert('Failed to initialize video processing. Please refresh the page and try again.');
+      }
+    }
+
+    // ---------- FILE HANDLING ----------
+    function handleDragOver(e) {
+      e.preventDefault();
+      uploadArea.classList.add('active');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('active');
+      
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        processFile(files[0]);
+      }
+    }
+
+    function handleFileSelect(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        processFile(files[0]);
+      }
+    }
+
+    function processFile(file) {
+      // Validate file type
+      if (!file.type.startsWith('video/')) {
+        alert('Please select a video file (MP4, WebM, MOV, etc.)');
+        return;
+      }
+      
+      currentVideoFile = file;
+      
+      // Show file info
+      fileInfo.innerHTML = `
+        <strong>File:</strong> ${file.name}<br>
+        <strong>Size:</strong> ${formatFileSize(file.size)}<br>
+        <strong>Type:</strong> ${file.type || 'Unknown'}
+      `;
+      fileInfo.classList.remove('hidden');
+      uploadArea.classList.add('active');
+      
+      // Create preview URL
+      const videoUrl = URL.createObjectURL(file);
+      videoPreview.src = videoUrl;
+      
+      // Enable controls
+      videoPreviewContainer.classList.add('active');
+      captionsEditor.classList.add('active');
+      processingControls.classList.add('active');
+      processBtn.disabled = false;
+      
+      // Clear existing captions
+      captions = [];
+      updateCaptionsList();
+    }
+
+    // ---------- CAPTIONS MANAGEMENT ----------
+    function addCaption() {
+      const currentTime = videoPreview.currentTime;
+      const newCaption = {
+        id: Date.now(),
+        text: '',
+        startTime: currentTime,
+        endTime: currentTime + 5 // Default 5 seconds duration
+      };
+      
+      captions.push(newCaption);
+      updateCaptionsList();
+    }
+
+    function updateCaptionsList() {
+      captionsList.innerHTML = '';
+      
+      if (captions.length === 0) {
+        captionsList.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">No captions added yet. Click "Add Caption" to get started.</p>';
+        return;
+      }
+      
+      // Sort captions by start time
+      captions.sort((a, b) => a.startTime - b.startTime);
+      
+      captions.forEach(caption => {
+        const captionItem = document.createElement('div');
+        captionItem.className = 'caption-item';
+        captionItem.innerHTML = `
+          <div class="caption-header">
+            <div class="caption-time">${formatTime(caption.startTime)} - ${formatTime(caption.endTime)}</div>
+            <button class="delete-caption" data-id="${caption.id}">
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="time-inputs">
+            <div class="time-input">
+              <label>Start Time (seconds)</label>
+              <input type="number" step="0.1" value="${caption.startTime}" data-id="${caption.id}" data-type="start">
+            </div>
+            <div class="time-input">
+              <label>End Time (seconds)</label>
+              <input type="number" step="0.1" value="${caption.endTime}" data-id="${caption.id}" data-type="end">
+            </div>
+          </div>
+          <textarea class="caption-text" placeholder="Enter caption text..." data-id="${caption.id}">${caption.text}</textarea>
+        `;
+        captionsList.appendChild(captionItem);
+      });
+      
+      // Add event listeners for caption controls
+      document.querySelectorAll('.delete-caption').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = parseInt(e.target.closest('.delete-caption').dataset.id);
+          deleteCaption(id);
+        });
+      });
+      
+      document.querySelectorAll('.caption-text').forEach(textarea => {
+        textarea.addEventListener('input', (e) => {
+          const id = parseInt(e.target.dataset.id);
+          const text = e.target.value;
+          updateCaptionText(id, text);
+        });
+      });
+      
+      document.querySelectorAll('.time-input input').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const id = parseInt(e.target.dataset.id);
+          const type = e.target.dataset.type;
+          const value = parseFloat(e.target.value);
+          updateCaptionTime(id, type, value);
+        });
+      });
+    }
+
+    function deleteCaption(id) {
+      captions = captions.filter(caption => caption.id !== id);
+      updateCaptionsList();
+    }
+
+    function updateCaptionText(id, text) {
+      const caption = captions.find(c => c.id === id);
+      if (caption) {
+        caption.text = text;
+      }
+    }
+
+    function updateCaptionTime(id, type, value) {
+      const caption = captions.find(c => c.id === id);
+      if (caption) {
+        if (type === 'start') {
+          caption.startTime = value;
+        } else if (type === 'end') {
+          caption.endTime = value;
+        }
+        
+        // Ensure end time is after start time
+        if (caption.endTime <= caption.startTime) {
+          caption.endTime = caption.startTime + 1;
+        }
+        
+        updateCaptionsList();
+      }
+    }
+
+    function useCurrentTime() {
+      const currentTime = videoPreview.currentTime;
+      alert(`Current time: ${formatTime(currentTime)}. Use this value when setting caption timing.`);
+    }
+
+    // ---------- VIDEO PROCESSING ----------
+    async function processVideo() {
+      if (!currentVideoFile || !ffmpeg || isProcessing) return;
+      
+      if (captions.length === 0) {
+        alert('Please add at least one caption before processing.');
+        return;
+      }
+      
+      isProcessing = true;
+      processBtn.disabled = true;
+      processBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Processing...';
+      
+      // Show progress container
+      progressContainer.classList.add('active');
+      updateProgress(0, 'Preparing video...');
+      
+      try {
+        // Write video file to FFmpeg's virtual file system
+        const videoData = await readFileAsArrayBuffer(currentVideoFile);
+        await ffmpeg.writeFile('input.mp4', new Uint8Array(videoData));
+        
+        updateProgress(10, 'Creating subtitle file...');
+        
+        // Create subtitle file
+        const subtitleContent = generateSubtitleFile();
+        await ffmpeg.writeFile('subtitles.srt', subtitleContent);
+        
+        updateProgress(30, 'Processing video with captions...');
+        
+        // Run FFmpeg command to add subtitles
+        await ffmpeg.exec([
+          '-i', 'input.mp4',
+          '-vf', 'subtitles=subtitles.srt:force_style=\'FontName=Arial,FontSize=24,PrimaryColour=&HFFFFFF,OutlineColour=&H000000,BackColour=&H80000000,BorderStyle=4,Outline=1,Shadow=1,MarginV=20\'',
+          '-c:a', 'copy',
+          'output.mp4'
+        ]);
+        
+        updateProgress(90, 'Finalizing video...');
+        
+        // Read the processed video
+        const outputData = await ffmpeg.readFile('output.mp4');
+        const outputBlob = new Blob([outputData.buffer], { type: 'video/mp4' });
+        processedVideoUrl = URL.createObjectURL(outputBlob);
+        
+        updateProgress(100, 'Processing complete!');
+        
+        // Enable download button
+        downloadBtn.disabled = false;
+        
+        // Update process button
+        processBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Processing Complete';
+        
+      } catch (error) {
+        console.error('Error processing video:', error);
+        alert('Error processing video. Please try again with a different video or check the console for details.');
+        
+        // Reset processing state
+        processBtn.disabled = false;
+        processBtn.innerHTML = '<i class="fas fa-cogs" aria-hidden="true"></i> Generate Captioned Video';
+      } finally {
+        isProcessing = false;
+      }
+    }
+
+    function generateSubtitleFile() {
+      let srtContent = '';
+      
+      captions.forEach((caption, index) => {
+        srtContent += `${index + 1}\n`;
+        srtContent += `${formatTimeForSRT(caption.startTime)} --> ${formatTimeForSRT(caption.endTime)}\n`;
+        srtContent += `${caption.text}\n\n`;
+      });
+      
+      return srtContent;
+    }
+
+    // ---------- DOWNLOAD VIDEO ----------
+    function downloadVideo() {
+      if (!processedVideoUrl) return;
+      
+      const a = document.createElement('a');
+      a.href = processedVideoUrl;
+      a.download = getOutputFilename(currentVideoFile.name);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // ---------- HELPER FUNCTIONS ----------
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      const ms = Math.floor((seconds % 1) * 100);
+      return `${mins}:${secs.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
+    }
+
+    function formatTimeForSRT(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const mins = Math.floor((seconds % 3600) / 60);
+      const secs = Math.floor(seconds % 60);
+      const ms = Math.floor((seconds % 1) * 1000);
+      
+      return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')},${ms.toString().padStart(3, '0')}`;
+    }
+
+    function getOutputFilename(originalName) {
+      const dotIndex = originalName.lastIndexOf('.');
+      const name = dotIndex !== -1 ? originalName.substring(0, dotIndex) : originalName;
+      return `${name}-captioned.mp4`;
+    }
+
+    function readFileAsArrayBuffer(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
+    }
+
+    function updateProgress(percent, message) {
+      progress.style.width = `${percent}%`;
+      progressText.textContent = `${percent}%`;
+      progressLabel.textContent = message;
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the caption generator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeCaptionGenerator);
+  </script>
+</body>
+</html>

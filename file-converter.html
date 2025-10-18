@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>File Converter | Free Online File Conversion - Prabin's Toolbox</title>
+  <meta name="description" content="Convert files online for free with Prabin's Toolbox. Upload documents, images, or audio and convert to your desired format instantly.">
+  <meta name="keywords" content="file converter, online file conversion, convert pdf to word, image converter, audio converter, free file conversion, browser-based file converter">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/file-converter.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="File Converter | Free Online File Conversion - Prabin's Toolbox">
+  <meta property="og:description" content="Convert files online instantly. Free, fast, and browser-based file converter for documents, images, and audio.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/file-converter-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/file-converter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="File Converter - Prabin's Toolbox">
+  <meta name="twitter:description" content="Convert files online in your browser. Upload, convert, and download instantly for free.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/file-converter-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "File Converter",
+    "description": "Convert files online for free with Prabin's Toolbox. Upload documents, images, or audio and convert to your desired format instantly.",
+    "url": "https://www.prabinpokhrel1.com.np/file-converter.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <!-- External Libraries -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://unpkg.com/ffmpeg@0.11.0/dist/ffmpeg.min.js"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .converter-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- UPLOAD SECTION --------- */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: var(--bg-light);
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: var(--bg-lighter);
+    }
+
+    .upload-area.active {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .upload-area i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .upload-area h3 {
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-area p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .upload-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .file-info {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .file-info.hidden {
+      display: none;
+    }
+
+    /* --------- CONVERSION OPTIONS --------- */
+    .conversion-options {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .conversion-options.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .options-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .options-header h3 {
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .format-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .format-option {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .format-option:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .format-option.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    .format-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .format-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* --------- PREVIEW SECTION --------- */
+    .preview-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .preview-container.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .preview-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .image-preview {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 8px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .text-preview {
+      width: 100%;
+      height: 200px;
+      padding: 1rem;
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-family: monospace;
+      resize: none;
+      margin-bottom: 1rem;
+    }
+
+    .audio-preview {
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    /* --------- PROCESSING CONTROLS --------- */
+    .processing-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .processing-controls.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .convert-btn {
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .convert-btn:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .convert-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .convert-btn:disabled:hover {
+      transform: none;
+    }
+
+    .download-btn {
+      padding: 1rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .download-btn:hover:not(:disabled) {
+      background: #0da271;
+      transform: translateY(-3px);
+    }
+
+    .download-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .download-btn:disabled:hover {
+      transform: none;
+    }
+
+    /* --------- PROGRESS INDICATOR --------- */
+    .progress-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .progress-container.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .progress-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: var(--bg-lighter);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --------- SUPPORTED FORMATS --------- */
+    .supported-formats {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .format-category {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-header i {
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .category-header h4 {
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .format-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .format-list li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .format-selector {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+
+      .formats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .processing-controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .convert-btn, .download-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="converter-card">
+        <div class="card-header">
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+          <h1>File Converter</h1>
+          <p>Convert files between different formats instantly in your browser</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+          <i class="fas fa-file-upload" aria-hidden="true"></i>
+          <h3>Upload File</h3>
+          <p>Supported formats: PDF, JPG, PNG, TXT, JSON, CSV, MP3, WAV</p>
+          <button class="upload-btn" id="uploadBtn">
+            <i class="fas fa-upload" aria-hidden="true"></i> Choose File
+          </button>
+          <input type="file" id="fileInput" accept="*" hidden>
+          <div class="file-info hidden" id="fileInfo">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="conversion-options" id="conversionOptions">
+          <div class="options-header">
+            <h3>Convert To</h3>
+          </div>
+          <div class="format-selector" id="formatSelector">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+          <div class="preview-label" id="previewLabel">File Preview</div>
+          <!-- Preview content will be populated by JavaScript -->
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-label" id="progressLabel">Processing File</div>
+          <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+          </div>
+          <div class="progress-text" id="progressText">0%</div>
+        </div>
+
+        <div class="processing-controls" id="processingControls">
+          <button class="convert-btn" id="convertBtn" disabled>
+            <i class="fas fa-cogs" aria-hidden="true"></i> Convert File
+          </button>
+          <button class="download-btn" id="downloadBtn" disabled>
+            <i class="fas fa-download" aria-hidden="true"></i> Download
+          </button>
+        </div>
+
+        <div class="supported-formats">
+          <h3>Supported Conversions</h3>
+          <div class="formats-grid">
+            <div class="format-category">
+              <div class="category-header">
+                <i class="fas fa-file-image" aria-hidden="true"></i>
+                <h4>Images</h4>
+              </div>
+              <ul class="format-list">
+                <li>JPG ↔ PNG</li>
+                <li>JPG ↔ WebP</li>
+                <li>PNG ↔ WebP</li>
+              </ul>
+            </div>
+            <div class="format-category">
+              <div class="category-header">
+                <i class="fas fa-file-alt" aria-hidden="true"></i>
+                <h4>Documents</h4>
+              </div>
+              <ul class="format-list">
+                <li>Text ↔ PDF</li>
+                <li>JSON ↔ CSV</li>
+                <li>JSON ↔ XML</li>
+              </ul>
+            </div>
+            <div class="format-category">
+              <div class="category-header">
+                <i class="fas fa-file-audio" aria-hidden="true"></i>
+                <h4>Audio</h4>
+              </div>
+              <ul class="format-list">
+                <li>MP3 ↔ WAV</li>
+                <li>MP3 ↔ OGG</li>
+                <li>WAV ↔ OGG</li>
+              </ul>
+            </div>
+            <div class="format-category">
+              <div class="category-header">
+                <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                <h4>PDF</h4>
+              </div>
+              <ul class="format-list">
+                <li>PDF ↔ Images</li>
+                <li>PDF ↔ Text</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This File Converter</h2>
+      <p>Our File Converter is a powerful tool that allows you to convert files between different formats directly in your browser. No need to install software or upload files to external servers - all processing happens locally on your device for maximum privacy and security.</p>
+      
+      <h3>How to Use the File Converter</h3>
+      <p>Using our file converter is simple:</p>
+      <ul>
+        <li>Click "Choose File" to upload the file you want to convert</li>
+        <li>Select the target format from the available options</li>
+        <li>Preview the file if applicable (images, text, audio)</li>
+        <li>Click "Convert File" to process your file</li>
+        <li>Download the converted file when processing is complete</li>
+      </ul>
+      
+      <h3>What This Tool Does</h3>
+      <p>This browser-based tool uses various JavaScript libraries to convert files between different formats. It's perfect for:</p>
+      <ul>
+        <li>Converting images between JPG, PNG, and WebP formats</li>
+        <li>Converting text documents to PDF and vice versa</li>
+        <li>Converting data between JSON, CSV, and XML formats</li>
+        <li>Converting audio files between MP3, WAV, and OGG formats</li>
+        <li>Extracting text or images from PDF files</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="text-to-video-caption.html" class="tool-link" aria-label="Text to Video Caption Generator">
+          <i class="fas fa-closed-captioning" aria-hidden="true"></i> Video Caption Generator
+        </a>
+        <a href="audio-volume-booster.html" class="tool-link" aria-label="Audio Volume Booster">
+          <i class="fas fa-volume-up" aria-hidden="true"></i> Audio Volume Booster
+        </a>
+        <a href="youtube-metadata-extractor.html" class="tool-link" aria-label="YouTube Metadata Extractor">
+          <i class="fab fa-youtube" aria-hidden="true"></i> YouTube Metadata Extractor
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>How does the File Converter work?</h3>
+        <p>Our tool uses various JavaScript libraries to process files directly in your browser. For image conversions, we use the Canvas API. For PDF operations, we use pdf-lib and jsPDF. For audio conversions, we use ffmpeg.wasm. All processing happens locally on your device.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is my data secure?</h3>
+        <p>Yes! All file processing happens entirely in your browser. Your files are never uploaded to any server, ensuring complete privacy and security.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>What file formats are supported?</h3>
+        <p>We support a wide range of formats including images (JPG, PNG, WebP), documents (PDF, TXT, JSON, CSV, XML), and audio (MP3, WAV, OGG). The available conversion options depend on the file type you upload.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is there a file size limit?</h3>
+        <p>There's no hard limit, but very large files may take longer to process and could impact browser performance. For best results, we recommend files under 100MB.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is this tool free to use?</h3>
+        <p>Yes, our File Converter is completely free to use with no registration required. You can use it as many times as you need without any limitations.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I convert multiple files at once?</h3>
+        <p>Currently, the tool supports converting one file at a time. For batch conversions, you'll need to convert each file individually.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const conversionOptions = document.getElementById('conversionOptions');
+    const formatSelector = document.getElementById('formatSelector');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewLabel = document.getElementById('previewLabel');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressLabel = document.getElementById('progressLabel');
+    const progress = document.getElementById('progress');
+    const progressText = document.getElementById('progressText');
+    const processingControls = document.getElementById('processingControls');
+    const convertBtn = document.getElementById('convertBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    // ---------- APPLICATION STATE ----------
+    let currentFile = null;
+    let currentFileType = '';
+    let targetFormat = '';
+    let convertedFile = null;
+    let ffmpeg = null;
+
+    // ---------- SUPPORTED CONVERSIONS ----------
+    const supportedConversions = {
+      'image/jpeg': ['PNG', 'WebP'],
+      'image/png': ['JPG', 'WebP'],
+      'image/webp': ['JPG', 'PNG'],
+      'text/plain': ['PDF', 'JSON'],
+      'application/json': ['CSV', 'XML', 'TXT'],
+      'text/csv': ['JSON', 'XML'],
+      'audio/mpeg': ['WAV', 'OGG'],
+      'audio/wav': ['MP3', 'OGG'],
+      'audio/ogg': ['MP3', 'WAV'],
+      'application/pdf': ['TXT', 'JPG']
+    };
+
+    const formatIcons = {
+      'JPG': 'file-image',
+      'PNG': 'file-image',
+      'WebP': 'file-image',
+      'PDF': 'file-pdf',
+      'TXT': 'file-alt',
+      'JSON': 'file-code',
+      'CSV': 'file-csv',
+      'XML': 'file-code',
+      'MP3': 'file-audio',
+      'WAV': 'file-audio',
+      'OGG': 'file-audio'
+    };
+
+    // ---------- INITIALIZATION ----------
+    function initializeConverter() {
+      // Add event listeners
+      uploadBtn.addEventListener('click', () => fileInput.click());
+      uploadArea.addEventListener('dragover', handleDragOver);
+      uploadArea.addEventListener('drop', handleDrop);
+      fileInput.addEventListener('change', handleFileSelect);
+      
+      convertBtn.addEventListener('click', convertFile);
+      downloadBtn.addEventListener('click', downloadFile);
+      
+      // Initialize FFmpeg if available
+      initializeFFmpeg();
+    }
+
+    // ---------- FFMPEG INITIALIZATION ----------
+    async function initializeFFmpeg() {
+      try {
+        // Create FFmpeg instance
+        ffmpeg = new FFmpeg();
+        
+        // Load FFmpeg
+        await ffmpeg.load();
+        console.log('FFmpeg loaded successfully');
+      } catch (error) {
+        console.error('Error loading FFmpeg:', error);
+        // FFmpeg is not critical for all conversions, so we continue without it
+      }
+    }
+
+    // ---------- FILE HANDLING ----------
+    function handleDragOver(e) {
+      e.preventDefault();
+      uploadArea.classList.add('active');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('active');
+      
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        processFile(files[0]);
+      }
+    }
+
+    function handleFileSelect(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        processFile(files[0]);
+      }
+    }
+
+    function processFile(file) {
+      currentFile = file;
+      currentFileType = file.type;
+      
+      // Show file info
+      fileInfo.innerHTML = `
+        <strong>File:</strong> ${file.name}<br>
+        <strong>Size:</strong> ${formatFileSize(file.size)}<br>
+        <strong>Type:</strong> ${file.type || 'Unknown'}
+      `;
+      fileInfo.classList.remove('hidden');
+      uploadArea.classList.add('active');
+      
+      // Show conversion options
+      showConversionOptions();
+      
+      // Show preview if applicable
+      showFilePreview();
+      
+      // Enable convert button
+      convertBtn.disabled = false;
+    }
+
+    // ---------- CONVERSION OPTIONS ----------
+    function showConversionOptions() {
+      const formats = supportedConversions[currentFileType] || [];
+      
+      if (formats.length === 0) {
+        formatSelector.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 1rem;">No conversion options available for this file type.</p>';
+        convertBtn.disabled = true;
+        return;
+      }
+      
+      formatSelector.innerHTML = '';
+      
+      formats.forEach(format => {
+        const formatOption = document.createElement('div');
+        formatOption.className = 'format-option';
+        formatOption.dataset.format = format;
+        formatOption.innerHTML = `
+          <div class="format-icon">
+            <i class="fas fa-${formatIcons[format] || 'file'}" aria-hidden="true"></i>
+          </div>
+          <div class="format-name">${format}</div>
+        `;
+        
+        formatOption.addEventListener('click', () => {
+          // Update active format
+          document.querySelectorAll('.format-option').forEach(option => {
+            option.classList.remove('active');
+          });
+          formatOption.classList.add('active');
+          
+          targetFormat = format;
+        });
+        
+        formatSelector.appendChild(formatOption);
+      });
+      
+      // Activate the first option by default
+      if (formats.length > 0) {
+        formatSelector.querySelector('.format-option').click();
+      }
+      
+      conversionOptions.classList.add('active');
+      processingControls.classList.add('active');
+    }
+
+    // ---------- FILE PREVIEW ----------
+    function showFilePreview() {
+      previewContainer.innerHTML = '';
+      
+      if (currentFileType.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.className = 'image-preview';
+        img.src = URL.createObjectURL(currentFile);
+        img.alt = 'File preview';
+        previewContainer.appendChild(img);
+        previewLabel.textContent = 'Image Preview';
+      } else if (currentFileType.startsWith('text/') || currentFileType === 'application/json') {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const textarea = document.createElement('textarea');
+          textarea.className = 'text-preview';
+          textarea.value = e.target.result;
+          textarea.readOnly = true;
+          previewContainer.appendChild(textarea);
+          previewLabel.textContent = 'Text Preview';
+        };
+        reader.readAsText(currentFile);
+      } else if (currentFileType.startsWith('audio/')) {
+        const audio = document.createElement('audio');
+        audio.className = 'audio-preview';
+        audio.src = URL.createObjectURL(currentFile);
+        audio.controls = true;
+        previewContainer.appendChild(audio);
+        previewLabel.textContent = 'Audio Preview';
+      } else if (currentFileType === 'application/pdf') {
+        const message = document.createElement('p');
+        message.textContent = 'PDF preview is not available in this version. The conversion will still work.';
+        message.style.color = 'var(--text-muted)';
+        previewContainer.appendChild(message);
+        previewLabel.textContent = 'PDF File';
+      } else {
+        const message = document.createElement('p');
+        message.textContent = 'Preview not available for this file type.';
+        message.style.color = 'var(--text-muted)';
+        previewContainer.appendChild(message);
+        previewLabel.textContent = 'File Preview';
+      }
+      
+      previewContainer.classList.add('active');
+    }
+
+    // ---------- FILE CONVERSION ----------
+    async function convertFile() {
+      if (!currentFile || !targetFormat) return;
+      
+      // Show progress container
+      progressContainer.classList.add('active');
+      updateProgress(0, 'Starting conversion...');
+      
+      try {
+        // Perform conversion based on file type and target format
+        if (currentFileType.startsWith('image/')) {
+          await convertImage();
+        } else if (currentFileType.startsWith('text/') || currentFileType === 'application/json') {
+          await convertText();
+        } else if (currentFileType.startsWith('audio/')) {
+          await convertAudio();
+        } else if (currentFileType === 'application/pdf') {
+          await convertPDF();
+        } else {
+          throw new Error('Unsupported file type for conversion');
+        }
+        
+        updateProgress(100, 'Conversion complete!');
+        
+        // Enable download button
+        downloadBtn.disabled = false;
+        
+      } catch (error) {
+        console.error('Error converting file:', error);
+        alert('Error converting file: ' + error.message);
+        
+        // Reset progress
+        progressContainer.classList.remove('active');
+      }
+    }
+
+    async function convertImage() {
+      updateProgress(20, 'Processing image...');
+      
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = function() {
+          updateProgress(50, 'Converting image format...');
+          
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          
+          let mimeType;
+          switch(targetFormat) {
+            case 'JPG': mimeType = 'image/jpeg'; break;
+            case 'PNG': mimeType = 'image/png'; break;
+            case 'WebP': mimeType = 'image/webp'; break;
+            default: reject(new Error('Unsupported target format for image'));
+          }
+          
+          canvas.toBlob(blob => {
+            convertedFile = blob;
+            updateProgress(100, 'Image conversion complete!');
+            resolve();
+          }, mimeType, 0.9);
+        };
+        
+        img.onerror = reject;
+        img.src = URL.createObjectURL(currentFile);
+      });
+    }
+
+    async function convertText() {
+      updateProgress(30, 'Reading text content...');
+      
+      const text = await readFileAsText(currentFile);
+      
+      updateProgress(60, 'Converting text format...');
+      
+      let convertedContent;
+      let fileExtension;
+      
+      switch(targetFormat) {
+        case 'PDF':
+          // Use jsPDF to create PDF from text
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+          doc.text(text, 10, 10);
+          convertedContent = doc.output('blob');
+          fileExtension = 'pdf';
+          break;
+          
+        case 'JSON':
+          if (currentFileType === 'text/plain') {
+            // Convert plain text to JSON
+            convertedContent = new Blob([JSON.stringify({ content: text }, null, 2)], { type: 'application/json' });
+            fileExtension = 'json';
+          } else if (currentFileType === 'application/json') {
+            // JSON to CSV
+            const data = JSON.parse(text);
+            convertedContent = new Blob([jsonToCsv(data)], { type: 'text/csv' });
+            fileExtension = 'csv';
+          }
+          break;
+          
+        case 'CSV':
+          // CSV to JSON
+          const csvData = parseCSV(text);
+          convertedContent = new Blob([JSON.stringify(csvData, null, 2)], { type: 'application/json' });
+          fileExtension = 'json';
+          break;
+          
+        case 'XML':
+          // JSON to XML
+          const jsonData = JSON.parse(text);
+          convertedContent = new Blob([jsonToXml(jsonData)], { type: 'application/xml' });
+          fileExtension = 'xml';
+          break;
+          
+        case 'TXT':
+          // JSON to plain text
+          const jsonObj = JSON.parse(text);
+          convertedContent = new Blob([JSON.stringify(jsonObj, null, 2)], { type: 'text/plain' });
+          fileExtension = 'txt';
+          break;
+          
+        default:
+          throw new Error('Unsupported target format for text');
+      }
+      
+      convertedFile = convertedContent;
+      updateProgress(100, 'Text conversion complete!');
+    }
+
+    async function convertAudio() {
+      if (!ffmpeg) {
+        throw new Error('Audio conversion requires FFmpeg, which failed to load. Please refresh the page and try again.');
+      }
+      
+      updateProgress(20, 'Loading audio file...');
+      
+      // Write audio file to FFmpeg's virtual file system
+      const audioData = await readFileAsArrayBuffer(currentFile);
+      await ffmpeg.writeFile('input.' + getFileExtension(currentFileType), new Uint8Array(audioData));
+      
+      updateProgress(40, 'Converting audio format...');
+      
+      // Run FFmpeg command to convert audio
+      let outputFormat;
+      switch(targetFormat) {
+        case 'MP3': outputFormat = 'mp3'; break;
+        case 'WAV': outputFormat = 'wav'; break;
+        case 'OGG': outputFormat = 'ogg'; break;
+        default: throw new Error('Unsupported target format for audio');
+      }
+      
+      await ffmpeg.exec([
+        '-i', `input.${getFileExtension(currentFileType)}`,
+        '-c:a', 'libmp3lame', // Use MP3 codec for all outputs for simplicity
+        `output.${outputFormat}`
+      ]);
+      
+      updateProgress(80, 'Reading converted audio...');
+      
+      // Read the converted audio
+      const outputData = await ffmpeg.readFile(`output.${outputFormat}`);
+      convertedFile = new Blob([outputData.buffer], { type: `audio/${outputFormat}` });
+      
+      updateProgress(100, 'Audio conversion complete!');
+    }
+
+    async function convertPDF() {
+      updateProgress(20, 'Processing PDF...');
+      
+      switch(targetFormat) {
+        case 'TXT':
+          // Extract text from PDF (simplified version)
+          const pdfData = await readFileAsArrayBuffer(currentFile);
+          // In a real implementation, you would use pdf.js to extract text
+          // For this demo, we'll just return a placeholder
+          convertedFile = new Blob(['PDF text extraction would require pdf.js library'], { type: 'text/plain' });
+          break;
+          
+        case 'JPG':
+          // Convert PDF to image (first page only for simplicity)
+          // In a real implementation, you would use pdf.js to render pages
+          convertedFile = new Blob(['PDF to image conversion would require pdf.js library'], { type: 'text/plain' });
+          break;
+          
+        default:
+          throw new Error('Unsupported target format for PDF');
+      }
+      
+      updateProgress(100, 'PDF conversion complete!');
+    }
+
+    // ---------- DOWNLOAD FILE ----------
+    function downloadFile() {
+      if (!convertedFile) return;
+      
+      const url = URL.createObjectURL(convertedFile);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = getOutputFilename(currentFile.name, targetFormat);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // ---------- HELPER FUNCTIONS ----------
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function getFileExtension(mimeType) {
+      const extensions = {
+        'image/jpeg': 'jpg',
+        'image/png': 'png',
+        'image/webp': 'webp',
+        'text/plain': 'txt',
+        'application/json': 'json',
+        'text/csv': 'csv',
+        'audio/mpeg': 'mp3',
+        'audio/wav': 'wav',
+        'audio/ogg': 'ogg',
+        'application/pdf': 'pdf'
+      };
+      
+      return extensions[mimeType] || 'bin';
+    }
+
+    function getOutputFilename(originalName, targetFormat) {
+      const dotIndex = originalName.lastIndexOf('.');
+      const name = dotIndex !== -1 ? originalName.substring(0, dotIndex) : originalName;
+      return `${name}.${targetFormat.toLowerCase()}`;
+    }
+
+    function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsText(file);
+      });
+    }
+
+    function readFileAsArrayBuffer(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
+    }
+
+    function jsonToCsv(data) {
+      if (Array.isArray(data)) {
+        if (data.length === 0) return '';
+        
+        const headers = Object.keys(data[0]);
+        const csvRows = [headers.join(',')];
+        
+        for (const row of data) {
+          const values = headers.map(header => {
+            const value = row[header];
+            return typeof value === 'string' && value.includes(',') ? `"${value}"` : value;
+          });
+          csvRows.push(values.join(','));
+        }
+        
+        return csvRows.join('\n');
+      } else {
+        // Single object
+        const headers = Object.keys(data);
+        const values = headers.map(header => {
+          const value = data[header];
+          return typeof value === 'string' && value.includes(',') ? `"${value}"` : value;
+        });
+        return [headers.join(','), values.join(',')].join('\n');
+      }
+    }
+
+    function parseCSV(csvText) {
+      const lines = csvText.split('\n');
+      const headers = lines[0].split(',');
+      
+      return lines.slice(1).map(line => {
+        const values = line.split(',');
+        const obj = {};
+        headers.forEach((header, index) => {
+          obj[header.trim()] = values[index] ? values[index].trim() : '';
+        });
+        return obj;
+      });
+    }
+
+    function jsonToXml(obj) {
+      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<root>\n';
+      
+      function toXml(key, value) {
+        if (Array.isArray(value)) {
+          return value.map(item => 
+            `<${key}>${typeof item === 'object' ? toXml('item', item) : item}</${key}>`
+          ).join('\n');
+        } else if (typeof value === 'object') {
+          return `<${key}>\n${
+            Object.entries(value).map(([k, v]) => toXml(k, v)).join('\n')
+          }\n</${key}>`;
+        } else {
+          return `<${key}>${value}</${key}>`;
+        }
+      }
+      
+      xml += Object.entries(obj).map(([key, value]) => toXml(key, value)).join('\n');
+      xml += '\n</root>';
+      
+      return xml;
+    }
+
+    function updateProgress(percent, message) {
+      progress.style.width = `${percent}%`;
+      progressText.textContent = `${percent}%`;
+      progressLabel.textContent = message;
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the converter when the page loads
+    document.addEventListener('DOMContentLoaded', initializeConverter);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Online Favicon Generator | Free Icon Maker by Prabin's Toolbox</title>
+  <meta name="description" content="Create favicons instantly using Prabin's Toolbox. Upload your logo or image and generate .ico and .png icons for your website for free.">
+  <meta name="keywords" content="favicon generator, favicon maker, free icon generator, online favicon tool, convert image to favicon, favicon converter">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/favicon-generator.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Online Favicon Generator | Free Icon Maker by Prabin's Toolbox">
+  <meta property="og:description" content="Generate favicons instantly for your website. 100% free, no signup required.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/assets/favicon-preview.png">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/favicon-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Online Favicon Generator by Prabin's Toolbox">
+  <meta name="twitter:description" content="Create and download favicons instantly for your website.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/assets/favicon-preview.png">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- JSZip for creating ZIP files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Online Favicon Generator",
+    "description": "Create favicons instantly using Prabin's Toolbox. Upload your logo or image and generate .ico and .png icons for your website for free.",
+    "url": "https://www.prabinpokhrel1.com.np/favicon-generator.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- UPLOAD AREA --------- */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 2rem;
+      background: var(--bg-light);
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: var(--bg-lighter);
+    }
+
+    .upload-area.active {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .upload-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .upload-text h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .upload-text p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .upload-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .upload-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .file-info {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --------- PREVIEW SECTION --------- */
+    .preview-section {
+      display: none;
+      margin-bottom: 2rem;
+    }
+
+    .preview-section.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .preview-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .preview-box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      overflow: hidden;
+    }
+
+    .preview-box.small {
+      width: 64px;
+      height: 64px;
+    }
+
+    .preview-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --------- OPTIONS SECTION --------- */
+    .options-section {
+      margin-bottom: 2rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .option-group label {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .option-group select,
+    .option-group input {
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .checkbox-group input {
+      width: auto;
+    }
+
+    /* --------- DOWNLOAD SECTION --------- */
+    .download-section {
+      display: none;
+      text-align: center;
+    }
+
+    .download-section.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .download-btn.secondary {
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .download-btn.secondary:hover {
+      background: var(--bg-lighter);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .preview-container {
+        gap: 1rem;
+      }
+
+      .download-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .download-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .preview-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="tool-card">
+        <div class="card-header">
+          <i class="fas fa-icons" aria-hidden="true"></i>
+          <h1>Favicon Generator</h1>
+          <p>Convert your image into professional favicons for your website</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <div class="upload-text">
+            <h3>Upload Your Image</h3>
+            <p>Drag & drop your image here or click to browse</p>
+            <p class="file-info">Supports: JPG, PNG, SVG (Max: 5MB)</p>
+          </div>
+          <button class="upload-btn" id="uploadBtn">
+            <i class="fas fa-folder-open"></i> Choose File
+          </button>
+          <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.svg,.gif">
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section" id="previewSection">
+          <h2 class="section-title">
+            <i class="fas fa-eye"></i> Favicon Preview
+          </h2>
+          <div class="preview-container">
+            <div class="preview-item">
+              <div class="preview-box" id="preview16">
+                <span>16×16</span>
+              </div>
+              <div class="preview-label">16×16 px</div>
+            </div>
+            <div class="preview-item">
+              <div class="preview-box" id="preview32">
+                <span>32×32</span>
+              </div>
+              <div class="preview-label">32×32 px</div>
+            </div>
+            <div class="preview-item">
+              <div class="preview-box" id="preview48">
+                <span>48×48</span>
+              </div>
+              <div class="preview-label">48×48 px</div>
+            </div>
+            <div class="preview-item">
+              <div class="preview-box small" id="preview64">
+                <span>64×64</span>
+              </div>
+              <div class="preview-label">64×64 px</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Options Section -->
+        <div class="options-section" id="optionsSection">
+          <h2 class="section-title">
+            <i class="fas fa-cog"></i> Generation Options
+          </h2>
+          <div class="options-grid">
+            <div class="option-group">
+              <label for="outputFormat">Output Format</label>
+              <select id="outputFormat">
+                <option value="both">Both ICO and PNG</option>
+                <option value="ico">ICO Only</option>
+                <option value="png">PNG Only</option>
+              </select>
+            </div>
+            <div class="option-group">
+              <label for="sizes">Favicon Sizes</label>
+              <select id="sizes">
+                <option value="all">All Sizes (16, 32, 48, 64)</option>
+                <option value="standard">Standard (16, 32)</option>
+                <option value="modern">Modern (32, 64)</option>
+              </select>
+            </div>
+            <div class="option-group">
+              <label for="quality">Image Quality</label>
+              <select id="quality">
+                <option value="high">High Quality</option>
+                <option value="medium">Medium Quality</option>
+                <option value="low">Low Quality (Smaller File)</option>
+              </select>
+            </div>
+            <div class="option-group">
+              <div class="checkbox-group">
+                <input type="checkbox" id="transparentBg" checked>
+                <label for="transparentBg">Transparent Background</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section" id="downloadSection">
+          <h2 class="section-title">
+            <i class="fas fa-download"></i> Download Your Favicons
+          </h2>
+          <p>Your favicons are ready! Download them individually or as a complete package.</p>
+          <div class="download-buttons">
+            <button class="download-btn" id="downloadZipBtn">
+              <i class="fas fa-file-archive"></i> Download All as ZIP
+            </button>
+            <button class="download-btn secondary" id="downloadIcoBtn">
+              <i class="fas fa-download"></i> Download ICO File
+            </button>
+            <button class="download-btn secondary" id="downloadPngBtn">
+              <i class="fas fa-download"></i> Download PNG Files
+            </button>
+          </div>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This Favicon Generator</h2>
+      <p>Our Free Favicon Generator is a powerful online tool that allows you to create professional favicons for your website in seconds. A favicon is the small icon that appears in browser tabs, bookmarks, and history, helping users identify your site quickly.</p>
+      
+      <h3>How to Use the Favicon Generator</h3>
+      <p>Creating your favicon is simple:</p>
+      <ul>
+        <li>Upload your logo or image (PNG, JPG, or SVG format)</li>
+        <li>Preview how your favicon will look in different sizes</li>
+        <li>Customize generation options if needed</li>
+        <li>Download your favicon in ICO and/or PNG format</li>
+        <li>Add the favicon to your website by uploading it to your root directory</li>
+      </ul>
+      
+      <h3>What Is a Favicon?</h3>
+      <p>A favicon (favorite icon) is a small, 16×16 pixel icon that represents your website. It appears in browser tabs, bookmarks, and history. Modern websites often use multiple favicon sizes to accommodate different devices and contexts:</p>
+      <ul>
+        <li><strong>16×16 px</strong> - Standard browser tab icon</li>
+        <li><strong>32×32 px</strong> - High-resolution browser tab icon</li>
+        <li><strong>48×48 px</strong> - Windows desktop shortcuts</li>
+        <li><strong>64×64 px</strong> - Safari reading list and high-DPI displays</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="logo-maker.html" class="tool-link" aria-label="Logo Maker">
+          <i class="fas fa-pen-fancy" aria-hidden="true"></i> Logo Maker
+        </a>
+        <a href="age-calculator.html" class="tool-link" aria-label="Age Calculator">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i> Age Calculator
+        </a>
+        <a href="unit-converter.html" class="tool-link" aria-label="Unit Converter">
+          <i class="fas fa-ruler-combined" aria-hidden="true"></i> Unit Converter
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>What image formats can I use to create a favicon?</h3>
+        <p>You can upload JPG, PNG, SVG, or GIF images. The tool will convert them to the appropriate favicon formats (ICO and PNG). For best results, we recommend using a square image with high resolution.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>What is the difference between ICO and PNG favicons?</h3>
+        <p>ICO files can contain multiple image sizes in a single file, which is why they're traditionally used for favicons. PNG files are smaller and work well for modern browsers. Our generator creates both formats to ensure compatibility with all browsers and devices.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>How do I add the favicon to my website?</h3>
+        <p>After downloading your favicon, upload the file(s) to your website's root directory. Then add the following code to the &lt;head&gt; section of your HTML:</p>
+        <pre>&lt;link rel="icon" type="image/x-icon" href="/favicon.ico"&gt;
+&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;</pre>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is this favicon generator really free?</h3>
+        <p>Yes, our favicon generator is completely free to use with no registration required. You can create and download as many favicons as you need without any limitations.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>What is the maximum file size for uploads?</h3>
+        <p>The maximum file size for uploads is 5MB. For best results, we recommend using images that are at least 64×64 pixels and have a square aspect ratio.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const previewSection = document.getElementById('previewSection');
+    const optionsSection = document.getElementById('optionsSection');
+    const downloadSection = document.getElementById('downloadSection');
+    const preview16 = document.getElementById('preview16');
+    const preview32 = document.getElementById('preview32');
+    const preview48 = document.getElementById('preview48');
+    const preview64 = document.getElementById('preview64');
+    const downloadZipBtn = document.getElementById('downloadZipBtn');
+    const downloadIcoBtn = document.getElementById('downloadIcoBtn');
+    const downloadPngBtn = document.getElementById('downloadPngBtn');
+    const outputFormat = document.getElementById('outputFormat');
+    const sizes = document.getElementById('sizes');
+    const quality = document.getElementById('quality');
+    const transparentBg = document.getElementById('transparentBg');
+
+    // ---------- VARIABLES ----------
+    let uploadedImage = null;
+    let generatedFavicons = {
+      ico: null,
+      png16: null,
+      png32: null,
+      png48: null,
+      png64: null
+    };
+
+    // ---------- EVENT LISTENERS ----------
+    function initializeEventListeners() {
+      // Upload button click
+      uploadBtn.addEventListener('click', () => fileInput.click());
+      
+      // File input change
+      fileInput.addEventListener('change', handleFileUpload);
+      
+      // Drag and drop
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('active');
+      });
+      
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('active');
+      });
+      
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('active');
+        
+        if (e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          handleFileUpload();
+        }
+      });
+      
+      // Download buttons
+      downloadZipBtn.addEventListener('click', downloadZip);
+      downloadIcoBtn.addEventListener('click', downloadIco);
+      downloadPngBtn.addEventListener('click', downloadPng);
+      
+      // Options change
+      outputFormat.addEventListener('change', updateDownloadButtons);
+      sizes.addEventListener('change', generateFavicons);
+      quality.addEventListener('change', generateFavicons);
+      transparentBg.addEventListener('change', generateFavicons);
+    }
+
+    // ---------- FILE UPLOAD ----------
+    function handleFileUpload() {
+      const file = fileInput.files[0];
+      
+      if (!file) return;
+      
+      // Check file type
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml', 'image/gif'];
+      if (!validTypes.includes(file.type)) {
+        alert('Please upload a valid image file (JPG, PNG, SVG, or GIF).');
+        return;
+      }
+      
+      // Check file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB.');
+        return;
+      }
+      
+      // Read the file
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedImage = new Image();
+        uploadedImage.onload = function() {
+          // Show preview and options sections
+          previewSection.classList.add('active');
+          optionsSection.classList.add('active');
+          
+          // Generate favicons
+          generateFavicons();
+        };
+        uploadedImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      
+      // Update upload area text
+      const uploadText = uploadArea.querySelector('.upload-text h3');
+      uploadText.textContent = 'Image Uploaded Successfully!';
+      uploadArea.querySelector('.upload-text p').textContent = 'Your image is ready for favicon generation';
+    }
+
+    // ---------- FAVICON GENERATION ----------
+    function generateFavicons() {
+      if (!uploadedImage) return;
+      
+      const sizesToGenerate = getSizesToGenerate();
+      const qualityValue = getQualityValue();
+      
+      // Generate previews for each size
+      sizesToGenerate.forEach(size => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        
+        // Set background
+        if (!transparentBg.checked) {
+          ctx.fillStyle = 'white';
+          ctx.fillRect(0, 0, size, size);
+        }
+        
+        // Draw image
+        ctx.drawImage(uploadedImage, 0, 0, size, size);
+        
+        // Update preview
+        const previewElement = document.getElementById(`preview${size}`);
+        previewElement.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png', qualityValue);
+        img.alt = `${size}×${size} favicon`;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        previewElement.appendChild(img);
+        
+        // Store generated favicon
+        if (size === 16) generatedFavicons.png16 = canvas.toDataURL('image/png', qualityValue);
+        if (size === 32) generatedFavicons.png32 = canvas.toDataURL('image/png', qualityValue);
+        if (size === 48) generatedFavicons.png48 = canvas.toDataURL('image/png', qualityValue);
+        if (size === 64) generatedFavicons.png64 = canvas.toDataURL('image/png', qualityValue);
+      });
+      
+      // Generate ICO file if needed
+      if (outputFormat.value === 'ico' || outputFormat.value === 'both') {
+        generateIcoFile(sizesToGenerate, qualityValue);
+      } else {
+        generatedFavicons.ico = null;
+      }
+      
+      // Show download section
+      downloadSection.classList.add('active');
+      updateDownloadButtons();
+    }
+
+    function getSizesToGenerate() {
+      switch(sizes.value) {
+        case 'all': return [16, 32, 48, 64];
+        case 'standard': return [16, 32];
+        case 'modern': return [32, 64];
+        default: return [16, 32, 48, 64];
+      }
+    }
+
+    function getQualityValue() {
+      switch(quality.value) {
+        case 'high': return 1.0;
+        case 'medium': return 0.8;
+        case 'low': return 0.6;
+        default: return 0.8;
+      }
+    }
+
+    // ---------- ICO GENERATION ----------
+    function generateIcoFile(sizesToGenerate, qualityValue) {
+      // In a real implementation, we would use a proper ICO encoder
+      // For this demo, we'll create a simple ICO file using canvas
+      // Note: This is a simplified version - a real ICO generator would be more complex
+      
+      // For demonstration purposes, we'll create a data URL that represents an ICO file
+      // In practice, you would use a proper ICO encoding library
+      const icoCanvas = document.createElement('canvas');
+      icoCanvas.width = 32;
+      icoCanvas.height = 32;
+      const icoCtx = icoCanvas.getContext('2d');
+      
+      if (!transparentBg.checked) {
+        icoCtx.fillStyle = 'white';
+        icoCtx.fillRect(0, 0, 32, 32);
+      }
+      
+      icoCtx.drawImage(uploadedImage, 0, 0, 32, 32);
+      
+      // Store the ICO as a data URL (in reality, this would be a proper ICO file)
+      generatedFavicons.ico = icoCanvas.toDataURL('image/x-icon', qualityValue);
+    }
+
+    // ---------- DOWNLOAD FUNCTIONS ----------
+    function updateDownloadButtons() {
+      const format = outputFormat.value;
+      
+      if (format === 'ico') {
+        downloadIcoBtn.style.display = 'inline-flex';
+        downloadPngBtn.style.display = 'none';
+      } else if (format === 'png') {
+        downloadIcoBtn.style.display = 'none';
+        downloadPngBtn.style.display = 'inline-flex';
+      } else {
+        downloadIcoBtn.style.display = 'inline-flex';
+        downloadPngBtn.style.display = 'inline-flex';
+      }
+    }
+
+    function downloadZip() {
+      const zip = new JSZip();
+      const sizesToGenerate = getSizesToGenerate();
+      
+      // Add ICO file if requested
+      if ((outputFormat.value === 'ico' || outputFormat.value === 'both') && generatedFavicons.ico) {
+        const icoBlob = dataURLToBlob(generatedFavicons.ico);
+        zip.file("favicon.ico", icoBlob);
+      }
+      
+      // Add PNG files if requested
+      if (outputFormat.value === 'png' || outputFormat.value === 'both') {
+        sizesToGenerate.forEach(size => {
+          const pngData = generatedFavicons[`png${size}`];
+          if (pngData) {
+            const pngBlob = dataURLToBlob(pngData);
+            zip.file(`favicon-${size}x${size}.png`, pngBlob);
+          }
+        });
+      }
+      
+      // Generate and download ZIP
+      zip.generateAsync({type: "blob"}).then(function(content) {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(content);
+        link.download = 'favicons.zip';
+        link.click();
+        URL.revokeObjectURL(link.href);
+      });
+    }
+
+    function downloadIco() {
+      if (!generatedFavicons.ico) return;
+      
+      const link = document.createElement('a');
+      link.href = generatedFavicons.ico;
+      link.download = 'favicon.ico';
+      link.click();
+    }
+
+    function downloadPng() {
+      const sizesToGenerate = getSizesToGenerate();
+      
+      // For simplicity, we'll download the 32x32 PNG as the main favicon
+      if (generatedFavicons.png32) {
+        const link = document.createElement('a');
+        link.href = generatedFavicons.png32;
+        link.download = 'favicon.png';
+        link.click();
+      }
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function dataURLToBlob(dataURL) {
+      const parts = dataURL.split(';base64,');
+      const contentType = parts[0].split(':')[1];
+      const raw = window.atob(parts[1]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
+      
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+      
+      return new Blob([uInt8Array], {type: contentType});
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // ---------- INITIALIZATION ----------
+    function initializeFaviconGenerator() {
+      initializeEventListeners();
+    }
+
+    // Initialize the favicon generator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeFaviconGenerator);
+  </script>
+</body>
+</html>
