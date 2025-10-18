@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan EMI Calculator | Calculate Monthly Installments | Prabin's Toolbox</title>
+  <meta name="description" content="Free online Loan EMI Calculator to estimate monthly loan installments, total interest, and total payment. Easy to use with instant results for home, car, and personal loans.">
+  <meta name="keywords" content="loan emi calculator, monthly installment, interest calculation, loan calculator, emi, home loan calculator, car loan calculator, personal loan calculator, Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/loan-emi-calculator.html">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Loan EMI Calculator | Calculate Monthly Installments | Prabin's Toolbox">
+  <meta property="og:description" content="Free online Loan EMI Calculator to estimate monthly loan installments, total interest, and total payment.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/emi-calculator-preview.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/loan-emi-calculator.html">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Loan EMI Calculator | Calculate Monthly Installments">
+  <meta name="twitter:description" content="Free online Loan EMI Calculator to estimate monthly loan installments, total interest, and total payment.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/emi-calculator-preview.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Loan EMI Calculator",
+    "description": "Free online loan EMI calculator tool to calculate monthly installments, total interest, and total payment amount",
+    "operatingSystem": "All",
+    "applicationCategory": "FinancialApplication",
+    "author": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": "https://www.prabinpokhrel1.com.np/loan-emi-calculator.html"
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;transition:background-color 0.3s,color 0.3s;}
+    :root{--primary:#38bdf8;--primary-dark:#0ea5e9;--secondary:#f472b6;--accent:#a78bfa;--bg:#0f172a;--bg-light:#1e293b;--bg-lighter:#334155;--text:#f1f5f9;--text-muted:#94a3b8;--card-bg:rgba(255,255,255,0.05);--card-shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);--border:rgba(255,255,255,0.1);--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;}
+    .light-mode{--bg:#f8fafc;--bg-light:#e2e8f0;--bg-lighter:#cbd5e1;--text:#0f172a;--text-muted:#475569;--card-bg:rgba(255,255,255,0.8);--card-shadow:0 4px 6px -1px rgba(0,0,0,0.05),0 2px 4px -1px rgba(0,0,0,0.03);--border:rgba(0,0,0,0.1);}
+    body{background:linear-gradient(135deg,var(--bg),var(--bg-light));color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background 0.5s ease;padding:0 1rem;}
+    header{width:100%;padding:1.5rem 1rem;text-align:center;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);position:relative;z-index:100;}
+    .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+    .logo{display:flex;align-items:center;gap:10px;}
+    .logo i{font-size:2.5rem;color:var(--primary);animation:rotate 10s linear infinite;}
+    @keyframes rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    .logo h1{font-size:2rem;color:var(--primary);letter-spacing:1px;}
+    .logo p{margin-top:0.5rem;color:var(--text-muted);font-size:1rem;}
+    .theme-toggle{background:var(--card-bg);border:1px solid var(--border);border-radius:50px;width:60px;height:30px;position:relative;cursor:pointer;display:flex;align-items:center;padding:0 5px;transition:all 0.3s ease;}
+    .theme-toggle:hover{transform:scale(1.05);}
+    .theme-toggle i{position:absolute;font-size:1.2rem;transition:all 0.3s ease;}
+    .theme-toggle .fa-sun{color:#f59e0b;opacity:0;}
+    .theme-toggle .fa-moon{color:#94a3b8;}
+    .light-mode .theme-toggle .fa-sun{opacity:1;}
+    .light-mode .theme-toggle .fa-moon{opacity:0;}
+    .theme-toggle::after{content:'';position:absolute;width:22px;height:22px;border-radius:50%;background:var(--primary);transition:all 0.3s ease;left:4px;}
+    .light-mode .theme-toggle::after{left:calc(100% - 26px);background:#f59e0b;}
+    .main-content{max-width:800px;width:100%;margin:2rem auto;padding:0 1rem;}
+    .calculator-card{background:var(--card-bg);border-radius:15px;padding:2rem;box-shadow:var(--card-shadow);backdrop-filter:blur(10px);border:1px solid var(--border);margin-bottom:2rem;animation:fadeIn 0.8s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .card-header{text-align:center;margin-bottom:2rem;}
+    .card-header h2{font-size:1.8rem;color:var(--primary);margin-bottom:0.5rem;}
+    .card-header p{color:var(--text-muted);}
+    .card-header i{font-size:3rem;color:var(--primary);margin-bottom:1rem;}
+    .form-group{margin-bottom:1.5rem;}
+    .form-group label{display:block;margin-bottom:0.5rem;font-weight:500;color:var(--text);}
+    .form-control{width:100%;padding:1rem 1.5rem;border:none;border-radius:10px;outline:none;font-size:1rem;background:var(--bg-light);color:var(--text);transition:all 0.3s ease;border:1px solid var(--border);}
+    .form-control:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(56,189,248,0.2);}
+    .input-with-icon{position:relative;}
+    .input-with-icon i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--text-muted);}
+    .input-with-icon input{padding-left:3rem;}
+    .input-with-icon .input-symbol{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-weight:500;}
+    .tenure-selector{display:flex;gap:1rem;margin-bottom:1.5rem;}
+    .tenure-option{flex:1;text-align:center;padding:0.8rem 1rem;background:var(--bg-light);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.3s ease;}
+    .tenure-option:hover{background:var(--primary);color:white;}
+    .tenure-option.active{background:var(--primary);color:white;border-color:var(--primary);}
+    .buttons-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+    .calculate-btn,.reset-btn{padding:1rem 1.5rem;border:none;border-radius:10px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+    .calculate-btn{background:var(--primary);color:white;}
+    .calculate-btn:hover{background:var(--primary-dark);transform:translateY(-3px);box-shadow:0 5px 15px rgba(56,189,248,0.4);}
+    .reset-btn{background:var(--bg-light);color:var(--text);border:1px solid var(--border);}
+    .reset-btn:hover{background:var(--bg-lighter);transform:translateY(-3px);}
+    .result-container{background:var(--bg-light);border-radius:10px;padding:1.5rem;margin-top:1.5rem;border:1px solid var(--border);transition:all 0.3s ease;opacity:0;transform:translateY(10px);transition:all 0.5s ease;}
+    .result-container.active{opacity:1;transform:translateY(0);border-color:var(--success);box-shadow:0 0 0 3px rgba(16,185,129,0.2);}
+    .result-label{font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;}
+    .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+    .result-card{background:var(--card-bg);border-radius:10px;padding:1.5rem;text-align:center;border:1px solid var(--border);transition:all 0.3s ease;}
+    .result-card:hover{transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+    .result-value{font-size:1.8rem;font-weight:700;margin:0.5rem 0;color:var(--primary);}
+    .result-title{font-size:0.9rem;color:var(--text-muted);}
+    .emi-value{color:var(--primary);}
+    .interest-value{color:var(--warning);}
+    .total-value{color:var(--success);}
+    .helper-text{margin-top:1.5rem;font-size:0.9rem;color:var(--text-muted);text-align:center;font-style:italic;}
+    .back-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.5rem;background:var(--card-bg);color:var(--text);border:1px solid var(--border);border-radius:10px;text-decoration:none;font-weight:500;transition:all 0.3s ease;margin-top:1rem;}
+    .back-btn:hover{background:var(--primary);color:white;transform:translateX(-5px);}
+    footer{padding:2rem 1rem;text-align:center;color:var(--text-muted);font-size:0.9rem;border-top:1px solid var(--border);width:100%;margin-top:auto;}
+    .footer-content{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:1rem;}
+    .footer-links{display:flex;gap:2rem;margin-top:1rem;}
+    .footer-links a{color:var(--text-muted);text-decoration:none;transition:color 0.3s ease;}
+    .footer-links a:hover{color:var(--primary);}
+    @media (max-width:768px){
+      .header-content{flex-direction:column;gap:1rem;}
+      .buttons-row{grid-template-columns:1fr;}
+      .result-grid{grid-template-columns:1fr;gap:0.8rem;}
+      .result-value{font-size:1.5rem;}
+    }
+    /* New Content Sections */
+    .content-section{background:var(--card-bg);border-radius:15px;padding:2rem;box-shadow:var(--card-shadow);backdrop-filter:blur(10px);border:1px solid var(--border);margin-bottom:2rem;animation:fadeIn 0.8s ease;}
+    .content-section h2{font-size:1.8rem;color:var(--primary);margin-bottom:1rem;border-bottom:2px solid var(--primary);padding-bottom:0.5rem;}
+    .content-section h3{font-size:1.4rem;color:var(--text);margin:1.5rem 0 1rem 0;}
+    .content-section p{color:var(--text-muted);margin-bottom:1rem;line-height:1.6;}
+    .content-section ul,.content-section ol{color:var(--text-muted);margin-bottom:1rem;padding-left:1.5rem;}
+    .content-section li{margin-bottom:0.5rem;line-height:1.6;}
+    .faq-item{margin-bottom:1.5rem;}
+    .faq-question{font-weight:600;color:var(--text);margin-bottom:0.5rem;}
+    .faq-answer{color:var(--text-muted);line-height:1.6;}
+    .tool-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem;}
+    .tool-link{display:flex;align-items:center;gap:0.8rem;padding:1rem;background:var(--bg-light);border-radius:10px;text-decoration:none;color:var(--text);transition:all 0.3s ease;border:1px solid var(--border);}
+    .tool-link:hover{background:var(--primary);color:white;transform:translateY(-3px);}
+    .tool-link i{font-size:1.5rem;}
+    .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:2rem 0;}
+    .feature-card{background:var(--card-bg);border-radius:10px;padding:1.5rem;border:1px solid var(--border);transition:all 0.3s ease;}
+    .feature-card:hover{transform:translateY(-5px);box-shadow:var(--card-shadow);}
+    .feature-card h3{color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Calculator Tool -->
+    <div class="calculator-card">
+      <div class="card-header">
+        <i class="fas fa-calculator" aria-hidden="true"></i>
+        <h2>Loan EMI Calculator</h2>
+        <p>Calculate your monthly loan installments based on amount, interest rate, and tenure</p>
+      </div>
+
+      <div class="form-group">
+        <label for="loanAmount">Loan Amount</label>
+        <div class="input-with-icon">
+          <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+          <input type="number" id="loanAmount" class="form-control" placeholder="Enter loan amount" min="1" step="1000" aria-describedby="loan-amount-help">
+          <span class="input-symbol">$</span>
+        </div>
+        <small id="loan-amount-help" class="text-muted">Enter the total loan amount you want to borrow</small>
+      </div>
+
+      <div class="form-group">
+        <label for="interestRate">Annual Interest Rate</label>
+        <div class="input-with-icon">
+          <i class="fas fa-percentage" aria-hidden="true"></i>
+          <input type="number" id="interestRate" class="form-control" placeholder="Enter annual interest rate" min="0.1" step="0.1" value="8.5" aria-describedby="interest-help">
+          <span class="input-symbol">%</span>
+        </div>
+        <small id="interest-help" class="text-muted">Enter the annual interest rate offered by your lender</small>
+      </div>
+
+      <div class="form-group">
+        <label for="loanTenure">Loan Tenure</label>
+        <div class="input-with-icon">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+          <input type="number" id="loanTenure" class="form-control" placeholder="Enter loan tenure" min="1" step="1" value="20" aria-describedby="tenure-help">
+        </div>
+        <small id="tenure-help" class="text-muted">Enter the loan repayment period</small>
+      </div>
+
+      <div class="tenure-selector">
+        <div class="tenure-option active" data-unit="years" role="button" tabindex="0" aria-label="Set tenure in years">
+          <i class="fas fa-calendar" aria-hidden="true"></i> Years
+        </div>
+        <div class="tenure-option" data-unit="months" role="button" tabindex="0" aria-label="Set tenure in months">
+          <i class="fas fa-calendar-week" aria-hidden="true"></i> Months
+        </div>
+      </div>
+
+      <div class="buttons-row">
+        <button class="calculate-btn" id="calculateBtn" aria-label="Calculate EMI">
+          <i class="fas fa-calculator" aria-hidden="true"></i> Calculate EMI
+        </button>
+        <button class="reset-btn" id="resetBtn" aria-label="Reset calculator">
+          <i class="fas fa-redo" aria-hidden="true"></i> Reset
+        </button>
+      </div>
+
+      <div class="result-container" id="resultContainer" role="status" aria-live="polite">
+        <div class="result-label">Loan Calculation Results</div>
+        <div class="result-grid">
+          <div class="result-card">
+            <div class="result-title">Monthly EMI</div>
+            <div class="result-value emi-value" id="emiValue">-</div>
+            <div class="result-details">Per month</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Total Interest</div>
+            <div class="result-value interest-value" id="interestValue">-</div>
+            <div class="result-details">Interest payable</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Total Payment</div>
+            <div class="result-value total-value" id="totalValue">-</div>
+            <div class="result-details">Principal + Interest</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="helper-text">
+        Use this tool to estimate your monthly loan installment based on amount, interest rate, and tenure.
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+      </a>
+    </div>
+
+    <!-- SEO Content Sections -->
+    <section class="content-section" aria-labelledby="intro-heading">
+      <h2 id="intro-heading">Free Online Loan EMI Calculator</h2>
+      <p>Our free online Loan EMI Calculator helps you estimate your monthly loan installments accurately. Whether you're planning for a home loan, car loan, personal loan, or education loan, this tool provides instant calculations of your EMI (Equated Monthly Installment), total interest payable, and the overall repayment amount.</p>
+      <p>Make informed financial decisions by understanding your monthly obligations before applying for any loan. Our calculator supports both years and months for loan tenure and provides real-time results as you adjust the inputs.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="how-to-heading">
+      <h2 id="how-to-heading">How to Use the Loan EMI Calculator</h2>
+      <ol>
+        <li><strong>Enter Loan Amount</strong> - Input the total amount you plan to borrow in the loan amount field</li>
+        <li><strong>Set Interest Rate</strong> - Enter the annual interest rate offered by your lender (default is 8.5%)</li>
+        <li><strong>Choose Tenure</strong> - Input the loan repayment period and select whether it's in years or months</li>
+        <li><strong>Calculate EMI</strong> - Click the "Calculate EMI" button to see your monthly installment amount</li>
+        <li><strong>Review Results</strong> - Check the detailed breakdown including total interest and overall payment</li>
+      </ol>
+    </section>
+
+    <section class="content-section" aria-labelledby="benefits-heading">
+      <h2 id="benefits-heading">Benefits of Using Our EMI Calculator</h2>
+      <div class="content-grid">
+        <div class="feature-card">
+          <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Financial Planning</h3>
+          <p>Plan your budget effectively by knowing exactly how much you need to pay each month towards your loan.</p>
+        </div>
+        <div class="feature-card">
+          <h3><i class="fas fa-balance-scale" aria-hidden="true"></i> Compare Options</h3>
+          <p>Compare different loan offers by calculating EMIs for various interest rates and tenures.</p>
+        </div>
+        <div class="feature-card">
+          <h3><i class="fas fa-shield-alt" aria-hidden="true"></i> No Hidden Costs</h3>
+          <p>Completely free with no registration required. Get accurate results without any charges.</p>
+        </div>
+        <div class="feature-card">
+          <h3><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile Friendly</h3>
+          <p>Use our calculator on any device - desktop, tablet, or smartphone with full functionality.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">What is EMI?</div>
+        <div class="faq-answer">EMI stands for Equated Monthly Installment. It's the fixed amount you pay to the lender each month to repay your loan, which includes both principal and interest components.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How is EMI calculated?</div>
+        <div class="faq-answer">EMI is calculated using the formula: [P x R x (1+R)^N]/[(1+R)^N-1], where P is the principal amount, R is the monthly interest rate, and N is the number of monthly installments.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Can I use this calculator for all types of loans?</div>
+        <div class="faq-answer">Yes, our EMI calculator works for all types of loans including home loans, car loans, personal loans, education loans, and business loans.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Is the calculated EMI amount exact?</div>
+        <div class="faq-answer">The calculated EMI is an accurate estimate. The actual EMI may vary slightly based on the lender's specific calculation methods and any additional charges.</div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="tools-heading">
+      <h2 id="tools-heading">More Useful Tools</h2>
+      <p>Explore our collection of free online tools to simplify your financial calculations:</p>
+      
+      <div class="tool-links">
+        <a href="unit-converter.html" class="tool-link">
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+          <span>Unit Converter</span>
+        </a>
+        <a href="percentage-calculator.html" class="tool-link">
+          <i class="fas fa-percentage" aria-hidden="true"></i>
+          <span>Percentage Calculator</span>
+        </a>
+        <a href="discount-calculator.html" class="tool-link">
+          <i class="fas fa-tag" aria-hidden="true"></i>
+          <span>Discount Calculator</span>
+        </a>
+        <a href="currency-converter.html" class="tool-link">
+          <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+          <span>Currency Converter</span>
+        </a>
+        <a href="index.html" class="tool-link">
+          <i class="fas fa-home" aria-hidden="true"></i>
+          <span>Home Page</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // DOM Elements
+    const loanAmountInput=document.getElementById('loanAmount');
+    const interestRateInput=document.getElementById('interestRate');
+    const loanTenureInput=document.getElementById('loanTenure');
+    const calculateBtn=document.getElementById('calculateBtn');
+    const resetBtn=document.getElementById('resetBtn');
+    const emiValue=document.getElementById('emiValue');
+    const interestValue=document.getElementById('interestValue');
+    const totalValue=document.getElementById('totalValue');
+    const resultContainer=document.getElementById('resultContainer');
+    const tenureOptions=document.querySelectorAll('.tenure-option');
+
+    // Tenure Unit
+    let currentTenureUnit='years';
+
+    // Initialize Calculator
+    function initializeCalculator(){
+      calculateBtn.addEventListener('click',calculateEMI);
+      resetBtn.addEventListener('click',resetCalculator);
+      tenureOptions.forEach(option=>{
+        option.addEventListener('click',()=>{
+          const unit=option.dataset.unit;
+          switchTenureUnit(unit);
+        });
+        option.addEventListener('keypress',(e)=>{
+          if(e.key==='Enter'||e.key===' '){
+            const unit=option.dataset.unit;
+            switchTenureUnit(unit);
+          }
+        });
+      });
+      loanAmountInput.addEventListener('keypress',(e)=>{if(e.key==='Enter')calculateEMI();});
+      interestRateInput.addEventListener('keypress',(e)=>{if(e.key==='Enter')calculateEMI();});
+      loanTenureInput.addEventListener('keypress',(e)=>{if(e.key==='Enter')calculateEMI();});
+      loanAmountInput.focus();
+    }
+
+    // Switch Tenure Unit
+    function switchTenureUnit(unit){
+      if(unit===currentTenureUnit)return;
+      currentTenureUnit=unit;
+      tenureOptions.forEach(option=>{
+        if(option.dataset.unit===unit){
+          option.classList.add('active');
+        }else{
+          option.classList.remove('active');
+        }
+      });
+      if(unit==='years'){
+        loanTenureInput.placeholder='Enter loan tenure in years';
+      }else{
+        loanTenureInput.placeholder='Enter loan tenure in months';
+      }
+    }
+
+    // Calculate EMI
+    function calculateEMI(){
+      const loanAmount=parseFloat(loanAmountInput.value);
+      const interestRate=parseFloat(interestRateInput.value);
+      let loanTenure=parseFloat(loanTenureInput.value);
+      if(isNaN(loanAmount)||isNaN(interestRate)||isNaN(loanTenure)||loanAmount<=0||interestRate<=0||loanTenure<=0){
+        showError('Please enter valid values for all fields');
+        return;
+      }
+      if(currentTenureUnit==='years'){
+        loanTenure=loanTenure*12;
+      }
+      const monthlyInterestRate=interestRate/12/100;
+      const emi=calculateEMIValue(loanAmount,monthlyInterestRate,loanTenure);
+      const totalPayment=emi*loanTenure;
+      const totalInterest=totalPayment-loanAmount;
+      displayResults(emi,totalInterest,totalPayment);
+    }
+
+    // Calculate EMI Value
+    function calculateEMIValue(principal,monthlyRate,months){
+      const numerator=principal*monthlyRate*Math.pow(1+monthlyRate,months);
+      const denominator=Math.pow(1+monthlyRate,months)-1;
+      if(denominator===0){
+        return principal/months;
+      }
+      return numerator/denominator;
+    }
+
+    // Display Results
+    function displayResults(emi,totalInterest,totalPayment){
+      const formatter=new Intl.NumberFormat('en-US',{
+        style:'currency',
+        currency:'USD',
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      });
+      emiValue.textContent=formatter.format(emi);
+      interestValue.textContent=formatter.format(totalInterest);
+      totalValue.textContent=formatter.format(totalPayment);
+      resultContainer.classList.add('active');
+    }
+
+    // Show Error
+    function showError(message){
+      emiValue.textContent='-';
+      interestValue.textContent='-';
+      totalValue.textContent='-';
+      resultContainer.classList.add('active');
+      alert(message);
+    }
+
+    // Reset Calculator
+    function resetCalculator(){
+      loanAmountInput.value='';
+      interestRateInput.value='8.5';
+      loanTenureInput.value='20';
+      emiValue.textContent='-';
+      interestValue.textContent='-';
+      totalValue.textContent='-';
+      resultContainer.classList.remove('active');
+      loanAmountInput.focus();
+    }
+
+    // Theme Toggle
+    const themeToggle=document.getElementById("themeToggle");
+    const prefersDarkScheme=window.matchMedia("(prefers-color-scheme: dark)");
+    const currentTheme=localStorage.getItem("theme")||(prefersDarkScheme.matches?"dark":"light");
+    if(currentTheme==="light"){
+      document.body.classList.add("light-mode");
+    }
+    themeToggle.addEventListener("click",()=>{
+      document.body.classList.toggle("light-mode");
+      const theme=document.body.classList.contains("light-mode")?"light":"dark";
+      localStorage.setItem("theme",theme);
+    });
+    themeToggle.addEventListener("keypress",(e)=>{
+      if(e.key==="Enter"||e.key===" "){
+        document.body.classList.toggle("light-mode");
+        const theme=document.body.classList.contains("light-mode")?"light":"dark";
+        localStorage.setItem("theme",theme);
+      }
+    });
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded',initializeCalculator);
+  </script>
+</body>
+</html>
+
+<!-- 
+✅ Optimized for SEO, performance, and accessibility
+🧩 Developed for Prabin's Toolbox - 2025
+-->

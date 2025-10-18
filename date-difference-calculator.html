@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Date Difference Calculator | Calculate Days Between Dates | Prabin's Toolbox</title>
+  <meta name="description" content="Free online date difference calculator. Calculate days, weeks, months, and years between two dates. Perfect for project planning, age calculation, and event countdowns.">
+  <meta name="keywords" content="date difference calculator, days between dates, date calculator, time between dates, project planning, age calculator, event countdown">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/date-difference-calculator.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Date Difference Calculator | Calculate Days Between Dates | Prabin's Toolbox">
+  <meta property="og:description" content="Free online date difference calculator. Calculate days, weeks, months, and years between two dates.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/date-calculator-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/date-difference-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prabin's Toolbox">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Date Difference Calculator | Calculate Days Between Dates">
+  <meta name="twitter:description" content="Free online date difference calculator. Calculate days, weeks, months, and years between two dates.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/date-calculator-og.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Preconnect to CDN -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Date Difference Calculator",
+    "description": "Free online calculator to find the difference between two dates in days, weeks, months, and years",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": "https://www.prabinpokhrel1.com.np/date-difference-calculator.html"
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .calculator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input {
+      padding-left: 3rem;
+    }
+
+    .dates-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: end;
+    }
+
+    .swap-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    .swap-btn:hover {
+      background: var(--primary-dark);
+      transform: rotate(180deg);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+    }
+
+    .checkbox-group label {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    .buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .calculate-btn, .reset-btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .calculate-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .calculate-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .reset-btn {
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-3px);
+    }
+
+    /* --------- RESULT SECTION --------- */
+    .result-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .result-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .result-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+    }
+
+    .result-title {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .days-value {
+      color: var(--primary);
+    }
+
+    .weeks-value {
+      color: var(--secondary);
+    }
+
+    .months-value {
+      color: var(--warning);
+    }
+
+    .years-value {
+      color: var(--success);
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .date-range {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .date-range span {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .content-section h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .content-section h3 {
+      color: var(--primary);
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.4rem;
+    }
+
+    .content-section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .content-section ul, .content-section ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-answer {
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .tool-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .tool-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .tool-link {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary-dark);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .dates-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .swap-btn {
+        align-self: center;
+        margin: 0.5rem 0;
+        transform: rotate(90deg);
+      }
+
+      .swap-btn:hover {
+        transform: rotate(270deg);
+      }
+
+      .buttons-row {
+        grid-template-columns: 1fr;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .result-value {
+        font-size: 1.5rem;
+      }
+      
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle light/dark mode">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="calculator-card">
+      <div class="card-header">
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        <h2>Date Difference Calculator</h2>
+        <p>Calculate the difference between two dates in days, weeks, months, and years</p>
+      </div>
+
+      <div class="dates-row">
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <div class="input-with-icon">
+            <i class="fas fa-calendar-plus" aria-hidden="true"></i>
+            <input type="date" id="startDate" class="form-control" required aria-describedby="startDateDescription">
+          </div>
+          <div class="error-message" id="startDateError"></div>
+        </div>
+
+        <button class="swap-btn" id="swapBtn" aria-label="Swap start and end dates">
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+        </button>
+
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <div class="input-with-icon">
+            <i class="fas fa-calendar-minus" aria-hidden="true"></i>
+            <input type="date" id="endDate" class="form-control" required aria-describedby="endDateDescription">
+          </div>
+          <div class="error-message" id="endDateError"></div>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="includeEndDate" checked aria-describedby="includeEndDateDescription">
+        <label for="includeEndDate">Include end date in calculation</label>
+      </div>
+
+      <div class="buttons-row">
+        <button class="calculate-btn" id="calculateBtn" aria-label="Calculate date difference">
+          <i class="fas fa-calculator" aria-hidden="true"></i> Calculate Difference
+        </button>
+        <button class="reset-btn" id="resetBtn" aria-label="Reset calculator">
+          <i class="fas fa-redo" aria-hidden="true"></i> Reset
+        </button>
+      </div>
+
+      <div class="result-container" id="resultContainer" aria-live="polite">
+        <div class="result-label">Date Difference Results</div>
+        <div class="result-grid">
+          <div class="result-card">
+            <div class="result-title">Total Days</div>
+            <div class="result-value days-value" id="daysValue">-</div>
+            <div class="result-details">Days between dates</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Total Weeks</div>
+            <div class="result-value weeks-value" id="weeksValue">-</div>
+            <div class="result-details">Weeks between dates</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Total Months</div>
+            <div class="result-value months-value" id="monthsValue">-</div>
+            <div class="result-details">Approximate months</div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">Total Years</div>
+            <div class="result-value years-value" id="yearsValue">-</div>
+            <div class="result-details">Approximate years</div>
+          </div>
+        </div>
+
+        <div class="date-range" id="dateRange">
+          <!-- Will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+      </a>
+    </div>
+
+    <!-- Content Sections -->
+    <section class="content-section" aria-labelledby="intro-heading">
+      <h2 id="intro-heading">What is a Date Difference Calculator?</h2>
+      <p>A date difference calculator is a useful tool that calculates the time span between two specific dates. It provides results in multiple units including days, weeks, months, and years, making it easier to understand the duration between events.</p>
+      <p>This tool is essential for various purposes such as project planning, calculating age, determining rental periods, tracking milestones, and counting down to important events.</p>
+      
+      <h3>Common Use Cases</h3>
+      <ul>
+        <li><strong>Project Planning</strong>: Calculate project timelines and deadlines</li>
+        <li><strong>Age Calculation</strong>: Determine exact age in years, months, and days</li>
+        <li><strong>Event Planning</strong>: Count down to weddings, vacations, or special occasions</li>
+        <li><strong>Financial Planning</strong>: Calculate interest periods or loan durations</li>
+        <li><strong>Rental Agreements</strong>: Determine exact rental periods</li>
+        <li><strong>Academic Planning</strong>: Track semester durations and assignment deadlines</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="how-to-use-heading">
+      <h2 id="how-to-use-heading">How to Use the Date Difference Calculator</h2>
+      <ol>
+        <li>Select your start date using the date picker or by typing the date</li>
+        <li>Select your end date using the date picker or by typing the date</li>
+        <li>Choose whether to include the end date in the calculation (this adds one day to the total)</li>
+        <li>Click the "Calculate Difference" button or let the tool automatically calculate as you change dates</li>
+        <li>Review the results displayed in days, weeks, months, and years</li>
+        <li>Use the swap button to quickly exchange the start and end dates</li>
+        <li>Reset the calculator to start over with new dates</li>
+      </ol>
+      <p>The calculator automatically validates your inputs and provides immediate results. All calculations happen in your browser, ensuring your data remains private and secure.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="benefits-heading">
+      <h2 id="benefits-heading">Benefits of Using Our Date Difference Calculator</h2>
+      <ul>
+        <li><strong>Completely Free</strong>: No registration, subscriptions, or hidden costs</li>
+        <li><strong>Multiple Time Units</strong>: Results in days, weeks, months, and years for comprehensive understanding</li>
+        <li><strong>Automatic Calculation</strong>: Instant results as you change dates</li>
+        <li><strong>Date Validation</strong>: Ensures logical date order and provides helpful error messages</li>
+        <li><strong>Flexible Options</strong>: Choose whether to include the end date in calculations</li>
+        <li><strong>Privacy-Focused</strong>: All calculations happen locally in your browser</li>
+        <li><strong>Mobile-Friendly</strong>: Fully responsive design works on all devices</li>
+        <li><strong>Accessible</strong>: Designed with accessibility in mind for all users</li>
+      </ul>
+      <p>Whether you're planning a project, calculating age, or counting down to an event, our date difference calculator provides accurate results with an intuitive interface.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">What does "Include end date" mean?</div>
+        <div class="faq-answer">When "Include end date" is checked, the calculation counts the end date as part of the duration. For example, from January 1 to January 2 would be 2 days with this option enabled, but only 1 day with it disabled. This is useful when you want to count both the start and end dates as part of the period.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How accurate are the month and year calculations?</div>
+        <div class="faq-answer">Month and year calculations are approximate since months have varying lengths (28-31 days) and years can be 365 or 366 days. The calculator uses averages: 30 days per month and 365 days per year for these conversions. For precise calculations, we recommend using the day count as your primary reference.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Can I calculate dates in the past?</div>
+        <div class="faq-answer">Yes, the calculator works for any dates, whether in the past, present, or future. You can calculate the time between historical events, future projections, or any combination of dates regardless of their position in time.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Why does the calculator show an error when start date is after end date?</div>
+        <div class="faq-answer">The calculator requires the start date to be on or before the end date for logical calculations. If you need to calculate negative time (time passed), simply swap the dates using the exchange button between the date fields.</div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="related-tools-heading">
+      <h2 id="related-tools-heading">Explore More Time & Utility Tools</h2>
+      <p>Discover other helpful calculators and tools in our collection:</p>
+      
+      <div class="tool-grid">
+        <div class="tool-card">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i>
+          <h3>Age Calculator</h3>
+          <p>Calculate exact age in years, months, and days from birth date</p>
+          <a href="age-calculator.html" class="tool-link">Use Tool</a>
+        </div>
+        
+        <div class="tool-card">
+          <i class="fas fa-clock" aria-hidden="true"></i>
+          <h3>Time Calculator</h3>
+          <p>Add or subtract time durations and calculate time differences</p>
+          <a href="time-calculator.html" class="tool-link">Use Tool</a>
+        </div>
+        
+        <div class="tool-card">
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+          <h3>Unit Converter</h3>
+          <p>Convert between different units of measurement quickly and accurately</p>
+          <a href="unit-converter.html" class="tool-link">Use Tool</a>
+        </div>
+        
+        <div class="tool-card">
+          <i class="fas fa-percentage" aria-hidden="true"></i>
+          <h3>Percentage Calculator</h3>
+          <p>Calculate percentages, increases, decreases, and more</p>
+          <a href="percentage-calculator.html" class="tool-link">Use Tool</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const includeEndDateCheckbox = document.getElementById('includeEndDate');
+    const calculateBtn = document.getElementById('calculateBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const daysValue = document.getElementById('daysValue');
+    const weeksValue = document.getElementById('weeksValue');
+    const monthsValue = document.getElementById('monthsValue');
+    const yearsValue = document.getElementById('yearsValue');
+    const dateRange = document.getElementById('dateRange');
+    const resultContainer = document.getElementById('resultContainer');
+    
+    // Error message elements
+    const startDateError = document.getElementById('startDateError');
+    const endDateError = document.getElementById('endDateError');
+
+    // ---------- INITIALIZATION ----------
+    function initializeCalculator() {
+      // Set default dates (today and 30 days from today)
+      const today = new Date();
+      const futureDate = new Date();
+      futureDate.setDate(today.getDate() + 30);
+      
+      startDateInput.value = formatDateForInput(today);
+      endDateInput.value = formatDateForInput(futureDate);
+      
+      // Add event listeners
+      calculateBtn.addEventListener('click', calculateDifference);
+      resetBtn.addEventListener('click', resetCalculator);
+      swapBtn.addEventListener('click', swapDates);
+      
+      // Add real-time calculation on input change
+      startDateInput.addEventListener('input', calculateDifference);
+      endDateInput.addEventListener('input', calculateDifference);
+      includeEndDateCheckbox.addEventListener('change', calculateDifference);
+      
+      // Perform initial calculation
+      calculateDifference();
+    }
+
+    // ---------- CALCULATE DIFFERENCE ----------
+    function calculateDifference() {
+      // Clear previous errors
+      clearErrors();
+      
+      // Get input values
+      const startDateValue = startDateInput.value;
+      const endDateValue = endDateInput.value;
+      const includeEndDate = includeEndDateCheckbox.checked;
+      
+      // Validate inputs
+      if (!startDateValue || !endDateValue) {
+        if (!startDateValue) {
+          startDateError.textContent = 'Please select a start date';
+          startDateError.style.display = 'block';
+        }
+        if (!endDateValue) {
+          endDateError.textContent = 'Please select an end date';
+          endDateError.style.display = 'block';
+        }
+        return;
+      }
+      
+      const startDate = new Date(startDateValue);
+      const endDate = new Date(endDateValue);
+      
+      // Validate date order
+      if (startDate > endDate) {
+        startDateError.textContent = 'Start date cannot be after end date';
+        startDateError.style.display = 'block';
+        return;
+      }
+      
+      // Calculate difference
+      const difference = calculateDateDifference(startDate, endDate, includeEndDate);
+      
+      // Display results
+      displayResults(difference, startDate, endDate);
+    }
+
+    // ---------- CALCULATE DATE DIFFERENCE ----------
+    function calculateDateDifference(startDate, endDate, includeEndDate) {
+      // Calculate total days
+      const timeDifference = endDate.getTime() - startDate.getTime();
+      let daysDifference = timeDifference / (1000 * 3600 * 24);
+      
+      // Adjust for including end date
+      if (includeEndDate) {
+        daysDifference += 1;
+      }
+      
+      // Calculate other units
+      const weeksDifference = daysDifference / 7;
+      const monthsDifference = daysDifference / 30; // Approximate
+      const yearsDifference = daysDifference / 365; // Approximate
+      
+      return {
+        days: Math.round(daysDifference),
+        weeks: Math.round(weeksDifference * 100) / 100,
+        months: Math.round(monthsDifference * 100) / 100,
+        years: Math.round(yearsDifference * 100) / 100
+      };
+    }
+
+    // ---------- DISPLAY RESULTS ----------
+    function displayResults(difference, startDate, endDate) {
+      const { days, weeks, months, years } = difference;
+      
+      // Update result values
+      daysValue.textContent = days.toLocaleString();
+      weeksValue.textContent = weeks.toLocaleString();
+      monthsValue.textContent = months.toLocaleString();
+      yearsValue.textContent = years.toLocaleString();
+      
+      // Update date range display
+      const startFormatted = formatDateForDisplay(startDate);
+      const endFormatted = formatDateForDisplay(endDate);
+      const includeText = includeEndDateCheckbox.checked ? ' (inclusive)' : '';
+      
+      dateRange.innerHTML = `
+        From <span>${startFormatted}</span> to <span>${endFormatted}</span>${includeText}
+      `;
+      
+      // Show result container with animation
+      resultContainer.classList.add('active');
+    }
+
+    // ---------- SWAP DATES ----------
+    function swapDates() {
+      const startDateValue = startDateInput.value;
+      const endDateValue = endDateInput.value;
+      
+      // Swap the values
+      startDateInput.value = endDateValue;
+      endDateInput.value = startDateValue;
+      
+      // Recalculate
+      calculateDifference();
+    }
+
+    // ---------- CLEAR ERRORS ----------
+    function clearErrors() {
+      startDateError.style.display = 'none';
+      endDateError.style.display = 'none';
+    }
+
+    // ---------- FORMAT DATE FOR INPUT ----------
+    function formatDateForInput(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // ---------- FORMAT DATE FOR DISPLAY ----------
+    function formatDateForDisplay(date) {
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    // ---------- RESET CALCULATOR ----------
+    function resetCalculator() {
+      // Set default dates
+      const today = new Date();
+      const futureDate = new Date();
+      futureDate.setDate(today.getDate() + 30);
+      
+      startDateInput.value = formatDateForInput(today);
+      endDateInput.value = formatDateForInput(futureDate);
+      includeEndDateCheckbox.checked = true;
+      
+      // Clear errors and results
+      clearErrors();
+      resultContainer.classList.remove('active');
+      
+      // Focus on first input
+      startDateInput.focus();
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    // Initialize the calculator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeCalculator);
+  </script>
+</body>
+</html>

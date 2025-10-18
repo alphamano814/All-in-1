@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Case Converter | Free Online Text Transformation Tool by Prabin's Toolbox</title>
+  <meta name="description" content="Free online text case converter tool. Transform text to uppercase, lowercase, title case, sentence case, camel case, and more. Perfect for writers, developers, and content creators.">
+  <meta name="keywords" content="text case converter, uppercase converter, lowercase converter, title case tool, sentence case, camel case, text transformation, text formatting, free text tool, Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/text-case-converter.html">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Text Case Converter | Free Online Tool by Prabin's Toolbox">
+  <meta property="og:description" content="Transform text to different cases instantly. Convert to uppercase, lowercase, title case, sentence case, camel case, and toggle case with one click.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/text-case-converter.html">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/text-case-converter-og.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text Case Converter | Free Online Tool by Prabin's Toolbox">
+  <meta name="twitter:description" content="Transform text to different cases instantly. Free online Text Case Converter for writers, developers, and content creators.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/text-case-converter-twitter.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text Case Converter",
+    "description": "Free online text case converter tool for transforming text to different cases and formats",
+    "url": "https://www.prabinpokhrel1.com.np/text-case-converter.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .converter-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .text-input, .text-output {
+      width: 100%;
+      min-height: 150px;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      resize: vertical;
+    }
+
+    .text-input:focus, .text-output:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .text-output {
+      background: var(--bg-lighter);
+      font-weight: 500;
+    }
+
+    .case-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .case-btn {
+      padding: 0.8rem 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .case-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .case-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .copy-btn, .reset-btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .copy-btn {
+      background: var(--success);
+      color: white;
+    }
+
+    .copy-btn:hover {
+      background: #0da271;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .reset-btn {
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-3px);
+    }
+
+    .output-container {
+      position: relative;
+    }
+
+    .copy-feedback {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--success);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .copy-feedback.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .content-section h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-section h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul, .content-section ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .benefit-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .case-types-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .case-type-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .case-type-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .case-type-name {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-answer {
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-link {
+      display: block;
+      background: var(--bg-light);
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .case-buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .buttons-row {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-types-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .case-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="converter-card">
+      <div class="card-header">
+        <i class="fas fa-text-height" aria-hidden="true"></i>
+        <h2>Text Case Converter</h2>
+        <p>Convert your text to different cases with a single click</p>
+      </div>
+
+      <div class="form-group">
+        <label for="inputText">Input Text</label>
+        <textarea id="inputText" class="text-input" placeholder="Enter your text here..." aria-describedby="inputError"></textarea>
+        <div class="error-message" id="inputError" role="alert"></div>
+      </div>
+
+      <div class="case-buttons">
+        <button class="case-btn" data-case="uppercase" aria-label="Convert text to uppercase">
+          <i class="fas fa-text-height" aria-hidden="true"></i> UPPERCASE
+        </button>
+        <button class="case-btn" data-case="lowercase" aria-label="Convert text to lowercase">
+          <i class="fas fa-text-height" aria-hidden="true"></i> lowercase
+        </button>
+        <button class="case-btn" data-case="titlecase" aria-label="Convert text to title case">
+          <i class="fas fa-heading" aria-hidden="true"></i> Title Case
+        </button>
+        <button class="case-btn" data-case="sentencecase" aria-label="Convert text to sentence case">
+          <i class="fas fa-paragraph" aria-hidden="true"></i> Sentence case
+        </button>
+        <button class="case-btn" data-case="togglecase" aria-label="Toggle text case">
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i> Toggle Case
+        </button>
+        <button class="case-btn" data-case="camelcase" aria-label="Convert text to camel case">
+          <i class="fas fa-font" aria-hidden="true"></i> CamelCase
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="outputText">Converted Text</label>
+        <div class="output-container">
+          <textarea id="outputText" class="text-output" placeholder="Converted text will appear here..." readonly aria-label="Converted text output"></textarea>
+          <div class="copy-feedback" id="copyFeedback">Copied to clipboard!</div>
+        </div>
+      </div>
+
+      <div class="buttons-row">
+        <button class="copy-btn" id="copyBtn" aria-label="Copy converted text to clipboard">
+          <i class="fas fa-copy" aria-hidden="true"></i> Copy to Clipboard
+        </button>
+        <button class="reset-btn" id="resetBtn" aria-label="Reset text converter">
+          <i class="fas fa-redo" aria-hidden="true"></i> Reset
+        </button>
+      </div>
+
+      <a href="index.html" class="back-btn" aria-label="Go back to homepage">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+      </a>
+    </div>
+
+    <!-- CONTENT SECTIONS -->
+    <section class="content-section" aria-labelledby="intro-heading">
+      <h2 id="intro-heading">Free Online Text Case Converter</h2>
+      <p>Our Text Case Converter is an essential tool for writers, developers, content creators, and anyone who works with text. Transform your text between different cases instantly with just one click. Whether you're formatting documents, writing code, creating social media posts, or preparing content for publication, this tool saves you time and ensures consistency.</p>
+      <p>No more manual text formatting or complex find-and-replace operations. Our converter handles all the case transformations automatically, providing clean, properly formatted text in seconds.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="how-to-use-heading">
+      <h2 id="how-to-use-heading">How to Use the Text Case Converter</h2>
+      <ol>
+        <li><strong>Enter Your Text:</strong> Paste or type your text into the input text area.</li>
+        <li><strong>Select Case Type:</strong> Choose from six different case conversion options using the buttons.</li>
+        <li><strong>View Results:</strong> The converted text will appear instantly in the output area.</li>
+        <li><strong>Copy Text:</strong> Use the "Copy to Clipboard" button to copy the converted text for use in your projects.</li>
+        <li><strong>Reset:</strong> Clear both input and output fields using the reset button to start fresh.</li>
+      </ol>
+      
+      <h3>Supported Case Types</h3>
+      <div class="case-types-grid">
+        <div class="case-type-card">
+          <div class="case-type-name">UPPERCASE</div>
+          <p>Converts all characters to capital letters. Perfect for headings and emphasis.</p>
+        </div>
+        <div class="case-type-card">
+          <div class="case-type-name">lowercase</div>
+          <p>Converts all characters to small letters. Useful for normalizing text.</p>
+        </div>
+        <div class="case-type-card">
+          <div class="case-type-name">Title Case</div>
+          <p>Capitalizes the first letter of each word. Ideal for titles and headings.</p>
+        </div>
+        <div class="case-type-card">
+          <div class="case-type-name">Sentence case</div>
+          <p>Capitalizes the first letter of each sentence. Perfect for paragraphs.</p>
+        </div>
+        <div class="case-type-card">
+          <div class="case-type-name">Toggle Case</div>
+          <p>Switches between uppercase and lowercase for each character.</p>
+        </div>
+        <div class="case-type-card">
+          <div class="case-type-name">CamelCase</div>
+          <p>Removes spaces and capitalizes each word. Commonly used in programming.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="benefits-heading">
+      <h2 id="benefits-heading">Benefits of Using Our Text Case Converter</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-bolt" aria-hidden="true"></i>
+          </div>
+          <h3>Instant Conversion</h3>
+          <p>Get real-time text transformation with immediate results as you type or select options.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-copy" aria-hidden="true"></i>
+          </div>
+          <h3>Easy Copy Function</h3>
+          <p>One-click copying to clipboard makes it simple to use converted text in other applications.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+          </div>
+          <h3>Mobile Friendly</h3>
+          <p>Works perfectly on all devices - desktop, tablet, and mobile phones.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-lock" aria-hidden="true"></i>
+          </div>
+          <h3>Privacy Focused</h3>
+          <p>Your text never leaves your browser - complete privacy guaranteed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">What is the difference between Title Case and Sentence Case?</div>
+        <div class="faq-answer">Title Case capitalizes the first letter of every word, while Sentence Case only capitalizes the first letter of each sentence. Title Case is typically used for titles and headings, while Sentence Case is used for regular paragraphs and body text.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What is CamelCase used for?</div>
+        <div class="faq-answer">CamelCase (also known as camel case) is commonly used in programming for variable names, function names, and other identifiers. It removes spaces between words and capitalizes each word except the first one (e.g., "camelCaseExample").</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Can I convert large amounts of text?</div>
+        <div class="faq-answer">Yes, our Text Case Converter can handle large amounts of text efficiently. However, for extremely large documents, we recommend converting sections at a time for optimal performance.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Is this text case converter free to use?</div>
+        <div class="faq-answer">Yes, our text case converter is completely free to use with no limitations. You can use it as often as you need without any registration or subscription.</div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="more-tools-heading">
+      <h2 id="more-tools-heading">Explore More Useful Tools</h2>
+      <p>Check out our other free online tools to simplify your daily tasks:</p>
+      <div class="tools-grid">
+        <a href="unit-converter.html" class="tool-link">Unit Converter</a>
+        <a href="percentage-calculator.html" class="tool-link">Percentage Calculator</a>
+        <a href="discount-calculator.html" class="tool-link">Discount Calculator</a>
+        <a href="index.html" class="tool-link">All Tools</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const inputText = document.getElementById('inputText');
+    const outputText = document.getElementById('outputText');
+    const copyBtn = document.getElementById('copyBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const copyFeedback = document.getElementById('copyFeedback');
+    const inputError = document.getElementById('inputError');
+    const caseButtons = document.querySelectorAll('.case-btn');
+
+    // ---------- INITIALIZATION ----------
+    function initializeConverter() {
+      // Add event listeners
+      copyBtn.addEventListener('click', copyToClipboard);
+      resetBtn.addEventListener('click', resetConverter);
+      
+      // Add event listeners to case buttons
+      caseButtons.forEach(button => {
+        button.addEventListener('click', convertText);
+        button.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            convertText(e);
+          }
+        });
+      });
+      
+      // Add real-time conversion on input change
+      inputText.addEventListener('input', convertText);
+      
+      // Focus on input textarea
+      inputText.focus();
+    }
+
+    // ---------- CONVERT TEXT ----------
+    function convertText(e) {
+      // Clear previous errors
+      clearErrors();
+      
+      // Get input text
+      const text = inputText.value.trim();
+      
+      // Validate input
+      if (!text) {
+        inputError.textContent = 'Please enter some text to convert';
+        inputError.style.display = 'block';
+        outputText.value = '';
+        return;
+      }
+      
+      // Determine conversion type
+      let conversionType;
+      if (e && e.currentTarget) {
+        conversionType = e.currentTarget.dataset.case;
+        
+        // Update active button
+        caseButtons.forEach(btn => {
+          btn.classList.remove('active');
+        });
+        e.currentTarget.classList.add('active');
+      } else {
+        // Default to uppercase if no button was clicked
+        conversionType = 'uppercase';
+      }
+      
+      // Convert text based on type
+      let convertedText;
+      switch(conversionType) {
+        case 'uppercase':
+          convertedText = text.toUpperCase();
+          break;
+        case 'lowercase':
+          convertedText = text.toLowerCase();
+          break;
+        case 'titlecase':
+          convertedText = toTitleCase(text);
+          break;
+        case 'sentencecase':
+          convertedText = toSentenceCase(text);
+          break;
+        case 'togglecase':
+          convertedText = toToggleCase(text);
+          break;
+        case 'camelcase':
+          convertedText = toCamelCase(text);
+          break;
+        default:
+          convertedText = text;
+      }
+      
+      // Display converted text
+      outputText.value = convertedText;
+    }
+
+    // ---------- TO TITLE CASE ----------
+    function toTitleCase(text) {
+      return text.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+    }
+
+    // ---------- TO SENTENCE CASE ----------
+    function toSentenceCase(text) {
+      // Split into sentences
+      const sentences = text.split(/([.!?]+\s*)/);
+      let result = '';
+      
+      for (let i = 0; i < sentences.length; i++) {
+        if (sentences[i].trim().length > 0) {
+          // Capitalize first letter of sentence
+          const sentence = sentences[i].trim();
+          if (sentence.length > 0) {
+            result += sentence.charAt(0).toUpperCase() + 
+                     sentence.slice(1).toLowerCase() + 
+                     (i < sentences.length - 1 ? ' ' : '');
+          }
+        }
+      }
+      
+      return result;
+    }
+
+    // ---------- TO TOGGLE CASE ----------
+    function toToggleCase(text) {
+      let result = '';
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        result += char === char.toUpperCase() ? 
+                 char.toLowerCase() : 
+                 char.toUpperCase();
+      }
+      return result;
+    }
+
+    // ---------- TO CAMEL CASE ----------
+    function toCamelCase(text) {
+      return text
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase())
+        .replace(/[^a-zA-Z0-9]/g, '');
+    }
+
+    // ---------- COPY TO CLIPBOARD ----------
+    function copyToClipboard() {
+      // Clear previous errors
+      clearErrors();
+      
+      // Check if there's text to copy
+      if (!outputText.value) {
+        inputError.textContent = 'No text to copy. Please convert some text first.';
+        inputError.style.display = 'block';
+        return;
+      }
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(outputText.value)
+        .then(() => {
+          // Show feedback
+          copyFeedback.classList.add('show');
+          setTimeout(() => {
+            copyFeedback.classList.remove('show');
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy text: ', err);
+          inputError.textContent = 'Failed to copy text to clipboard';
+          inputError.style.display = 'block';
+        });
+    }
+
+    // ---------- CLEAR ERRORS ----------
+    function clearErrors() {
+      inputError.style.display = 'none';
+    }
+
+    // ---------- RESET CONVERTER ----------
+    function resetConverter() {
+      inputText.value = '';
+      outputText.value = '';
+      
+      // Clear errors and active button
+      clearErrors();
+      caseButtons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Focus on input textarea
+      inputText.focus();
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    themeToggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the converter when the page loads
+    document.addEventListener('DOMContentLoaded', initializeConverter);
+  </script>
+</body>
+</html>
+
+<!-- 
+✅ Optimized for SEO, performance, and accessibility
+🧩 Developed for Prabin's Toolbox - 2025
+-->

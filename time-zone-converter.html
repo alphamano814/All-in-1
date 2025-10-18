@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Zone Converter | Free Online Time Conversion Tool by Prabin's Toolbox</title>
+  <meta name="description" content="Free online time zone converter tool. Convert time between different time zones instantly. Perfect for scheduling meetings, travel planning, and international communication.">
+  <meta name="keywords" content="time zone converter, online time converter, world clock, time conversion, international time, meeting planner, travel time, free time tool, Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/time-zone-converter.html">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Time Zone Converter | Free Online Tool by Prabin's Toolbox">
+  <meta property="og:description" content="Convert time between different time zones instantly. Free online Time Zone Converter for scheduling meetings, travel planning, and international communication.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/time-zone-converter.html">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/time-zone-converter-og.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Time Zone Converter | Free Online Tool by Prabin's Toolbox">
+  <meta name="twitter:description" content="Convert time between different time zones instantly. Perfect for scheduling international meetings and travel planning.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/time-zone-converter-twitter.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Time Zone Converter",
+    "description": "Free online time zone converter tool for converting time between different time zones worldwide",
+    "url": "https://www.prabinpokhrel1.com.np/time-zone-converter.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    .main-content {
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .converter-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input, .input-with-icon select {
+      padding-left: 3rem;
+    }
+
+    .timezone-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: end;
+    }
+
+    .swap-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    .swap-btn:hover {
+      background: var(--primary-dark);
+      transform: rotate(180deg);
+    }
+
+    .buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .convert-btn, .reset-btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .convert-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .convert-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .reset-btn {
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-3px);
+    }
+
+    /* --------- RESULT SECTION --------- */
+    .result-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .result-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .result-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+
+    .result-details {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .timezone-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .timezone-from, .timezone-to {
+      text-align: center;
+      flex: 1;
+    }
+
+    .timezone-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .timezone-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .timezone-offset {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .content-section h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-section h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul, .content-section ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .benefit-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-answer {
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-link {
+      display: block;
+      background: var(--bg-light);
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .timezone-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .swap-btn {
+        align-self: center;
+        margin: 0.5rem 0;
+        transform: rotate(90deg);
+      }
+
+      .swap-btn:hover {
+        transform: rotate(270deg);
+      }
+
+      .buttons-row {
+        grid-template-columns: 1fr;
+      }
+
+      .timezone-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="converter-card">
+      <div class="card-header">
+        <i class="fas fa-globe-americas" aria-hidden="true"></i>
+        <h2>Time Zone Converter</h2>
+        <p>Convert time between different time zones around the world</p>
+      </div>
+
+      <div class="form-group">
+        <label for="inputTime">Time</label>
+        <div class="input-with-icon">
+          <i class="fas fa-clock" aria-hidden="true"></i>
+          <input type="time" id="inputTime" class="form-control" required aria-describedby="timeError">
+        </div>
+        <div class="error-message" id="timeError" role="alert"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputDate">Date (Optional)</label>
+        <div class="input-with-icon">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+          <input type="date" id="inputDate" class="form-control">
+        </div>
+      </div>
+
+      <div class="timezone-row">
+        <div class="form-group">
+          <label for="fromTimezone">From Time Zone</label>
+          <div class="input-with-icon">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            <select id="fromTimezone" class="form-control" aria-label="Select source time zone">
+              <!-- Options will be populated by JavaScript -->
+            </select>
+          </div>
+        </div>
+
+        <button class="swap-btn" id="swapBtn" aria-label="Swap time zones">
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+        </button>
+
+        <div class="form-group">
+          <label for="toTimezone">To Time Zone</label>
+          <div class="input-with-icon">
+            <i class="fas fa-flag" aria-hidden="true"></i>
+            <select id="toTimezone" class="form-control" aria-label="Select target time zone">
+              <!-- Options will be populated by JavaScript -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons-row">
+        <button class="convert-btn" id="convertBtn" aria-label="Convert time">
+          <i class="fas fa-sync-alt" aria-hidden="true"></i> Convert Time
+        </button>
+        <button class="reset-btn" id="resetBtn" aria-label="Reset converter">
+          <i class="fas fa-redo" aria-hidden="true"></i> Reset
+        </button>
+      </div>
+
+      <div class="result-container" id="resultContainer" role="status" aria-live="polite">
+        <div class="result-label">Converted Time</div>
+        <div class="result-value" id="resultValue">-</div>
+        <div class="result-details" id="resultDetails">Select time and time zones to convert</div>
+        
+        <div class="timezone-info">
+          <div class="timezone-from">
+            <div class="timezone-label">From</div>
+            <div class="timezone-name" id="fromTimezoneName">-</div>
+            <div class="timezone-offset" id="fromTimezoneOffset">-</div>
+          </div>
+          <div class="timezone-to">
+            <div class="timezone-label">To</div>
+            <div class="timezone-name" id="toTimezoneName">-</div>
+            <div class="timezone-offset" id="toTimezoneOffset">-</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="index.html" class="back-btn" aria-label="Go back to homepage">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+      </a>
+    </div>
+
+    <!-- CONTENT SECTIONS -->
+    <section class="content-section" aria-labelledby="intro-heading">
+      <h2 id="intro-heading">Free Online Time Zone Converter</h2>
+      <p>Our Time Zone Converter is an essential tool for anyone working with international teams, planning travel, or communicating across different time zones. Convert any time instantly between over 20 different time zones worldwide with just a few clicks.</p>
+      <p>Whether you're scheduling a meeting with colleagues in different countries, planning an international call, or coordinating travel arrangements, our tool ensures you always have the right time at your fingertips.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="how-to-use-heading">
+      <h2 id="how-to-use-heading">How to Use the Time Zone Converter</h2>
+      <ol>
+        <li><strong>Enter Time:</strong> Input the time you want to convert using the time selector.</li>
+        <li><strong>Select Date (Optional):</strong> Choose a specific date if needed, or leave blank to use today's date.</li>
+        <li><strong>Choose Time Zones:</strong> Select your source time zone and target time zone from the dropdown menus.</li>
+        <li><strong>Convert:</strong> Click the "Convert Time" button or let the tool automatically update as you make changes.</li>
+        <li><strong>Swap Time Zones:</strong> Use the swap button to quickly reverse your source and target time zones.</li>
+      </ol>
+      
+      <h3>Supported Time Zones</h3>
+      <p>Our converter includes major time zones from around the world including UTC, GMT, EST, PST, CET, IST, JST, AEST, and many more. Each time zone displays its UTC offset for easy reference.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="benefits-heading">
+      <h2 id="benefits-heading">Benefits of Using Our Time Zone Converter</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-globe" aria-hidden="true"></i>
+          </div>
+          <h3>Global Coverage</h3>
+          <p>Convert between 20+ major time zones from around the world with accurate UTC offsets.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-bolt" aria-hidden="true"></i>
+          </div>
+          <h3>Instant Results</h3>
+          <p>Get real-time conversions as you type with automatic calculation updates.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+          </div>
+          <h3>Mobile Friendly</h3>
+          <p>Works perfectly on all devices - desktop, tablet, and mobile phones.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-lock" aria-hidden="true"></i>
+          </div>
+          <h3>Privacy Focused</h3>
+          <p>Your data never leaves your browser - complete privacy guaranteed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">What is the difference between UTC and GMT?</div>
+        <div class="faq-answer">UTC (Coordinated Universal Time) is the primary time standard while GMT (Greenwich Mean Time) is a time zone. For most practical purposes, they are equivalent and have the same time offset (UTC+0).</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Do you account for Daylight Saving Time?</div>
+        <div class="faq-answer">Yes, our time zone converter includes both standard and daylight saving time variants for regions that observe DST, such as EST/EDT, PST/PDT, etc.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How accurate is the time zone conversion?</div>
+        <div class="faq-answer">Our conversions are mathematically precise based on the UTC offsets of each time zone. The tool accounts for the exact time difference between zones down to the minute.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Is this time zone converter free to use?</div>
+        <div class="faq-answer">Yes, our time zone converter is completely free to use with no limitations. You can use it as often as you need without any registration or subscription.</div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="more-tools-heading">
+      <h2 id="more-tools-heading">Explore More Useful Tools</h2>
+      <p>Check out our other free online tools to simplify your daily tasks:</p>
+      <div class="tools-grid">
+        <a href="unit-converter.html" class="tool-link">Unit Converter</a>
+        <a href="percentage-calculator.html" class="tool-link">Percentage Calculator</a>
+        <a href="discount-calculator.html" class="tool-link">Discount Calculator</a>
+        <a href="index.html" class="tool-link">All Tools</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- TIME ZONE DATA ----------
+    const timeZones = [
+      { id: 'UTC', name: 'UTC (Coordinated Universal Time)', offset: 0 },
+      { id: 'GMT', name: 'GMT (Greenwich Mean Time)', offset: 0 },
+      { id: 'EST', name: 'EST (Eastern Standard Time)', offset: -5 },
+      { id: 'EDT', name: 'EDT (Eastern Daylight Time)', offset: -4 },
+      { id: 'CST', name: 'CST (Central Standard Time)', offset: -6 },
+      { id: 'CDT', name: 'CDT (Central Daylight Time)', offset: -5 },
+      { id: 'MST', name: 'MST (Mountain Standard Time)', offset: -7 },
+      { id: 'MDT', name: 'MDT (Mountain Daylight Time)', offset: -6 },
+      { id: 'PST', name: 'PST (Pacific Standard Time)', offset: -8 },
+      { id: 'PDT', name: 'PDT (Pacific Daylight Time)', offset: -7 },
+      { id: 'CET', name: 'CET (Central European Time)', offset: 1 },
+      { id: 'CEST', name: 'CEST (Central European Summer Time)', offset: 2 },
+      { id: 'EET', name: 'EET (Eastern European Time)', offset: 2 },
+      { id: 'EEST', name: 'EEST (Eastern European Summer Time)', offset: 3 },
+      { id: 'IST', name: 'IST (Indian Standard Time)', offset: 5.5 },
+      { id: 'JST', name: 'JST (Japan Standard Time)', offset: 9 },
+      { id: 'AEST', name: 'AEST (Australian Eastern Standard Time)', offset: 10 },
+      { id: 'AEDT', name: 'AEDT (Australian Eastern Daylight Time)', offset: 11 },
+      { id: 'ACST', name: 'ACST (Australian Central Standard Time)', offset: 9.5 },
+      { id: 'ACDT', name: 'ACDT (Australian Central Daylight Time)', offset: 10.5 }
+    ];
+
+    // ---------- DOM ELEMENTS ----------
+    const inputTime = document.getElementById('inputTime');
+    const inputDate = document.getElementById('inputDate');
+    const fromTimezoneSelect = document.getElementById('fromTimezone');
+    const toTimezoneSelect = document.getElementById('toTimezone');
+    const convertBtn = document.getElementById('convertBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const resultValue = document.getElementById('resultValue');
+    const resultDetails = document.getElementById('resultDetails');
+    const resultContainer = document.getElementById('resultContainer');
+    const fromTimezoneName = document.getElementById('fromTimezoneName');
+    const fromTimezoneOffset = document.getElementById('fromTimezoneOffset');
+    const toTimezoneName = document.getElementById('toTimezoneName');
+    const toTimezoneOffset = document.getElementById('toTimezoneOffset');
+    const timeError = document.getElementById('timeError');
+
+    // ---------- INITIALIZATION ----------
+    function initializeConverter() {
+      // Set default date to today
+      const today = new Date();
+      inputDate.value = formatDateForInput(today);
+      
+      // Set default time to current time
+      inputTime.value = formatTimeForInput(today);
+      
+      // Populate timezone dropdowns
+      populateTimezoneSelects();
+      
+      // Set default timezones
+      fromTimezoneSelect.value = 'EST';
+      toTimezoneSelect.value = 'UTC';
+      
+      // Add event listeners
+      convertBtn.addEventListener('click', convertTime);
+      resetBtn.addEventListener('click', resetConverter);
+      swapBtn.addEventListener('click', swapTimezones);
+      
+      // Add keyboard support for swap button
+      swapBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          swapTimezones();
+        }
+      });
+      
+      // Add real-time calculation on input change
+      inputTime.addEventListener('input', convertTime);
+      inputDate.addEventListener('input', convertTime);
+      fromTimezoneSelect.addEventListener('change', convertTime);
+      toTimezoneSelect.addEventListener('change', convertTime);
+      
+      // Perform initial conversion
+      convertTime();
+    }
+
+    // ---------- POPULATE TIMEZONE SELECTS ----------
+    function populateTimezoneSelects() {
+      // Clear existing options
+      fromTimezoneSelect.innerHTML = '';
+      toTimezoneSelect.innerHTML = '';
+      
+      // Add options to both selects
+      timeZones.forEach(tz => {
+        const option = document.createElement('option');
+        option.value = tz.id;
+        option.textContent = `${tz.id} - ${tz.name}`;
+        
+        fromTimezoneSelect.appendChild(option.cloneNode(true));
+        toTimezoneSelect.appendChild(option);
+      });
+    }
+
+    // ---------- SWAP TIMEZONES ----------
+    function swapTimezones() {
+      const fromIndex = fromTimezoneSelect.selectedIndex;
+      const toIndex = toTimezoneSelect.selectedIndex;
+      
+      fromTimezoneSelect.selectedIndex = toIndex;
+      toTimezoneSelect.selectedIndex = fromIndex;
+      
+      convertTime();
+    }
+
+    // ---------- CONVERT TIME ----------
+    function convertTime() {
+      // Clear previous errors
+      clearErrors();
+      
+      // Get input values
+      const timeValue = inputTime.value;
+      const dateValue = inputDate.value;
+      const fromTimezoneId = fromTimezoneSelect.value;
+      const toTimezoneId = toTimezoneSelect.value;
+      
+      // Validate inputs
+      if (!timeValue) {
+        timeError.textContent = 'Please enter a valid time';
+        timeError.style.display = 'block';
+        return;
+      }
+      
+      // Get timezone objects
+      const fromTimezone = timeZones.find(tz => tz.id === fromTimezoneId);
+      const toTimezone = timeZones.find(tz => tz.id === toTimezoneId);
+      
+      if (!fromTimezone || !toTimezone) {
+        return;
+      }
+      
+      // Parse input time and date
+      const [hours, minutes] = timeValue.split(':').map(Number);
+      let date;
+      
+      if (dateValue) {
+        date = new Date(dateValue);
+        date.setHours(hours, minutes, 0, 0);
+      } else {
+        date = new Date();
+        date.setHours(hours, minutes, 0, 0);
+      }
+      
+      // Calculate time difference
+      const timeDifference = toTimezone.offset - fromTimezone.offset;
+      
+      // Apply time difference (in hours)
+      const convertedDate = new Date(date.getTime() + (timeDifference * 60 * 60 * 1000));
+      
+      // Display result
+      displayResult(convertedDate, fromTimezone, toTimezone);
+    }
+
+    // ---------- DISPLAY RESULT ----------
+    function displayResult(convertedDate, fromTimezone, toTimezone) {
+      // Format the converted time
+      const timeString = formatTimeForDisplay(convertedDate);
+      const dateString = formatDateForDisplay(convertedDate);
+      
+      // Update result display
+      resultValue.textContent = timeString;
+      resultDetails.textContent = `on ${dateString}`;
+      
+      // Update timezone info
+      fromTimezoneName.textContent = fromTimezone.id;
+      fromTimezoneOffset.textContent = formatOffset(fromTimezone.offset);
+      
+      toTimezoneName.textContent = toTimezone.id;
+      toTimezoneOffset.textContent = formatOffset(toTimezone.offset);
+      
+      // Show result container with animation
+      resultContainer.classList.add('active');
+    }
+
+    // ---------- FORMAT OFFSET ----------
+    function formatOffset(offset) {
+      const sign = offset >= 0 ? '+' : '';
+      const hours = Math.abs(Math.floor(offset));
+      const minutes = Math.abs((offset % 1) * 60);
+      
+      if (minutes === 0) {
+        return `UTC ${sign}${hours}`;
+      } else {
+        return `UTC ${sign}${hours}:${minutes.toString().padStart(2, '0')}`;
+      }
+    }
+
+    // ---------- FORMAT TIME FOR INPUT ----------
+    function formatTimeForInput(date) {
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${hours}:${minutes}`;
+    }
+
+    // ---------- FORMAT DATE FOR INPUT ----------
+    function formatDateForInput(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // ---------- FORMAT TIME FOR DISPLAY ----------
+    function formatTimeForDisplay(date) {
+      return date.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+    }
+
+    // ---------- FORMAT DATE FOR DISPLAY ----------
+    function formatDateForDisplay(date) {
+      return date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    // ---------- CLEAR ERRORS ----------
+    function clearErrors() {
+      timeError.style.display = 'none';
+    }
+
+    // ---------- RESET CONVERTER ----------
+    function resetConverter() {
+      // Set default date to today
+      const today = new Date();
+      inputDate.value = formatDateForInput(today);
+      
+      // Set default time to current time
+      inputTime.value = formatTimeForInput(today);
+      
+      // Set default timezones
+      fromTimezoneSelect.value = 'EST';
+      toTimezoneSelect.value = 'UTC';
+      
+      // Clear errors and results
+      clearErrors();
+      resultContainer.classList.remove('active');
+      
+      // Focus on first input
+      inputTime.focus();
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    themeToggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the converter when the page loads
+    document.addEventListener('DOMContentLoaded', initializeConverter);
+  </script>
+</body>
+</html>
+
+<!-- 
+✅ Optimized for SEO, performance, and accessibility
+🔧 Enhanced by ChatGPT (GPT-5)
+🧩 Developed for Prabin's Toolbox - 2025
+-->

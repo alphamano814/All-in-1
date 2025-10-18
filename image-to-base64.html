@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Image to Base64 Converter | Free Online Tool by Prabin's Toolbox</title>
+  <meta name="description" content="Convert images to Base64 strings instantly in your browser. No uploads, 100% secure. Supports JPG, PNG, GIF, WEBP, SVG. Free tool by Prabin's Toolbox.">
+  <meta name="keywords" content="image to base64, base64 converter, image converter, online tool, free, prabin's toolbox, jpg to base64, png to base64, webp to base64">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/image-to-base64.html" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Image to Base64 Converter | Free Online Tool by Prabin's Toolbox">
+  <meta property="og:description" content="Convert images to Base64 strings instantly in your browser. No uploads, 100% secure. Supports JPG, PNG, GIF, WEBP, SVG.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/assets/images/base64-converter-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/image-to-base64.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prabin's Toolbox">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Image to Base64 Converter | Free Online Tool">
+  <meta name="twitter:description" content="Convert images to Base64 strings instantly in your browser. No uploads, 100% secure.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/assets/images/base64-converter-twitter.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://www.prabinpokhrel1.com.np/favicon.ico" type="image/x-icon">
+  
+  <!-- Preconnect to CDN -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/libs">
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image to Base64 Converter",
+    "description": "Free online tool to convert images to Base64 format directly in your browser",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    },
+    "url": "https://www.prabinpokhrel1.com.np/image-to-base64.html",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.prabinpokhrel1.com.np/image-to-base64.html"
+    }
+  }
+  </script>
+  
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Base64 encoding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to embed images directly in HTML, CSS, or JSON files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my images uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, all image processing happens locally in your browser. Your images never leave your device, ensuring complete privacy and security."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool supports JPG, JPEG, PNG, GIF, WEBP, and SVG image formats with a maximum file size of 10MB per image."
+        }
+      }
+    ]
+  }
+  </script>
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1000px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .converter-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- UPLOAD AREA --------- */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 2rem;
+      background: var(--bg-light);
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: var(--bg-lighter);
+      transform: translateY(-2px);
+    }
+
+    .upload-area.dragover {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .upload-icon {
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .upload-text {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-subtext {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    /* --------- PREVIEW GRID --------- */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .preview-item {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .preview-filename {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    .preview-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text);
+    }
+
+    .action-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .action-btn.remove:hover {
+      background: var(--error);
+      color: white;
+    }
+
+    .preview-image {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      background: var(--bg-lighter);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .file-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .base64-output {
+      margin-top: 1rem;
+    }
+
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .output-title {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .output-toggle {
+      color: var(--primary);
+      transition: transform 0.3s ease;
+    }
+
+    .output-toggle.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .base64-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--bg-lighter);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 0.8rem;
+      resize: vertical;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .base64-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+
+    .base64-textarea.collapsed {
+      display: none;
+    }
+
+    /* --------- BUTTONS --------- */
+    .button-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #0da271;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-light);
+      transform: translateY(-3px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --------- STATUS MESSAGES --------- */
+    .status-message {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .status-message.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .status-success {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .status-error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+
+    .status-info {
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    /* --------- PROGRESS INDICATOR --------- */
+    .progress-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .progress-container.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .progress-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--bg-lighter);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* --------- MESSAGE TOAST --------- */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin: 1.5rem 0 1rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul, .content-section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-answer {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .tool-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .tool-link i {
+      font-size: 1.5rem;
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- SECURITY NOTE --------- */
+    .security-note {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .button-group {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .upload-area {
+        padding: 2rem 1rem;
+      }
+
+      .upload-icon {
+        font-size: 3rem;
+      }
+
+      .tool-links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .converter-card, .content-section, .intro-section {
+        padding: 1.5rem;
+      }
+
+      .preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .preview-actions {
+        align-self: flex-end;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Converter Tool -->
+    <section class="converter-card">
+      <div class="card-header">
+        <i class="fas fa-image" aria-hidden="true"></i>
+        <h2>Convert Images to Base64</h2>
+        <p>Drag & drop images or click to upload</p>
+      </div>
+
+      <div class="status-message" id="statusMessage" role="alert" aria-live="polite"></div>
+
+      <div class="upload-area" id="uploadArea" role="button" tabindex="0" aria-label="Upload area for images">
+        <div class="upload-icon">
+          <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+        </div>
+        <div class="upload-text">Drop images here or click to upload</div>
+        <div class="upload-subtext">Supports JPG, PNG, GIF, WEBP, SVG • Max 10MB per file</div>
+        <input type="file" id="fileInput" class="file-input" accept=".jpg,.jpeg,.png,.gif,.webp,.svg" multiple aria-label="Select image files">
+      </div>
+
+      <div class="progress-container" id="progressContainer" aria-live="polite">
+        <div class="progress-header">
+          <div class="progress-title">Converting Images</div>
+          <div class="progress-percent" id="progressPercent">0%</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">Processing 0 of 0 images</div>
+      </div>
+
+      <div class="preview-grid" id="previewGrid">
+        <!-- Image previews will be dynamically added here -->
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" id="convertBtn" aria-label="Convert images to Base64">
+          <i class="fas fa-code" aria-hidden="true"></i> Convert to Base64
+        </button>
+        <button class="btn btn-success" id="downloadAllBtn" disabled aria-label="Download all Base64 codes as text file">
+          <i class="fas fa-download" aria-hidden="true"></i> Download All as .txt
+        </button>
+        <button class="btn btn-secondary" id="resetBtn" aria-label="Reset converter">
+          <i class="fas fa-redo" aria-hidden="true"></i> Reset
+        </button>
+      </div>
+
+      <div class="security-note">
+        <i class="fas fa-shield-alt" aria-hidden="true"></i> All conversions happen locally in your browser. No images are uploaded to any server.
+      </div>
+
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+      </a>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="content-section" aria-labelledby="intro-heading">
+      <h2 id="intro-heading"><i class="fas fa-info-circle" aria-hidden="true"></i> Image to Base64 Converter</h2>
+      <p>Convert your images to Base64 format instantly in your browser. This free online tool allows you to encode images as Base64 strings that can be directly embedded in HTML, CSS, or JSON files.</p>
+      
+      <h3>What is Base64 Encoding?</h3>
+      <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to embed images and other binary assets directly in web documents without requiring separate file requests.</p>
+      
+      <h3>Why Use This Tool?</h3>
+      <ul>
+        <li><strong>100% Secure:</strong> All processing happens locally in your browser - no images are uploaded to any server</li>
+        <li><strong>Fast Conversion:</strong> Convert multiple images simultaneously with progress tracking</li>
+        <li><strong>Wide Format Support:</strong> Works with JPG, PNG, GIF, WEBP, and SVG images</li>
+        <li><strong>User-Friendly:</strong> Simple drag-and-drop interface with instant preview</li>
+        <li><strong>Free to Use:</strong> No registration or payment required</li>
+      </ul>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="content-section" aria-labelledby="how-to-use-heading">
+      <h2 id="how-to-use-heading"><i class="fas fa-info-circle" aria-hidden="true"></i> How to Use This Tool</h2>
+      
+      <ol>
+        <li><strong>Upload Images:</strong> Drag and drop your images into the upload area or click to select files from your device.</li>
+        <li><strong>Preview Images:</strong> See thumbnails of your uploaded images with file information.</li>
+        <li><strong>Convert to Base64:</strong> Click the "Convert to Base64" button to generate Base64 encodings for all images.</li>
+        <li><strong>Copy or Download:</strong> Copy individual Base64 strings to clipboard or download all as a text file.</li>
+        <li><strong>Use in Your Projects:</strong> Paste the Base64 strings directly into your HTML, CSS, or code files.</li>
+      </ol>
+      
+      <h3>Common Use Cases</h3>
+      <ul>
+        <li>Embedding images in HTML emails</li>
+        <li>Including small icons in CSS files</li>
+        <li>Storing images in JSON configuration files</li>
+        <li>Reducing HTTP requests for small images</li>
+        <li>Creating data URIs for web applications</li>
+      </ul>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="content-section" aria-labelledby="benefits-heading">
+      <h2 id="benefits-heading"><i class="fas fa-star" aria-hidden="true"></i> Benefits of Using Our Tool</h2>
+      
+      <h3>Complete Privacy & Security</h3>
+      <p>Unlike many online converters, our tool processes everything locally in your browser. Your images never leave your computer, ensuring complete privacy and security for personal or sensitive images.</p>
+      
+      <h3>No File Size Limits</h3>
+      <p>Convert as many images as you want without any restrictions. While we recommend files under 10MB for optimal performance, there are no hard limits on the number of images you can process.</p>
+      
+      <h3>Optimized for Developers</h3>
+      <p>Get clean, ready-to-use Base64 strings that can be directly embedded in your HTML, CSS, or code files. Perfect for web developers, designers, and content creators.</p>
+      
+      <h3>Batch Processing</h3>
+      <p>Process multiple images at once with our efficient batch processing system. Save time when working with multiple images for websites, applications, or documentation.</p>
+      
+      <h3>No Registration Required</h3>
+      <p>Start converting immediately without creating an account or providing any personal information. Our free tool is designed to help you without any barriers.</p>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="content-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading"><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">What is Base64 encoding?</div>
+        <div class="faq-answer">Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to embed images directly in HTML, CSS, or JSON files, eliminating the need for separate image files.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Are my images uploaded to a server?</div>
+        <div class="faq-answer">No, all image processing happens locally in your browser. Your images never leave your device, ensuring complete privacy and security. This is a 100% client-side tool.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What image formats are supported?</div>
+        <div class="faq-answer">This tool supports JPG, JPEG, PNG, GIF, WEBP, and SVG image formats with a maximum file size of 10MB per image. If you need to convert other formats, consider converting them first to a supported format.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Why would I use Base64 encoded images?</div>
+        <div class="faq-answer">Base64 encoded images are useful when you want to embed images directly in code (HTML, CSS, JSON) without needing separate image files. This can reduce HTTP requests and simplify deployment for small images.</div>
+      </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="content-section" aria-labelledby="related-tools-heading">
+      <h2 id="related-tools-heading"><i class="fas fa-tools" aria-hidden="true"></i> Explore More Tools</h2>
+      <p>Check out these other useful tools from Prabin's Toolbox:</p>
+      
+      <div class="tool-links">
+        <a href="unit-converter.html" class="tool-link">
+          <i class="fas fa-balance-scale" aria-hidden="true"></i>
+          <span>Unit Converter</span>
+        </a>
+        <a href="percentage-calculator.html" class="tool-link">
+          <i class="fas fa-percentage" aria-hidden="true"></i>
+          <span>Percentage Calculator</span>
+        </a>
+        <a href="discount-calculator.html" class="tool-link">
+          <i class="fas fa-tag" aria-hidden="true"></i>
+          <span>Discount Calculator</span>
+        </a>
+        <a href="age-calculator.html" class="tool-link">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i>
+          <span>Age Calculator</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="copyToast" role="alert" aria-live="assertive">
+    <i class="fas fa-check-circle" aria-hidden="true"></i>
+    <span>Base64 copied to clipboard!</span>
+  </div>
+
+  <script>
+    // Security note: All image processing happens client-side only.
+    // No image data is transmitted to any server - everything remains on your device.
+
+    // ---------- DOM ELEMENTS ----------
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const previewGrid = document.getElementById('previewGrid');
+    const convertBtn = document.getElementById('convertBtn');
+    const downloadAllBtn = document.getElementById('downloadAllBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const statusMessage = document.getElementById('statusMessage');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressText = document.getElementById('progressText');
+    const copyToast = document.getElementById('copyToast');
+
+    // ---------- STATE VARIABLES ----------
+    let uploadedFiles = [];
+    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+    // ---------- INITIALIZATION ----------
+    function initializeConverter() {
+      setupEventListeners();
+      // Announce page load for screen readers
+      announceToScreenReader('Image to Base64 Converter loaded. Drag and drop images or click to upload.');
+    }
+
+    function setupEventListeners() {
+      // File input events
+      uploadArea.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', handleFileSelect);
+      
+      // Drag and drop events
+      uploadArea.addEventListener('dragover', handleDragOver);
+      uploadArea.addEventListener('dragleave', handleDragLeave);
+      uploadArea.addEventListener('drop', handleDrop);
+      
+      // Keyboard accessibility for upload area
+      uploadArea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          fileInput.click();
+        }
+      });
+      
+      // Button events
+      convertBtn.addEventListener('click', convertAllToBase64);
+      downloadAllBtn.addEventListener('click', downloadAllBase64);
+      resetBtn.addEventListener('click', resetConverter);
+    }
+
+    // ---------- ACCESSIBILITY FUNCTIONS ----------
+    function announceToScreenReader(message) {
+      // Create a live region for screen reader announcements
+      let liveRegion = document.getElementById('sr-announcement');
+      if (!liveRegion) {
+        liveRegion = document.createElement('div');
+        liveRegion.id = 'sr-announcement';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.style.position = 'absolute';
+        liveRegion.style.left = '-10000px';
+        liveRegion.style.width = '1px';
+        liveRegion.style.height = '1px';
+        liveRegion.style.overflow = 'hidden';
+        document.body.appendChild(liveRegion);
+      }
+      
+      liveRegion.textContent = message;
+    }
+
+    // ---------- FILE HANDLING ----------
+    function handleFileSelect(event) {
+      const files = Array.from(event.target.files);
+      processFiles(files);
+    }
+
+    function handleDragOver(event) {
+      event.preventDefault();
+      uploadArea.classList.add('dragover');
+    }
+
+    function handleDragLeave(event) {
+      event.preventDefault();
+      uploadArea.classList.remove('dragover');
+    }
+
+    function handleDrop(event) {
+      event.preventDefault();
+      uploadArea.classList.remove('dragover');
+      
+      const files = Array.from(event.dataTransfer.files);
+      processFiles(files);
+    }
+
+    function processFiles(files) {
+      const validFiles = [];
+      const errors = [];
+      
+      files.forEach(file => {
+        // Validate file type
+        if (!isValidImageType(file)) {
+          errors.push(`"${file.name}" - Unsupported file type`);
+          return;
+        }
+        
+        // Validate file size
+        if (file.size > MAX_FILE_SIZE) {
+          errors.push(`"${file.name}" - File too large (max 10MB)`);
+          return;
+        }
+        
+        validFiles.push(file);
+      });
+      
+      // Show errors if any
+      if (errors.length > 0) {
+        showStatus(errors.join('<br>'), 'error');
+      }
+      
+      // Process valid files
+      if (validFiles.length > 0) {
+        uploadedFiles = [...uploadedFiles, ...validFiles];
+        renderPreviews();
+        updateButtonStates();
+        showStatus(`Added ${validFiles.length} image(s)`, 'success');
+        announceToScreenReader(`Added ${validFiles.length} image${validFiles.length > 1 ? 's' : ''}`);
+      }
+    }
+
+    function isValidImageType(file) {
+      const validTypes = [
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/gif',
+        'image/webp',
+        'image/svg+xml'
+      ];
+      return validTypes.includes(file.type);
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // ---------- PREVIEW RENDERING ----------
+    function renderPreviews() {
+      previewGrid.innerHTML = '';
+      
+      uploadedFiles.forEach((file, index) => {
+        const previewItem = createPreviewItem(file, index);
+        previewGrid.appendChild(previewItem);
+      });
+    }
+
+    function createPreviewItem(file, index) {
+      const item = document.createElement('div');
+      item.className = 'preview-item';
+      item.innerHTML = `
+        <div class="preview-header">
+          <div class="preview-filename" title="${file.name}">${file.name}</div>
+          <div class="preview-actions">
+            <button class="action-btn remove" data-index="${index}" title="Remove ${file.name}" aria-label="Remove ${file.name}">
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <img class="preview-image" src="#" alt="Preview of ${file.name}" data-index="${index}">
+        <div class="file-info">
+          <span>Size: ${formatFileSize(file.size)}</span>
+          <span class="base64-size" id="base64Size-${index}">-</span>
+        </div>
+        <div class="base64-output">
+          <div class="output-header" tabindex="0" role="button" aria-expanded="false" aria-controls="base64Output-${index}">
+            <div class="output-title">Base64 Code</div>
+            <div class="output-toggle">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
+          <textarea 
+            class="base64-textarea collapsed" 
+            id="base64Output-${index}" 
+            readonly 
+            placeholder="Base64 code will appear here after conversion..."
+            aria-label="Base64 code for ${file.name}"
+          ></textarea>
+          <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary btn-small copy-base64" data-index="${index}" style="padding: 0.5rem 1rem; font-size: 0.8rem;" aria-label="Copy Base64 code for ${file.name}">
+              <i class="fas fa-copy" aria-hidden="true"></i> Copy
+            </button>
+          </div>
+        </div>
+      `;
+      
+      // Load image preview
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = item.querySelector('.preview-image');
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      
+      // Add event listeners
+      const removeBtn = item.querySelector('.remove');
+      const toggleBtn = item.querySelector('.output-header');
+      const textarea = item.querySelector('.base64-textarea');
+      const copyBtn = item.querySelector('.copy-base64');
+      
+      removeBtn.addEventListener('click', () => removeFile(index));
+      toggleBtn.addEventListener('click', () => toggleOutput(index));
+      toggleBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleOutput(index);
+        }
+      });
+      textarea.addEventListener('click', () => selectBase64Text(index));
+      copyBtn.addEventListener('click', () => copyBase64ToClipboard(index));
+      
+      return item;
+    }
+
+    function removeFile(index) {
+      const fileName = uploadedFiles[index].name;
+      uploadedFiles.splice(index, 1);
+      renderPreviews();
+      updateButtonStates();
+      
+      if (uploadedFiles.length === 0) {
+        showStatus('All images removed', 'info');
+      }
+      
+      announceToScreenReader(`Removed ${fileName}`);
+    }
+
+    function toggleOutput(index) {
+      const textarea = document.getElementById(`base64Output-${index}`);
+      const toggle = document.querySelector(`[data-index="${index}"]`).closest('.preview-item').querySelector('.output-header');
+      const toggleIcon = toggle.querySelector('.output-toggle i');
+      
+      const isCollapsed = textarea.classList.contains('collapsed');
+      
+      textarea.classList.toggle('collapsed');
+      toggleIcon.classList.toggle('fa-chevron-down');
+      toggleIcon.classList.toggle('fa-chevron-up');
+      toggle.setAttribute('aria-expanded', !isCollapsed);
+      
+      // Announce state change for screen readers
+      announceToScreenReader(`Base64 code ${isCollapsed ? 'expanded' : 'collapsed'} for image`);
+    }
+
+    function selectBase64Text(index) {
+      const textarea = document.getElementById(`base64Output-${index}`);
+      textarea.select();
+    }
+
+    // ---------- BASE64 CONVERSION ----------
+    function convertAllToBase64() {
+      if (uploadedFiles.length === 0) {
+        showStatus('Please upload images first', 'error');
+        announceToScreenReader('Please upload images before converting');
+        return;
+      }
+      
+      showProgress(0, uploadedFiles.length);
+      progressContainer.classList.add('active');
+      announceToScreenReader('Starting Base64 conversion');
+      
+      let processedCount = 0;
+      
+      uploadedFiles.forEach((file, index) => {
+        convertToBase64(file, index)
+          .then(() => {
+            processedCount++;
+            updateProgress(processedCount, uploadedFiles.length);
+            
+            if (processedCount === uploadedFiles.length) {
+              progressContainer.classList.remove('active');
+              showStatus('All images converted to Base64', 'success');
+              downloadAllBtn.disabled = false;
+              announceToScreenReader('All images successfully converted to Base64');
+            }
+          })
+          .catch(error => {
+            processedCount++;
+            updateProgress(processedCount, uploadedFiles.length);
+            console.error(`Error converting ${file.name}:`, error);
+            showStatus(`Error converting ${file.name}`, 'error');
+            announceToScreenReader(`Error converting ${file.name}`);
+          });
+      });
+    }
+
+    function convertToBase64(file, index) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          const base64String = e.target.result;
+          const textarea = document.getElementById(`base64Output-${index}`);
+          const sizeElement = document.getElementById(`base64Size-${index}`);
+          
+          textarea.value = base64String;
+          sizeElement.textContent = `Base64: ${formatFileSize(base64String.length)}`;
+          
+          // Auto-expand the output
+          const toggle = document.querySelector(`[data-index="${index}"]`).closest('.preview-item').querySelector('.output-header');
+          const toggleIcon = toggle.querySelector('.output-toggle i');
+          const outputArea = document.querySelector(`[data-index="${index}"]`).closest('.preview-item').querySelector('.base64-textarea');
+          
+          outputArea.classList.remove('collapsed');
+          toggleIcon.classList.remove('fa-chevron-down');
+          toggleIcon.classList.add('fa-chevron-up');
+          toggle.setAttribute('aria-expanded', 'true');
+          
+          resolve();
+        };
+        
+        reader.onerror = function() {
+          reject(new Error(`Failed to read file: ${file.name}`));
+        };
+        
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ---------- PROGRESS INDICATOR ----------
+    function showProgress(current, total) {
+      progressContainer.classList.add('active');
+      updateProgress(current, total);
+    }
+
+    function updateProgress(current, total) {
+      const percent = Math.round((current / total) * 100);
+      progressFill.style.width = `${percent}%`;
+      progressPercent.textContent = `${percent}%`;
+      progressText.textContent = `Processing ${current} of ${total} images`;
+      
+      // Announce progress for screen readers every 25% or when complete
+      if (percent % 25 === 0 || percent === 100) {
+        announceToScreenReader(`Base64 conversion ${percent}% complete`);
+      }
+    }
+
+    // ---------- DOWNLOAD FUNCTIONS ----------
+    function downloadAllBase64() {
+      if (uploadedFiles.length === 0) return;
+      
+      let content = '';
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
+      
+      uploadedFiles.forEach((file, index) {
+        const base64Output = document.getElementById(`base64Output-${index}`);
+        if (base64Output && base64Output.value) {
+          content += `// ${file.name}\n`;
+          content += `${base64Output.value}\n\n`;
+        }
+      });
+      
+      if (!content) {
+        showStatus('No Base64 data to download', 'error');
+        announceToScreenReader('No Base64 data available for download');
+        return;
+      }
+      
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `base64-images-${timestamp}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showStatus('Base64 data downloaded as text file', 'success');
+      announceToScreenReader('Base64 data downloaded successfully');
+    }
+
+    function copyBase64ToClipboard(index) {
+      const textarea = document.getElementById(`base64Output-${index}`);
+      
+      if (!textarea || !textarea.value) {
+        showStatus('No Base64 data to copy', 'error');
+        announceToScreenReader('No Base64 data available to copy');
+        return;
+      }
+      
+      navigator.clipboard.writeText(textarea.value)
+        .then(() => {
+          copyToast.classList.add('show');
+          setTimeout(() => {
+            copyToast.classList.remove('show');
+          }, 3000);
+          announceToScreenReader('Base64 code copied to clipboard');
+        })
+        .catch(err => {
+          console.error('Failed to copy text: ', err);
+          showStatus('Failed to copy to clipboard', 'error');
+          announceToScreenReader('Failed to copy Base64 code to clipboard');
+        });
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function updateButtonStates() {
+      convertBtn.disabled = uploadedFiles.length === 0;
+      downloadAllBtn.disabled = uploadedFiles.length === 0;
+    }
+
+    function resetConverter() {
+      uploadedFiles = [];
+      previewGrid.innerHTML = '';
+      fileInput.value = '';
+      progressContainer.classList.remove('active');
+      downloadAllBtn.disabled = true;
+      showStatus('Converter reset', 'info');
+      announceToScreenReader('Converter has been reset');
+    }
+
+    function showStatus(message, type) {
+      statusMessage.innerHTML = message;
+      statusMessage.className = `status-message active status-${type}`;
+      
+      setTimeout(() => {
+        statusMessage.classList.remove('active');
+      }, 5000);
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+      
+      // Announce theme change for screen readers
+      announceToScreenReader(`Switched to ${theme} mode`);
+    });
+
+    // Initialize the converter when the page loads
+    document.addEventListener('DOMContentLoaded', initializeConverter);
+  </script>
+</body>
+</html>
+
+<!-- 
+✅ Optimized for SEO, performance, and accessibility
+🧩 Developed for Prabin's Toolbox - 2025
+-->
