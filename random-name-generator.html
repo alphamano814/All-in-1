@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Random Name Generator – Generate Male, Female, or Fantasy Names Instantly</title>
+  <meta name="description" content="Free Random Name Generator tool to instantly create names for characters, babies, brands, or stories. Choose gender, origin, and style.">
+  <meta name="keywords" content="random name generator, baby name generator, fantasy name generator, english name generator, free online tool">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/random-name-generator.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Random Name Generator – Generate Male, Female, or Fantasy Names Instantly">
+  <meta property="og:description" content="Free Random Name Generator tool to instantly create names for characters, babies, brands, or stories.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/name-generator-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/random-name-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Name Generator – Generate Male, Female, or Fantasy Names Instantly">
+  <meta name="twitter:description" content="Free Random Name Generator tool to instantly create names for characters, babies, brands, or stories.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/name-generator-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Random Name Generator",
+    "description": "Free Random Name Generator tool to instantly create names for characters, babies, brands, or stories.",
+    "url": "https://www.prabinpokhrel1.com.np/random-name-generator.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --male: #3b82f6;
+      --female: #ec4899;
+      --unisex: #8b5cf6;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+      --male: #1d4ed8;
+      --female: #be185d;
+      --unisex: #7c3aed;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .generator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input {
+      padding-left: 3rem;
+    }
+
+    .optional-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+      font-style: italic;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .generate-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .generate-btn:active {
+      transform: translateY(0);
+    }
+
+    /* --------- NAMES GRID --------- */
+    .names-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .name-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      position: relative;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .name-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .name-card.male {
+      border-left: 4px solid var(--male);
+    }
+
+    .name-card.female {
+      border-left: 4px solid var(--female);
+    }
+
+    .name-card.unisex {
+      border-left: 4px solid var(--unisex);
+    }
+
+    .name-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .name-origin {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .name-actions {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .copy-btn {
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    .copy-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .favorite-btn {
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    .favorite-btn:hover, .favorite-btn.active {
+      background: var(--secondary);
+      color: white;
+    }
+
+    /* --------- FAVORITES SECTION --------- */
+    .favorites-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .clear-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .clear-btn:hover {
+      background: var(--error);
+      color: white;
+    }
+
+    .export-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-lighter);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .export-btn:hover {
+      background: var(--success);
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* --------- TOAST NOTIFICATIONS --------- */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error {
+      background: var(--error);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .filter-row {
+        flex-direction: column;
+      }
+      
+      .filter-group {
+        min-width: 100%;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+      
+      .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .names-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="generator-card">
+        <div class="card-header">
+          <i class="fas fa-user" aria-hidden="true"></i>
+          <h1>Random Name Generator</h1>
+          <p>Generate unique names for characters, babies, brands, or any creative project.</p>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group">
+            <label for="gender">Gender</label>
+            <select id="gender" class="form-control" aria-describedby="gender-help">
+              <option value="any">Any Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="unisex">Unisex</option>
+            </select>
+            <div id="gender-help" class="sr-only">Select the gender preference for generated names</div>
+          </div>
+
+          <div class="filter-group">
+            <label for="origin">Origin / Language</label>
+            <select id="origin" class="form-control" aria-describedby="origin-help">
+              <option value="any">Any Origin</option>
+              <option value="english">English</option>
+              <option value="nepali">Nepali</option>
+              <option value="indian">Indian</option>
+              <option value="japanese">Japanese</option>
+              <option value="arabic">Arabic</option>
+              <option value="spanish">Spanish</option>
+              <option value="french">French</option>
+              <option value="german">German</option>
+              <option value="fantasy">Fantasy</option>
+            </select>
+            <div id="origin-help" class="sr-only">Select the cultural origin for generated names</div>
+          </div>
+
+          <div class="filter-group">
+            <label for="theme">Theme / Style</label>
+            <select id="theme" class="form-control" aria-describedby="theme-help">
+              <option value="any">Any Theme</option>
+              <option value="modern">Modern</option>
+              <option value="classic">Classic</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="mythical">Mythical</option>
+              <option value="funny">Funny</option>
+            </select>
+            <div id="theme-help" class="sr-only">Select the style theme for generated names</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="count">Number of Names to Generate</label>
+          <select id="count" class="form-control" aria-describedby="count-help">
+            <option value="5">5 Names</option>
+            <option value="10" selected>10 Names</option>
+            <option value="15">15 Names</option>
+            <option value="20">20 Names</option>
+          </select>
+          <div id="count-help" class="sr-only">Select how many names to generate at once</div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn" aria-label="Generate names">
+          <i class="fas fa-magic" aria-hidden="true"></i> Generate Names
+        </button>
+
+        <div class="names-grid" id="namesGrid" aria-live="polite">
+          <!-- Names will be generated here -->
+        </div>
+
+        <div class="favorites-section">
+          <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-star" aria-hidden="true"></i> Favorite Names</h2>
+            <div>
+              <button class="export-btn" id="exportBtn" aria-label="Export favorites">
+                <i class="fas fa-download" aria-hidden="true"></i> Export
+              </button>
+              <button class="clear-btn" id="clearBtn" aria-label="Clear all favorites">
+                <i class="fas fa-trash" aria-hidden="true"></i> Clear All
+              </button>
+            </div>
+          </div>
+          <div class="names-grid" id="favoritesGrid">
+            <!-- Favorites will be displayed here -->
+          </div>
+          <div class="empty-state" id="emptyFavorites">
+            <i class="fas fa-star" aria-hidden="true"></i>
+            <p>No favorite names yet. Click the star icon on any name to add it here.</p>
+          </div>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This Name Generator</h2>
+      <p>Our Random Name Generator is a free tool that helps you create unique names for various purposes. Whether you're naming a character in a story, looking for baby name ideas, or need a brand name, this tool provides endless inspiration.</p>
+      
+      <h3>How to Use the Name Generator</h3>
+      <p>Using our name generator is simple:</p>
+      <ul>
+        <li>Select your preferred gender, origin, and theme filters</li>
+        <li>Choose how many names you want to generate</li>
+        <li>Click the "Generate Names" button</li>
+        <li>Copy names you like or add them to your favorites</li>
+        <li>Export your favorite names for future reference</li>
+      </ul>
+      
+      <h3>What This Tool Does</h3>
+      <p>This free name generator tool creates unique names based on your selected criteria. It's perfect for:</p>
+      <ul>
+        <li>Finding baby name inspiration</li>
+        <li>Creating character names for stories, games, or role-playing</li>
+        <li>Generating brand or business names</li>
+        <li>Overcoming writer's block</li>
+        <li>Exploring names from different cultures</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="age-calculator.html" class="tool-link" aria-label="Age Calculator">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i> Age Calculator
+        </a>
+        <a href="unit-converter.html" class="tool-link" aria-label="Unit Converter">
+          <i class="fas fa-ruler-combined" aria-hidden="true"></i> Unit Converter
+        </a>
+        <a href="percentage-calculator.html" class="tool-link" aria-label="Percentage Calculator">
+          <i class="fas fa-percentage" aria-hidden="true"></i> Percentage Calculator
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>How does the Name Generator work?</h3>
+        <p>Our name generator uses a curated database of names from various cultures and styles. When you select your preferences, it filters the database and randomly selects names that match your criteria.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I save names for later?</h3>
+        <p>Yes! You can click the star icon on any generated name to add it to your favorites. Your favorites are saved in your browser's local storage, so they'll be there when you return.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is this tool free to use?</h3>
+        <p>Yes, our Random Name Generator is completely free to use with no registration required. You can use it as many times as you need without any limitations.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I suggest new names or origins?</h3>
+        <p>We're always expanding our name database. If you have suggestions for names or origins we should include, please contact us through our website.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---------- NAME DATABASE ----------
+    const nameDatabase = [
+      // English Names
+      { name: "James", gender: "male", origin: "english", theme: "classic" },
+      { name: "William", gender: "male", origin: "english", theme: "classic" },
+      { name: "Oliver", gender: "male", origin: "english", theme: "modern" },
+      { name: "Henry", gender: "male", origin: "english", theme: "classic" },
+      { name: "Liam", gender: "male", origin: "english", theme: "modern" },
+      { name: "Noah", gender: "male", origin: "english", theme: "modern" },
+      { name: "Ethan", gender: "male", origin: "english", theme: "modern" },
+      { name: "Mason", gender: "male", origin: "english", theme: "modern" },
+      { name: "Lucas", gender: "male", origin: "english", theme: "modern" },
+      { name: "Alexander", gender: "male", origin: "english", theme: "classic" },
+      
+      { name: "Emma", gender: "female", origin: "english", theme: "classic" },
+      { name: "Olivia", gender: "female", origin: "english", theme: "modern" },
+      { name: "Ava", gender: "female", origin: "english", theme: "modern" },
+      { name: "Isabella", gender: "female", origin: "english", theme: "classic" },
+      { name: "Sophia", gender: "female", origin: "english", theme: "classic" },
+      { name: "Charlotte", gender: "female", origin: "english", theme: "classic" },
+      { name: "Mia", gender: "female", origin: "english", theme: "modern" },
+      { name: "Amelia", gender: "female", origin: "english", theme: "classic" },
+      { name: "Harper", gender: "female", origin: "english", theme: "modern" },
+      { name: "Evelyn", gender: "female", origin: "english", theme: "classic" },
+      
+      { name: "Taylor", gender: "unisex", origin: "english", theme: "modern" },
+      { name: "Jordan", gender: "unisex", origin: "english", theme: "modern" },
+      { name: "Alex", gender: "unisex", origin: "english", theme: "modern" },
+      { name: "Casey", gender: "unisex", origin: "english", theme: "modern" },
+      { name: "Jamie", gender: "unisex", origin: "english", theme: "modern" },
+      
+      // Nepali Names
+      { name: "Bikash", gender: "male", origin: "nepali", theme: "modern" },
+      { name: "Sagar", gender: "male", origin: "nepali", theme: "modern" },
+      { name: "Krishna", gender: "male", origin: "nepali", theme: "classic" },
+      { name: "Raj", gender: "male", origin: "nepali", theme: "classic" },
+      { name: "Suman", gender: "male", origin: "nepali", theme: "modern" },
+      
+      { name: "Sita", gender: "female", origin: "nepali", theme: "classic" },
+      { name: "Gita", gender: "female", origin: "nepali", theme: "classic" },
+      { name: "Anjali", gender: "female", origin: "nepali", theme: "modern" },
+      { name: "Pooja", gender: "female", origin: "nepali", theme: "modern" },
+      { name: "Sarita", gender: "female", origin: "nepali", theme: "modern" },
+      
+      // Indian Names
+      { name: "Arjun", gender: "male", origin: "indian", theme: "classic" },
+      { name: "Rohan", gender: "male", origin: "indian", theme: "modern" },
+      { name: "Aryan", gender: "male", origin: "indian", theme: "modern" },
+      { name: "Dev", gender: "male", origin: "indian", theme: "classic" },
+      { name: "Rahul", gender: "male", origin: "indian", theme: "modern" },
+      
+      { name: "Priya", gender: "female", origin: "indian", theme: "classic" },
+      { name: "Ananya", gender: "female", origin: "indian", theme: "modern" },
+      { name: "Diya", gender: "female", origin: "indian", theme: "modern" },
+      { name: "Meera", gender: "female", origin: "indian", theme: "classic" },
+      { name: "Kavya", gender: "female", origin: "indian", theme: "modern" },
+      
+      // Japanese Names
+      { name: "Haruto", gender: "male", origin: "japanese", theme: "modern" },
+      { name: "Ren", gender: "male", origin: "japanese", theme: "modern" },
+      { name: "Yuto", gender: "male", origin: "japanese", theme: "modern" },
+      { name: "Sora", gender: "male", origin: "japanese", theme: "modern" },
+      { name: "Kaito", gender: "male", origin: "japanese", theme: "modern" },
+      
+      { name: "Yui", gender: "female", origin: "japanese", theme: "modern" },
+      { name: "Hina", gender: "female", origin: "japanese", theme: "modern" },
+      { name: "Sakura", gender: "female", origin: "japanese", theme: "classic" },
+      { name: "Aoi", gender: "female", origin: "japanese", theme: "modern" },
+      { name: "Mei", gender: "female", origin: "japanese", theme: "modern" },
+      
+      // Arabic Names
+      { name: "Mohammed", gender: "male", origin: "arabic", theme: "classic" },
+      { name: "Omar", gender: "male", origin: "arabic", theme: "classic" },
+      { name: "Ahmed", gender: "male", origin: "arabic", theme: "classic" },
+      { name: "Yusuf", gender: "male", origin: "arabic", theme: "classic" },
+      { name: "Khalid", gender: "male", origin: "arabic", theme: "classic" },
+      
+      { name: "Fatima", gender: "female", origin: "arabic", theme: "classic" },
+      { name: "Aisha", gender: "female", origin: "arabic", theme: "classic" },
+      { name: "Layla", gender: "female", origin: "arabic", theme: "classic" },
+      { name: "Zainab", gender: "female", origin: "arabic", theme: "classic" },
+      { name: "Noor", gender: "female", origin: "arabic", theme: "modern" },
+      
+      // Fantasy Names
+      { name: "Aelar", gender: "male", origin: "fantasy", theme: "fantasy" },
+      { name: "Thalion", gender: "male", origin: "fantasy", theme: "fantasy" },
+      { name: "Kaelen", gender: "male", origin: "fantasy", theme: "fantasy" },
+      { name: "Riven", gender: "male", origin: "fantasy", theme: "fantasy" },
+      { name: "Zephyr", gender: "male", origin: "fantasy", theme: "fantasy" },
+      
+      { name: "Lyra", gender: "female", origin: "fantasy", theme: "fantasy" },
+      { name: "Elowen", gender: "female", origin: "fantasy", theme: "fantasy" },
+      { name: "Seraphina", gender: "female", origin: "fantasy", theme: "fantasy" },
+      { name: "Isolde", gender: "female", origin: "fantasy", theme: "fantasy" },
+      { name: "Morwenna", gender: "female", origin: "fantasy", theme: "fantasy" },
+      
+      { name: "Aether", gender: "unisex", origin: "fantasy", theme: "fantasy" },
+      { name: "Orion", gender: "unisex", origin: "fantasy", theme: "fantasy" },
+      { name: "Phoenix", gender: "unisex", origin: "fantasy", theme: "fantasy" },
+      { name: "Rune", gender: "unisex", origin: "fantasy", theme: "fantasy" },
+      { name: "Sage", gender: "unisex", origin: "fantasy", theme: "fantasy" },
+      
+      // Funny Names
+      { name: "Buddy", gender: "male", origin: "english", theme: "funny" },
+      { name: "Chip", gender: "male", origin: "english", theme: "funny" },
+      { name: "Rusty", gender: "male", origin: "english", theme: "funny" },
+      { name: "Skip", gender: "male", origin: "english", theme: "funny" },
+      { name: "Bubba", gender: "male", origin: "english", theme: "funny" },
+      
+      { name: "Bubbles", gender: "female", origin: "english", theme: "funny" },
+      { name: "Candy", gender: "female", origin: "english", theme: "funny" },
+      { name: "Daisy", gender: "female", origin: "english", theme: "funny" },
+      { name: "Peaches", gender: "female", origin: "english", theme: "funny" },
+      { name: "Trixie", gender: "female", origin: "english", theme: "funny" },
+      
+      { name: "Sunny", gender: "unisex", origin: "english", theme: "funny" },
+      { name: "Happy", gender: "unisex", origin: "english", theme: "funny" },
+      { name: "Lucky", gender: "unisex", origin: "english", theme: "funny" },
+      { name: "Patches", gender: "unisex", origin: "english", theme: "funny" },
+      { name: "Smiley", gender: "unisex", origin: "english", theme: "funny" }
+    ];
+
+    // ---------- DOM ELEMENTS ----------
+    const genderSelect = document.getElementById('gender');
+    const originSelect = document.getElementById('origin');
+    const themeSelect = document.getElementById('theme');
+    const countSelect = document.getElementById('count');
+    const generateBtn = document.getElementById('generateBtn');
+    const namesGrid = document.getElementById('namesGrid');
+    const favoritesGrid = document.getElementById('favoritesGrid');
+    const emptyFavorites = document.getElementById('emptyFavorites');
+    const clearBtn = document.getElementById('clearBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const toast = document.getElementById('toast');
+
+    // ---------- INITIALIZATION ----------
+    function initializeGenerator() {
+      // Load favorites from localStorage
+      loadFavorites();
+      
+      // Add event listeners
+      generateBtn.addEventListener('click', generateNames);
+      clearBtn.addEventListener('click', clearFavorites);
+      exportBtn.addEventListener('click', exportFavorites);
+      
+      // Generate initial names
+      generateNames();
+    }
+
+    // ---------- GENERATE NAMES ----------
+    function generateNames() {
+      const gender = genderSelect.value;
+      const origin = originSelect.value;
+      const theme = themeSelect.value;
+      const count = parseInt(countSelect.value);
+      
+      // Filter names based on selected criteria
+      let filteredNames = nameDatabase.filter(name => {
+        return (gender === 'any' || name.gender === gender) &&
+               (origin === 'any' || name.origin === origin) &&
+               (theme === 'any' || name.theme === theme);
+      });
+      
+      // If no names match, show a message and return
+      if (filteredNames.length === 0) {
+        namesGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>No names found matching your criteria. Try different filters.</p></div>';
+        return;
+      }
+      
+      // Shuffle and select names
+      const shuffledNames = shuffleArray([...filteredNames]);
+      const selectedNames = shuffledNames.slice(0, Math.min(count, shuffledNames.length));
+      
+      // Display names
+      displayNames(selectedNames, namesGrid);
+    }
+
+    // ---------- DISPLAY NAMES ----------
+    function displayNames(names, container) {
+      container.innerHTML = '';
+      
+      names.forEach(name => {
+        const nameCard = document.createElement('div');
+        nameCard.className = `name-card ${name.gender}`;
+        
+        // Check if this name is in favorites
+        const favorites = getFavorites();
+        const isFavorite = favorites.some(fav => fav.name === name.name && fav.gender === name.gender && fav.origin === name.origin);
+        
+        nameCard.innerHTML = `
+          <div class="name-text">${name.name}</div>
+          <div class="name-origin">${capitalizeFirstLetter(name.origin)} • ${capitalizeFirstLetter(name.gender)}</div>
+          <div class="name-actions">
+            <button class="action-btn copy-btn" data-name="${name.name}" aria-label="Copy name ${name.name}">
+              <i class="fas fa-copy" aria-hidden="true"></i> Copy
+            </button>
+            <button class="action-btn favorite-btn ${isFavorite ? 'active' : ''}" data-name='${JSON.stringify(name)}' aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+              <i class="fas fa-star" aria-hidden="true"></i> ${isFavorite ? 'Saved' : 'Save'}
+            </button>
+          </div>
+        `;
+        
+        container.appendChild(nameCard);
+      });
+      
+      // Add event listeners to the new buttons
+      addNameActionListeners();
+    }
+
+    // ---------- NAME ACTIONS ----------
+    function addNameActionListeners() {
+      // Copy buttons
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const name = this.getAttribute('data-name');
+          copyToClipboard(name);
+          showToast(`Copied "${name}" to clipboard!`);
+        });
+      });
+      
+      // Favorite buttons
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const nameData = JSON.parse(this.getAttribute('data-name'));
+          toggleFavorite(nameData, this);
+        });
+      });
+    }
+
+    // ---------- FAVORITES MANAGEMENT ----------
+    function getFavorites() {
+      return JSON.parse(localStorage.getItem('nameGeneratorFavorites')) || [];
+    }
+
+    function saveFavorites(favorites) {
+      localStorage.setItem('nameGeneratorFavorites', JSON.stringify(favorites));
+    }
+
+    function loadFavorites() {
+      const favorites = getFavorites();
+      
+      if (favorites.length === 0) {
+        favoritesGrid.innerHTML = '';
+        emptyFavorites.style.display = 'block';
+      } else {
+        emptyFavorites.style.display = 'none';
+        displayNames(favorites, favoritesGrid);
+      }
+    }
+
+    function toggleFavorite(nameData, button) {
+      const favorites = getFavorites();
+      const nameIndex = favorites.findIndex(fav => 
+        fav.name === nameData.name && 
+        fav.gender === nameData.gender && 
+        fav.origin === nameData.origin
+      );
+      
+      if (nameIndex === -1) {
+        // Add to favorites
+        favorites.push(nameData);
+        button.classList.add('active');
+        button.innerHTML = '<i class="fas fa-star" aria-hidden="true"></i> Saved';
+        showToast(`Added "${nameData.name}" to favorites!`);
+      } else {
+        // Remove from favorites
+        favorites.splice(nameIndex, 1);
+        button.classList.remove('active');
+        button.innerHTML = '<i class="fas fa-star" aria-hidden="true"></i> Save';
+        showToast(`Removed "${nameData.name}" from favorites!`);
+      }
+      
+      saveFavorites(favorites);
+      loadFavorites(); // Refresh favorites display
+    }
+
+    function clearFavorites() {
+      if (confirm('Are you sure you want to clear all your favorite names?')) {
+        localStorage.removeItem('nameGeneratorFavorites');
+        loadFavorites();
+        showToast('All favorites cleared!');
+        
+        // Also update the favorite buttons in the generated names
+        document.querySelectorAll('.favorite-btn.active').forEach(btn => {
+          btn.classList.remove('active');
+          btn.innerHTML = '<i class="fas fa-star" aria-hidden="true"></i> Save';
+        });
+      }
+    }
+
+    function exportFavorites() {
+      const favorites = getFavorites();
+      
+      if (favorites.length === 0) {
+        showToast('No favorites to export!', true);
+        return;
+      }
+      
+      let exportText = 'Favorite Names\n';
+      exportText += 'Generated by All-in-One Tools Name Generator\n';
+      exportText += 'Date: ' + new Date().toLocaleDateString() + '\n\n';
+      
+      favorites.forEach((name, index) => {
+        exportText += `${index + 1}. ${name.name} (${capitalizeFirstLetter(name.gender)}, ${capitalizeFirstLetter(name.origin)})\n`;
+      });
+      
+      const blob = new Blob([exportText], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'favorite-names.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showToast('Favorites exported successfully!');
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+
+    function showToast(message, isError = false) {
+      toast.textContent = message;
+      toast.className = isError ? 'toast error show' : 'toast show';
+      
+      setTimeout(() => {
+        toast.className = 'toast';
+      }, 3000);
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the generator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeGenerator);
+  </script>
+</body>
+</html>
