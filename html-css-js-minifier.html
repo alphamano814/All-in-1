@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>HTML, CSS & JS Minifier – Online Code Compressor</title>
+  <meta name="description" content="Free online HTML, CSS & JavaScript Minifier. Paste or upload your code and instantly compress it to boost performance — all client-side, secure, and fast.">
+  <meta name="keywords" content="html minifier, css minifier, js minifier, code compressor, website optimization, online tools">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/code-minifier.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="HTML, CSS & JS Minifier – Online Code Compressor">
+  <meta property="og:description" content="Free online HTML, CSS & JavaScript Minifier. Paste or upload your code and instantly compress it to boost performance.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/code-minifier-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/code-minifier.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HTML, CSS & JS Minifier – Online Code Compressor">
+  <meta name="twitter:description" content="Free online HTML, CSS & JavaScript Minifier. Paste or upload your code and instantly compress it to boost performance.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/code-minifier-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HTML, CSS & JS Minifier",
+    "description": "Free online HTML, CSS & JavaScript Minifier. Paste or upload your code and instantly compress it to boost performance.",
+    "url": "https://www.prabinpokhrel1.com.np/code-minifier.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- LANGUAGE SELECTOR --------- */
+    .language-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .language-tab {
+      padding: 0.8rem 1.5rem;
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .language-tab:hover {
+      background: var(--bg-lighter);
+    }
+
+    .language-tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* --------- CODE EDITOR LAYOUT --------- */
+    .editor-container {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .editor-container {
+        flex-direction: column;
+      }
+    }
+
+    .editor-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .panel-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .action-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+
+    .editor {
+      position: relative;
+      flex: 1;
+      min-height: 400px;
+    }
+
+    .editor textarea {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      padding: 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .editor textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .editor pre {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      padding: 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* --------- BUTTONS --------- */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .primary-btn {
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .primary-btn:active {
+      transform: translateY(0);
+    }
+
+    .secondary-btn {
+      padding: 1rem 1.5rem;
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .secondary-btn:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-3px);
+    }
+
+    .secondary-btn:active {
+      transform: translateY(0);
+    }
+
+    /* --------- FILE UPLOAD --------- */
+    .file-upload {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .file-upload input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    /* --------- STATISTICS --------- */
+    .statistics {
+      display: flex;
+      gap: 2rem;
+      padding: 1.5rem;
+      background: var(--bg-light);
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value.original {
+      color: var(--text);
+    }
+
+    .stat-value.minified {
+      color: var(--success);
+    }
+
+    .stat-value.savings {
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --------- TOAST NOTIFICATIONS --------- */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error {
+      background: var(--error);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .language-selector {
+        justify-content: center;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+      
+      .panel-actions {
+        flex-wrap: wrap;
+      }
+      
+      .statistics {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="tool-card">
+        <div class="card-header">
+          <i class="fas fa-compress-alt" aria-hidden="true"></i>
+          <h1>HTML, CSS & JS Minifier</h1>
+          <p>Paste or upload your code and instantly compress it to boost performance</p>
+        </div>
+
+        <div class="language-selector">
+          <div class="language-tab active" data-lang="html">
+            <i class="fab fa-html5" aria-hidden="true"></i> HTML
+          </div>
+          <div class="language-tab" data-lang="css">
+            <i class="fab fa-css3-alt" aria-hidden="true"></i> CSS
+          </div>
+          <div class="language-tab" data-lang="js">
+            <i class="fab fa-js-square" aria-hidden="true"></i> JavaScript
+          </div>
+        </div>
+
+        <div class="file-upload">
+          <button class="secondary-btn" aria-label="Upload code file">
+            <i class="fas fa-upload" aria-hidden="true"></i> Upload File
+          </button>
+          <input type="file" id="fileInput" accept=".html,.css,.js,.txt" aria-label="Select code file to upload">
+        </div>
+
+        <div class="button-group">
+          <button class="primary-btn" id="minifyBtn" aria-label="Minify code">
+            <i class="fas fa-compress-alt" aria-hidden="true"></i> Minify Code
+          </button>
+          <button class="secondary-btn" id="clearBtn" aria-label="Clear all code">
+            <i class="fas fa-trash" aria-hidden="true"></i> Clear All
+          </button>
+        </div>
+
+        <div class="statistics">
+          <div class="stat-item">
+            <div class="stat-value original" id="originalSize">0 B</div>
+            <div class="stat-label">Original Size</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value minified" id="minifiedSize">0 B</div>
+            <div class="stat-label">Minified Size</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value savings" id="savingsPercent">0%</div>
+            <div class="stat-label">Space Saved</div>
+          </div>
+        </div>
+
+        <div class="editor-container">
+          <div class="editor-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-pencil-alt" aria-hidden="true"></i> Input Code
+              </div>
+              <div class="panel-actions">
+                <button class="action-btn" id="pasteBtn" aria-label="Paste code from clipboard">
+                  <i class="fas fa-paste" aria-hidden="true"></i> Paste
+                </button>
+              </div>
+            </div>
+            <div class="editor">
+              <textarea id="codeInput" placeholder='Paste your code here or upload a file' aria-label="Code input area"></textarea>
+            </div>
+          </div>
+
+          <div class="editor-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-eye" aria-hidden="true"></i> Minified Output
+              </div>
+              <div class="panel-actions">
+                <button class="action-btn" id="copyBtn" aria-label="Copy minified code to clipboard">
+                  <i class="fas fa-copy" aria-hidden="true"></i> Copy
+                </button>
+                <button class="action-btn" id="downloadBtn" aria-label="Download minified code">
+                  <i class="fas fa-download" aria-hidden="true"></i> Download
+                </button>
+              </div>
+            </div>
+            <div class="editor">
+              <pre id="codeOutput"><code id="codeCode">Your minified code will appear here...</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This Code Minifier</h2>
+      <p>Our HTML, CSS & JavaScript Minifier is a free online tool that helps developers optimize their code by removing unnecessary characters, whitespace, and comments. It runs entirely in your browser, ensuring your code never leaves your computer.</p>
+      
+      <h3>How to Use the Code Minifier</h3>
+      <p>Using our code minifier is simple:</p>
+      <ul>
+        <li>Select the language (HTML, CSS, or JavaScript)</li>
+        <li>Paste your code into the input area or upload a file</li>
+        <li>Click "Minify Code" to compress your code</li>
+        <li>Copy or download the minified output</li>
+        <li>Check the statistics to see how much space you saved</li>
+      </ul>
+      
+      <h3>What This Tool Does</h3>
+      <p>This code minifier helps optimize your website performance by:</p>
+      <ul>
+        <li>Removing unnecessary whitespace, line breaks, and comments</li>
+        <li>Reducing file sizes for faster loading times</li>
+        <li>Improving website performance and SEO rankings</li>
+        <li>Providing detailed statistics on space savings</li>
+        <li>Supporting HTML, CSS, and JavaScript files</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="json-formatter.html" class="tool-link" aria-label="JSON Formatter">
+          <i class="fas fa-code" aria-hidden="true"></i> JSON Formatter
+        </a>
+        <a href="random-name-generator.html" class="tool-link" aria-label="Random Name Generator">
+          <i class="fas fa-user" aria-hidden="true"></i> Name Generator
+        </a>
+        <a href="age-calculator.html" class="tool-link" aria-label="Age Calculator">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i> Age Calculator
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>What is code minification?</h3>
+        <p>Code minification is the process of removing unnecessary characters from source code without changing its functionality. This includes removing whitespace, line breaks, comments, and shortening variable names where possible.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is my code secure?</h3>
+        <p>Yes! This tool runs entirely in your browser. Your code never leaves your computer and is not stored on any server. This ensures complete privacy and security for your code.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>How much can I expect to save?</h3>
+        <p>Savings vary depending on your code, but typically you can expect:</p>
+        <ul>
+          <li>HTML: 10-30% reduction</li>
+          <li>CSS: 20-50% reduction</li>
+          <li>JavaScript: 30-60% reduction</li>
+        </ul>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Will minification break my code?</h3>
+        <p>No, our minifier is designed to preserve functionality while removing unnecessary characters. However, it's always a good practice to test your minified code before deploying it to production.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const codeInput = document.getElementById('codeInput');
+    const codeOutput = document.getElementById('codeOutput');
+    const codeCode = document.getElementById('codeCode');
+    const minifyBtn = document.getElementById('minifyBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const pasteBtn = document.getElementById('pasteBtn');
+    const fileInput = document.getElementById('fileInput');
+    const languageTabs = document.querySelectorAll('.language-tab');
+    const originalSize = document.getElementById('originalSize');
+    const minifiedSize = document.getElementById('minifiedSize');
+    const savingsPercent = document.getElementById('savingsPercent');
+    const toast = document.getElementById('toast');
+
+    // ---------- GLOBAL VARIABLES ----------
+    let currentLanguage = 'html';
+    let originalCodeSize = 0;
+    let minifiedCodeSize = 0;
+
+    // ---------- INITIALIZATION ----------
+    function initializeMinifier() {
+      // Load last code from localStorage if available
+      const lastCode = localStorage.getItem('lastCode');
+      const lastLanguage = localStorage.getItem('lastLanguage');
+      
+      if (lastCode) {
+        codeInput.value = lastCode;
+        updateStatistics();
+      }
+      
+      if (lastLanguage) {
+        currentLanguage = lastLanguage;
+        setActiveLanguage(currentLanguage);
+      }
+      
+      // Add event listeners
+      minifyBtn.addEventListener('click', minifyCode);
+      clearBtn.addEventListener('click', clearAll);
+      copyBtn.addEventListener('click', copyOutput);
+      downloadBtn.addEventListener('click', downloadCode);
+      pasteBtn.addEventListener('click', pasteFromClipboard);
+      fileInput.addEventListener('change', handleFileUpload);
+      
+      // Language tab selection
+      languageTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const lang = tab.getAttribute('data-lang');
+          setActiveLanguage(lang);
+        });
+      });
+      
+      // Auto-minify on input change (with debounce)
+      let debounceTimer;
+      codeInput.addEventListener('input', () => {
+        updateStatistics();
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          if (codeInput.value.trim()) {
+            minifyCode();
+          }
+        }, 1000);
+      });
+    }
+
+    // ---------- LANGUAGE SELECTION ----------
+    function setActiveLanguage(lang) {
+      currentLanguage = lang;
+      
+      // Update UI
+      languageTabs.forEach(tab => {
+        if (tab.getAttribute('data-lang') === lang) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+      
+      // Update placeholder
+      codeInput.placeholder = `Paste your ${lang.toUpperCase()} code here or upload a file`;
+      
+      // Save to localStorage
+      localStorage.setItem('lastLanguage', lang);
+      
+      // If there's code, re-minify with new language
+      if (codeInput.value.trim()) {
+        minifyCode();
+      }
+    }
+
+    // ---------- CODE MINIFICATION ----------
+    function minifyCode() {
+      const input = codeInput.value.trim();
+      
+      if (!input) {
+        showError('Please enter some code to minify');
+        return;
+      }
+      
+      try {
+        let minified;
+        
+        switch (currentLanguage) {
+          case 'html':
+            minified = minifyHtml(input);
+            break;
+          case 'css':
+            minified = minifyCss(input);
+            break;
+          case 'js':
+            minified = minifyJs(input);
+            break;
+          default:
+            minified = input;
+        }
+        
+        codeCode.textContent = minified;
+        updateStatistics();
+        showToast('Code minified successfully!');
+        
+        // Save to localStorage
+        localStorage.setItem('lastCode', input);
+      } catch (error) {
+        showError('Error minifying code: ' + error.message);
+        console.error('Minification error:', error);
+      }
+    }
+
+    // ---------- HTML MINIFICATION ----------
+    function minifyHtml(html) {
+      // Remove comments (but keep conditional comments)
+      let minified = html.replace(/<!--(?!\[if\s|\s<!\[endif\]).*?-->/gs, '');
+      
+      // Remove whitespace between tags
+      minified = minified.replace(/>\s+</g, '><');
+      
+      // Remove multiple spaces
+      minified = minified.replace(/\s+/g, ' ');
+      
+      // Trim the result
+      return minified.trim();
+    }
+
+    // ---------- CSS MINIFICATION ----------
+    function minifyCss(css) {
+      // Remove comments
+      let minified = css.replace(/\/\*[\s\S]*?\*\//g, '');
+      
+      // Remove whitespace
+      minified = minified.replace(/\s+/g, ' ');
+      
+      // Remove spaces around braces and colons
+      minified = minified.replace(/\s*{\s*/g, '{');
+      minified = minified.replace(/\s*}\s*/g, '}');
+      minified = minified.replace(/\s*:\s*/g, ':');
+      minified = minified.replace(/\s*;\s*/g, ';');
+      minified = minified.replace(/\s*,\s*/g, ',');
+      
+      // Remove trailing semicolons
+      minified = minified.replace(/;}/g, '}');
+      
+      // Trim the result
+      return minified.trim();
+    }
+
+    // ---------- JAVASCRIPT MINIFICATION ----------
+    function minifyJs(js) {
+      // Remove single-line comments
+      let minified = js.replace(/\/\/.*$/gm, '');
+      
+      // Remove multi-line comments (but be careful with regex)
+      minified = minified.replace(/\/\*[\s\S]*?\*\//g, '');
+      
+      // Remove whitespace (but be careful with string literals)
+      minified = minified.replace(/\s+/g, ' ');
+      
+      // Remove spaces around operators and punctuation
+      minified = minified.replace(/\s*([=+\-*\/%&|^~<>!?{}();:,])\s*/g, '$1');
+      
+      // Trim the result
+      return minified.trim();
+    }
+
+    // ---------- STATISTICS ----------
+    function updateStatistics() {
+      const input = codeInput.value;
+      originalCodeSize = new Blob([input]).size;
+      
+      // Update original size display
+      originalSize.textContent = formatBytes(originalCodeSize);
+      
+      // Update minified size if we have minified code
+      if (codeCode.textContent && codeCode.textContent !== 'Your minified code will appear here...') {
+        minifiedCodeSize = new Blob([codeCode.textContent]).size;
+        minifiedSize.textContent = formatBytes(minifiedCodeSize);
+        
+        // Calculate savings
+        if (originalCodeSize > 0) {
+          const savings = ((originalCodeSize - minifiedCodeSize) / originalCodeSize) * 100;
+          savingsPercent.textContent = savings.toFixed(1) + '%';
+        } else {
+          savingsPercent.textContent = '0%';
+        }
+      } else {
+        minifiedSize.textContent = '0 B';
+        savingsPercent.textContent = '0%';
+      }
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // ---------- UTILITY FUNCTIONS ----------
+    function clearAll() {
+      codeInput.value = '';
+      codeCode.textContent = 'Your minified code will appear here...';
+      updateStatistics();
+      localStorage.removeItem('lastCode');
+      showToast('All data cleared');
+    }
+
+    function copyOutput() {
+      const textToCopy = codeCode.textContent;
+      
+      if (!textToCopy || textToCopy === 'Your minified code will appear here...') {
+        showToast('No code to copy', true);
+        return;
+      }
+      
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast('Minified code copied to clipboard!');
+      }).catch(err => {
+        showToast('Failed to copy code', true);
+        console.error('Failed to copy: ', err);
+      });
+    }
+
+    function downloadCode() {
+      const textToDownload = codeCode.textContent;
+      
+      if (!textToDownload || textToDownload === 'Your minified code will appear here...') {
+        showToast('No code to download', true);
+        return;
+      }
+      
+      const extension = currentLanguage === 'html' ? 'html' : currentLanguage;
+      const mimeType = currentLanguage === 'html' ? 'text/html' : 
+                      currentLanguage === 'css' ? 'text/css' : 'application/javascript';
+      
+      const blob = new Blob([textToDownload], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `minified.${extension}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showToast('Minified code downloaded!');
+    }
+
+    function pasteFromClipboard() {
+      navigator.clipboard.readText().then(text => {
+        codeInput.value = text;
+        updateStatistics();
+        minifyCode();
+        showToast('Code pasted from clipboard');
+      }).catch(err => {
+        showToast('Failed to read from clipboard', true);
+        console.error('Failed to read clipboard: ', err);
+      });
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      // Detect language from file extension
+      const fileName = file.name.toLowerCase();
+      if (fileName.endsWith('.html') || fileName.endsWith('.htm')) {
+        setActiveLanguage('html');
+      } else if (fileName.endsWith('.css')) {
+        setActiveLanguage('css');
+      } else if (fileName.endsWith('.js')) {
+        setActiveLanguage('js');
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        codeInput.value = content;
+        updateStatistics();
+        minifyCode();
+        showToast('File loaded successfully');
+      };
+      reader.readAsText(file);
+      
+      // Reset file input
+      event.target.value = '';
+    }
+
+    function showToast(message, isError = false) {
+      toast.textContent = message;
+      toast.className = isError ? 'toast error show' : 'toast show';
+      
+      setTimeout(() => {
+        toast.className = 'toast';
+      }, 3000);
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the minifier when the page loads
+    document.addEventListener('DOMContentLoaded', initializeMinifier);
+  </script>
+</body>
+</html>
