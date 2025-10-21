@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Base64 Encoder/Decoder Online | Free Text & File Converter</title>
+  <meta name="description" content="Instantly encode or decode Base64 text online. Fast, free, and secure Base64 converter for text and files.">
+  <meta name="keywords" content="base64 encoder, base64 decoder, base64 converter, base64 encode, base64 decode, text to base64, base64 to text, file to base64, online base64 tool">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/base64-encoder-decoder.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Base64 Encoder/Decoder Online | Free Text & File Converter">
+  <meta property="og:description" content="Instantly encode or decode Base64 text online. Fast, free, and secure Base64 converter for text and files.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/base64-encoder-decoder-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/base64-encoder-decoder.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Base64 Encoder/Decoder Online | Free Text & File Converter">
+  <meta name="twitter:description" content="Instantly encode or decode Base64 text online. Fast, free, and secure Base64 converter for text and files.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/base64-encoder-decoder-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Base64 Encoder/Decoder Online Tool",
+    "description": "Instantly encode or decode Base64 text online. Fast, free, and secure Base64 converter for text and files.",
+    "url": "https://www.prabinpokhrel1.com.np/base64-encoder-decoder.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .calculator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- TABS --------- */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-button {
+      padding: 0.8rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .tab-button.active {
+      color: var(--primary);
+    }
+
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .tab-button:hover:not(.active) {
+      color: var(--text);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .file-input-container {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-input-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .file-input-label:hover {
+      background: var(--bg-lighter);
+    }
+
+    .file-input {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+    }
+
+    .file-info {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .file-info i {
+      color: var(--success);
+    }
+
+    /* --------- BUTTONS --------- */
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-btn {
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+    }
+
+    .action-btn.secondary {
+      background: var(--bg-lighter);
+      color: var(--text);
+    }
+
+    .action-btn.secondary:hover {
+      background: var(--bg-light);
+    }
+
+    .copy-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .copy-btn:hover {
+      background: #0da271;
+      transform: translateY(-3px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    /* --------- TOAST MESSAGE --------- */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tabs {
+        flex-direction: column;
+      }
+
+      .tab-button {
+        text-align: center;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="calculator-card">
+        <div class="card-header">
+          <i class="fas fa-code" aria-hidden="true"></i>
+          <h1>Base64 Encoder/Decoder</h1>
+          <p>Encode text or files to Base64, or decode Base64 back to text.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-button active" id="encodeTab" data-tab="encode">Encode</button>
+          <button class="tab-button" id="decodeTab" data-tab="decode">Decode</button>
+        </div>
+
+        <!-- Encode Tab Content -->
+        <div id="encode" class="tab-content active">
+          <div class="form-group">
+            <label for="encodeInput">Text to Encode</label>
+            <textarea id="encodeInput" class="form-control" placeholder="Enter text to encode to Base64..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="encodeFile">Or Upload a Text File</label>
+            <div class="file-input-container">
+              <label for="encodeFile" class="file-input-label">
+                <i class="fas fa-file-upload" aria-hidden="true"></i>
+                <span>Choose File</span>
+              </label>
+              <input type="file" id="encodeFile" class="file-input" accept=".txt,.text,text/*">
+            </div>
+            <div id="encodeFileInfo" class="file-info" style="display: none;">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              <span id="encodeFileName"></span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="action-btn" id="encodeBtn">
+              <i class="fas fa-lock" aria-hidden="true"></i> Encode to Base64
+            </button>
+            <button class="action-btn secondary" id="clearEncode">
+              <i class="fas fa-broom" aria-hidden="true"></i> Clear
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="encodeOutput">Base64 Encoded Result</label>
+            <textarea id="encodeOutput" class="form-control" readonly></textarea>
+          </div>
+
+          <button class="copy-btn" id="copyEncode">
+            <i class="fas fa-copy" aria-hidden="true"></i> Copy Result
+          </button>
+        </div>
+
+        <!-- Decode Tab Content -->
+        <div id="decode" class="tab-content">
+          <div class="form-group">
+            <label for="decodeInput">Base64 to Decode</label>
+            <textarea id="decodeInput" class="form-control" placeholder="Enter Base64 string to decode..."></textarea>
+          </div>
+
+          <div class="action-buttons">
+            <button class="action-btn" id="decodeBtn">
+              <i class="fas fa-lock-open" aria-hidden="true"></i> Decode from Base64
+            </button>
+            <button class="action-btn secondary" id="clearDecode">
+              <i class="fas fa-broom" aria-hidden="true"></i> Clear
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="decodeOutput">Decoded Result</label>
+            <textarea id="decodeOutput" class="form-control" readonly></textarea>
+          </div>
+
+          <button class="copy-btn" id="copyDecode">
+            <i class="fas fa-copy" aria-hidden="true"></i> Copy Result
+          </button>
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About Base64 Encoding</h2>
+      <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used when there is a need to encode binary data that needs to be stored and transferred over media designed to deal with text.</p>
+      
+      <h3>How Base64 Encoding Works</h3>
+      <p>Base64 encoding converts binary data into a set of 64 different ASCII characters (A-Z, a-z, 0-9, +, /) that are safe for transmission over text-based protocols. Each Base64 digit represents exactly 6 bits of data, so three 8-bit bytes (24 bits) can be represented by four 6-bit Base64 digits.</p>
+      
+      <h3>Common Uses of Base64</h3>
+      <ul>
+        <li>Email attachments (MIME)</li>
+        <li>Embedding images in HTML or CSS</li>
+        <li>Storing complex data in JSON or XML</li>
+        <li>Data URIs</li>
+        <li>Basic authentication in HTTP headers</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="age-calculator.html" class="tool-link" aria-label="Age Calculator">
+          <i class="fas fa-birthday-cake" aria-hidden="true"></i> Age Calculator
+        </a>
+        <a href="unit-converter.html" class="tool-link" aria-label="Unit Converter">
+          <i class="fas fa-ruler-combined" aria-hidden="true"></i> Unit Converter
+        </a>
+        <a href="percentage-calculator.html" class="tool-link" aria-label="Percentage Calculator">
+          <i class="fas fa-percentage" aria-hidden="true"></i> Percentage Calculator
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>What is Base64 encoding used for?</h3>
+        <p>Base64 is primarily used to encode binary data (like images, files, or encrypted data) into a text format that can be safely transmitted over text-based protocols such as email, JSON, or XML without data corruption.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is Base64 encoding secure?</h3>
+        <p>Base64 is not an encryption method and provides no security. It's simply an encoding scheme that converts binary data to text. Anyone can decode Base64 data back to its original form.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Does Base64 encoding increase file size?</h3>
+        <p>Yes, Base64 encoding typically increases the size of the data by about 33%. This is because every 3 bytes of binary data become 4 Base64 characters.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I encode any file type with this tool?</h3>
+        <p>This tool is optimized for text files and small documents. While you can technically encode any file type, very large files may cause performance issues in a browser environment.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Message -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle" aria-hidden="true"></i>
+    <span id="toastMessage">Copied to clipboard!</span>
+  </div>
+
+  <script>
+    // ---------- DOM ELEMENTS ----------
+    const encodeTab = document.getElementById('encodeTab');
+    const decodeTab = document.getElementById('decodeTab');
+    const encodeContent = document.getElementById('encode');
+    const decodeContent = document.getElementById('decode');
+    
+    const encodeInput = document.getElementById('encodeInput');
+    const encodeFile = document.getElementById('encodeFile');
+    const encodeFileInfo = document.getElementById('encodeFileInfo');
+    const encodeFileName = document.getElementById('encodeFileName');
+    const encodeBtn = document.getElementById('encodeBtn');
+    const encodeOutput = document.getElementById('encodeOutput');
+    const copyEncode = document.getElementById('copyEncode');
+    const clearEncode = document.getElementById('clearEncode');
+    
+    const decodeInput = document.getElementById('decodeInput');
+    const decodeBtn = document.getElementById('decodeBtn');
+    const decodeOutput = document.getElementById('decodeOutput');
+    const copyDecode = document.getElementById('copyDecode');
+    const clearDecode = document.getElementById('clearDecode');
+    
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+
+    // ---------- TAB MANAGEMENT ----------
+    function switchTab(tabName) {
+      // Update tab buttons
+      encodeTab.classList.toggle('active', tabName === 'encode');
+      decodeTab.classList.toggle('active', tabName === 'decode');
+      
+      // Update tab content
+      encodeContent.classList.toggle('active', tabName === 'encode');
+      decodeContent.classList.toggle('active', tabName === 'decode');
+    }
+
+    encodeTab.addEventListener('click', () => switchTab('encode'));
+    decodeTab.addEventListener('click', () => switchTab('decode'));
+
+    // ---------- FILE HANDLING ----------
+    encodeFile.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      // Check if file is a text file
+      if (!file.type.startsWith('text/') && !file.name.endsWith('.txt')) {
+        showToast('Please select a text file', 'error');
+        encodeFile.value = '';
+        return;
+      }
+      
+      // Show file info
+      encodeFileName.textContent = file.name;
+      encodeFileInfo.style.display = 'flex';
+      
+      // Read file content
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        encodeInput.value = e.target.result;
+      };
+      reader.readAsText(file);
+    });
+
+    // ---------- ENCODING ----------
+    function encodeToBase64() {
+      const text = encodeInput.value.trim();
+      
+      if (!text) {
+        showToast('Please enter text to encode', 'error');
+        return;
+      }
+      
+      try {
+        const encoded = btoa(unescape(encodeURIComponent(text)));
+        encodeOutput.value = encoded;
+      } catch (error) {
+        showToast('Error encoding text: ' + error.message, 'error');
+      }
+    }
+
+    encodeBtn.addEventListener('click', encodeToBase64);
+
+    // ---------- DECODING ----------
+    function decodeFromBase64() {
+      const base64 = decodeInput.value.trim();
+      
+      if (!base64) {
+        showToast('Please enter Base64 to decode', 'error');
+        return;
+      }
+      
+      // Remove data URL prefix if present
+      const cleanBase64 = base64.replace(/^data:[^;]+;base64,/, '');
+      
+      try {
+        const decoded = decodeURIComponent(escape(atob(cleanBase64)));
+        decodeOutput.value = decoded;
+      } catch (error) {
+        showToast('Invalid Base64 string', 'error');
+      }
+    }
+
+    decodeBtn.addEventListener('click', decodeFromBase64);
+
+    // ---------- COPY TO CLIPBOARD ----------
+    function copyToClipboard(text, message) {
+      if (!text) {
+        showToast('Nothing to copy', 'error');
+        return;
+      }
+      
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(message || 'Copied to clipboard!');
+      }).catch(err => {
+        showToast('Failed to copy: ' + err, 'error');
+      });
+    }
+
+    copyEncode.addEventListener('click', () => {
+      copyToClipboard(encodeOutput.value, 'Base64 copied to clipboard!');
+    });
+
+    copyDecode.addEventListener('click', () => {
+      copyToClipboard(decodeOutput.value, 'Decoded text copied to clipboard!');
+    });
+
+    // ---------- CLEAR FUNCTIONS ----------
+    clearEncode.addEventListener('click', () => {
+      encodeInput.value = '';
+      encodeOutput.value = '';
+      encodeFile.value = '';
+      encodeFileInfo.style.display = 'none';
+    });
+
+    clearDecode.addEventListener('click', () => {
+      decodeInput.value = '';
+      decodeOutput.value = '';
+    });
+
+    // ---------- TOAST MESSAGE ----------
+    function showToast(message, type = 'success') {
+      toastMessage.textContent = message;
+      
+      // Update toast style based on type
+      if (type === 'error') {
+        toast.style.background = 'var(--error)';
+      } else {
+        toast.style.background = 'var(--success)';
+      }
+      
+      // Show toast
+      toast.classList.add('show');
+      
+      // Hide after 3 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // ---------- KEYBOARD SHORTCUTS ----------
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+Enter to encode/decode based on active tab
+      if (e.ctrlKey && e.key === 'Enter') {
+        if (encodeContent.classList.contains('active')) {
+          encodeToBase64();
+        } else {
+          decodeFromBase64();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
