@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>WHOIS Lookup Tool | Free Domain Information Checker</title>
+  <meta name="description" content="Get comprehensive WHOIS information for any domain. Check registration details, expiration dates, name servers, and more with our free domain lookup tool.">
+  <meta name="keywords" content="whois lookup, domain lookup, whois checker, domain information, domain registration, expiration date, name servers, registrar information, free whois tool">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/whois-lookup.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="WHOIS Lookup Tool | Free Domain Information Checker">
+  <meta property="og:description" content="Get comprehensive WHOIS information for any domain with our free lookup tool.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/whois-lookup-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/whois-lookup.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WHOIS Lookup Tool | Free Domain Information Checker">
+  <meta name="twitter:description" content="Get comprehensive WHOIS information for any domain with our free lookup tool.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/whois-lookup-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "WHOIS Lookup Tool",
+    "description": "Get comprehensive WHOIS information for any domain with our free lookup tool.",
+    "url": "https://www.prabinpokhrel1.com.np/whois-lookup.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .calculator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input {
+      padding-left: 3rem;
+    }
+
+    .domain-examples {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .lookup-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .lookup-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .lookup-btn:active {
+      transform: translateY(0);
+    }
+
+    .lookup-btn:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --------- LOADING SPINNER --------- */
+    .loading-spinner {
+      display: none;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--bg-light);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* --------- RESULT SECTION --------- */
+    .result-container {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+      display: none;
+    }
+
+    .result-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      display: block;
+    }
+
+    .result-container.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+      display: block;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-domain {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .result-status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-available {
+      background: var(--success);
+      color: white;
+    }
+
+    .status-registered {
+      background: var(--warning);
+      color: white;
+    }
+
+    .status-error {
+      background: var(--error);
+      color: white;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .info-card h3 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-item {
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .info-label {
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .info-value {
+      color: var(--text-muted);
+      flex: 2;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .nameserver-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nameserver-list li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nameserver-list li:last-child {
+      border-bottom: none;
+    }
+
+    .raw-data-container {
+      margin-top: 1.5rem;
+    }
+
+    .raw-data-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      width: 100%;
+      text-align: left;
+      color: var(--text);
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .raw-data-toggle:hover {
+      background: var(--bg-lighter);
+    }
+
+    .raw-data-content {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border);
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      display: none;
+    }
+
+    .raw-data-content.active {
+      display: block;
+    }
+
+    /* --------- CONTENT SECTIONS --------- */
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .tool-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .tool-links {
+        justify-content: center;
+      }
+
+      .result-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .info-item {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .info-value {
+        text-align: left;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="calculator-card">
+        <div class="card-header">
+          <i class="fas fa-globe" aria-hidden="true"></i>
+          <h1>WHOIS Lookup Tool</h1>
+          <p>Get comprehensive domain registration information for any domain name.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="domainInput">Domain Name <span class="required">*</span></label>
+          <div class="input-with-icon">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input type="text" id="domainInput" class="form-control" placeholder="example.com" required>
+          </div>
+          <div class="domain-examples">Examples: google.com, github.io, wikipedia.org</div>
+        </div>
+
+        <button class="lookup-btn" id="lookupBtn" aria-label="Lookup WHOIS information">
+          <i class="fas fa-search" aria-hidden="true"></i> Lookup Domain
+        </button>
+
+        <div class="loading-spinner" id="loadingSpinner">
+          <div class="spinner"></div>
+          <p>Fetching WHOIS information...</p>
+        </div>
+
+        <div class="result-container" id="resultContainer" aria-live="polite">
+          <!-- Will be populated by JavaScript -->
+        </div>
+
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+        </a>
+      </div>
+    </article>
+
+    <section class="content-section">
+      <h2><i class="fas fa-info-circle" aria-hidden="true"></i> About This WHOIS Lookup Tool</h2>
+      <p>Our WHOIS Lookup Tool is a free service that provides comprehensive domain registration information for any domain name. Whether you're researching a domain for purchase, investigating website ownership, or just curious about domain details, this tool delivers accurate WHOIS data instantly.</p>
+      
+      <h3>How to Use the WHOIS Lookup</h3>
+      <p>Using our WHOIS lookup is simple:</p>
+      <ul>
+        <li>Enter a domain name in the search field (e.g., example.com)</li>
+        <li>Click the "Lookup Domain" button</li>
+        <li>View comprehensive domain registration information</li>
+        <li>Expand the raw data section for technical details</li>
+      </ul>
+      
+      <h3>What Information Does WHOIS Provide?</h3>
+      <p>WHOIS lookup returns valuable domain information including:</p>
+      <ul>
+        <li><strong>Registrar Information:</strong> The company that registered the domain</li>
+        <li><strong>Registration Dates:</strong> When the domain was created and when it expires</li>
+        <li><strong>Registrant Details:</strong> Domain owner information (when available)</li>
+        <li><strong>Name Servers:</strong> DNS servers handling the domain's records</li>
+        <li><strong>Domain Status:</strong> Current state of the domain (active, suspended, etc.)</li>
+        <li><strong>DNSSEC:</strong> DNS security extension status</li>
+        <li><strong>Contact Information:</strong> Administrative and technical contacts</li>
+      </ul>
+      
+      <h3>Other Useful Tools</h3>
+      <p>Explore more helpful utilities in our toolbox:</p>
+      <div class="tool-links">
+        <a href="ip-lookup.html" class="tool-link" aria-label="IP Lookup">
+          <i class="fas fa-network-wired" aria-hidden="true"></i> IP Lookup
+        </a>
+        <a href="ssl-checker.html" class="tool-link" aria-label="SSL Checker">
+          <i class="fas fa-lock" aria-hidden="true"></i> SSL Checker
+        </a>
+        <a href="dns-lookup.html" class="tool-link" aria-label="DNS Lookup">
+          <i class="fas fa-server" aria-hidden="true"></i> DNS Lookup
+        </a>
+        <a href="index.html" class="tool-link" aria-label="All Tools">
+          <i class="fas fa-tools" aria-hidden="true"></i> All Tools
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2><i class="fas fa-question-circle" aria-hidden="true"></i> Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>What is WHOIS data?</h3>
+        <p>WHOIS is a query and response protocol used for querying databases that store registered users or assignees of internet resources, such as domain names, IP address blocks, and autonomous systems. It provides information about domain registration, ownership, and administrative contacts.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Why is some registrant information hidden?</h3>
+        <p>Many domain registrars offer WHOIS privacy protection services that hide the personal contact information of domain owners. This is done to protect privacy and reduce spam. In such cases, you'll see the registrar's contact information instead of the actual domain owner's details.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Is this tool free to use?</h3>
+        <p>Yes, our WHOIS Lookup Tool is completely free to use with no registration required. You can perform unlimited domain lookups without any restrictions.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>How current is the WHOIS information?</h3>
+        <p>Our tool fetches real-time WHOIS data directly from official domain registries, so the information is as current as possible. However, there may be a slight delay (usually 24-48 hours) for recently updated domain information to propagate through all WHOIS databases.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== CONFIGURATION ==========
+    // CONFIG - set your preferred WHOIS API and key here
+    // Example endpoints:
+    //   https://api.api-ninjas.com/v1/whois?domain=example.com  (requires API key in header)
+    //   https://ipapi.co/domain/whois/ (if supported) - check provider docs
+    //   https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=YOUR_KEY&domainName=example.com&outputFormat=JSON
+    const WHOIS_API_URL = "https://api.api-ninjas.com/v1/whois?domain=";
+    const WHOIS_API_KEY = ""; // Paste your key here if required
+
+    // ========== DOM ELEMENTS ==========
+    const domainInput = document.getElementById('domainInput');
+    const lookupBtn = document.getElementById('lookupBtn');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const resultContainer = document.getElementById('resultContainer');
+
+    // ========== INITIALIZATION ==========
+    function initializeLookup() {
+      // Add event listeners
+      lookupBtn.addEventListener('click', performLookup);
+      domainInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') performLookup();
+      });
+    }
+
+    // ========== PERFORM WHOIS LOOKUP ==========
+    async function performLookup() {
+      const domain = domainInput.value.trim();
+      
+      // Validate input
+      if (!domain) {
+        showError('Please enter a domain name');
+        return;
+      }
+      
+      // Basic domain validation
+      if (!isValidDomain(domain)) {
+        showError('Please enter a valid domain name (e.g., example.com)');
+        return;
+      }
+      
+      // Show loading state
+      setLoadingState(true);
+      
+      try {
+        const whoisData = await fetchWhoisData(domain);
+        displayResults(whoisData, domain);
+      } catch (error) {
+        console.error('WHOIS lookup error:', error);
+        showError('Failed to fetch WHOIS data. Please try again later.');
+      } finally {
+        setLoadingState(false);
+      }
+    }
+
+    // ========== FETCH WHOIS DATA ==========
+    async function fetchWhoisData(domain) {
+      const url = WHOIS_API_URL + encodeURIComponent(domain);
+      const options = {
+        method: 'GET',
+        headers: {}
+      };
+      
+      // Add API key if configured
+      if (WHOIS_API_KEY) {
+        options.headers['X-Api-Key'] = WHOIS_API_KEY;
+      }
+      
+      const response = await fetch(url, options);
+      
+      if (!response.ok) {
+        throw new Error(`API returned ${response.status}: ${response.statusText}`);
+      }
+      
+      return await response.json();
+    }
+
+    // ========== DISPLAY RESULTS ==========
+    function displayResults(data, domain) {
+      // Check if we have valid data
+      if (!data || Object.keys(data).length === 0) {
+        showError('No WHOIS data found for this domain');
+        return;
+      }
+      
+      // Determine domain status
+      const status = determineDomainStatus(data);
+      const statusClass = status === 'Available' ? 'status-available' : 
+                         status === 'Error' ? 'status-error' : 'status-registered';
+      
+      // Format dates
+      const createdDate = formatDate(data.createDate || data.creationDate || data.registered);
+      const updatedDate = formatDate(data.updateDate || data.updatedDate || data.lastUpdated);
+      const expiresDate = formatDate(data.expireDate || data.expiryDate || data.expires);
+      
+      // Build the result HTML
+      let resultHTML = `
+        <div class="result-header">
+          <div class="result-domain">${domain}</div>
+          <div class="result-status ${statusClass}">${status}</div>
+        </div>
+        
+        <div class="info-grid">
+          <div class="info-card">
+            <h3><i class="fas fa-building"></i> Registrar Information</h3>
+            <div class="info-item">
+              <span class="info-label">Registrar:</span>
+              <span class="info-value">${data.registrarName || data.registrar || 'N/A'}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">WHOIS Server:</span>
+              <span class="info-value">${data.whoisServer || 'N/A'}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">DNSSEC:</span>
+              <span class="info-value">${data.dnssec || data.dnsSec || 'N/A'}</span>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <h3><i class="fas fa-calendar-alt"></i> Dates</h3>
+            <div class="info-item">
+              <span class="info-label">Created:</span>
+              <span class="info-value">${createdDate}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Updated:</span>
+              <span class="info-value">${updatedDate}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Expires:</span>
+              <span class="info-value">${expiresDate}</span>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <h3><i class="fas fa-user"></i> Registrant</h3>
+            <div class="info-item">
+              <span class="info-label">Organization:</span>
+              <span class="info-value">${data.registrantOrganization || data.organization || 'N/A'}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Country:</span>
+              <span class="info-value">${data.registrantCountry || data.country || 'N/A'}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">State/Province:</span>
+              <span class="info-value">${data.registrantState || data.state || 'N/A'}</span>
+            </div>
+          </div>
+      `;
+      
+      // Add name servers if available
+      if (data.nameServers && data.nameServers.length > 0) {
+        resultHTML += `
+          <div class="info-card">
+            <h3><i class="fas fa-server"></i> Name Servers</h3>
+            <ul class="nameserver-list">
+        `;
+        
+        data.nameServers.forEach(server => {
+          resultHTML += `<li>${server}</li>`;
+        });
+        
+        resultHTML += `
+            </ul>
+          </div>
+        `;
+      }
+      
+      // Add domain status if available
+      if (data.domainStatus) {
+        resultHTML += `
+          <div class="info-card">
+            <h3><i class="fas fa-info-circle"></i> Domain Status</h3>
+        `;
+        
+        if (Array.isArray(data.domainStatus)) {
+          data.domainStatus.forEach(status => {
+            resultHTML += `<div class="info-item"><span class="info-value">${status}</span></div>`;
+          });
+        } else {
+          resultHTML += `<div class="info-item"><span class="info-value">${data.domainStatus}</span></div>`;
+        }
+        
+        resultHTML += `</div>`;
+      }
+      
+      resultHTML += `</div>`;
+      
+      // Add raw data section
+      resultHTML += `
+        <div class="raw-data-container">
+          <button class="raw-data-toggle" id="rawDataToggle">
+            <span>Raw WHOIS Data</span>
+            <i class="fas fa-chevron-down" id="rawDataIcon"></i>
+          </button>
+          <div class="raw-data-content" id="rawDataContent">
+            ${JSON.stringify(data, null, 2)}
+          </div>
+        </div>
+      `;
+      
+      resultContainer.innerHTML = resultHTML;
+      resultContainer.className = 'result-container active';
+      
+      // Add event listener for raw data toggle
+      const rawDataToggle = document.getElementById('rawDataToggle');
+      const rawDataContent = document.getElementById('rawDataContent');
+      const rawDataIcon = document.getElementById('rawDataIcon');
+      
+      rawDataToggle.addEventListener('click', () => {
+        rawDataContent.classList.toggle('active');
+        rawDataIcon.classList.toggle('fa-chevron-down');
+        rawDataIcon.classList.toggle('fa-chevron-up');
+      });
+    }
+
+    // ========== HELPER FUNCTIONS ==========
+    function isValidDomain(domain) {
+      // Simple domain validation - can be enhanced
+      const domainRegex = /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z]{2,})+$/;
+      return domainRegex.test(domain);
+    }
+
+    function determineDomainStatus(data) {
+      if (!data || data.error) return 'Error';
+      if (data.domainName && data.registrarName) return 'Registered';
+      return 'Available';
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return 'N/A';
+      
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      } catch (e) {
+        return dateString;
+      }
+    }
+
+    function setLoadingState(isLoading) {
+      if (isLoading) {
+        lookupBtn.disabled = true;
+        lookupBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Looking Up...';
+        loadingSpinner.style.display = 'block';
+        resultContainer.className = 'result-container';
+      } else {
+        lookupBtn.disabled = false;
+        lookupBtn.innerHTML = '<i class="fas fa-search" aria-hidden="true"></i> Lookup Domain';
+        loadingSpinner.style.display = 'none';
+      }
+    }
+
+    function showError(message) {
+      resultContainer.innerHTML = `
+        <div class="result-header">
+          <div class="result-domain">Error</div>
+          <div class="result-status status-error">Failed</div>
+        </div>
+        <div style="text-align: center; padding: 2rem;">
+          <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--error); margin-bottom: 1rem;"></i>
+          <p style="color: var(--text); font-size: 1.1rem;">${message}</p>
+        </div>
+      `;
+      resultContainer.className = 'result-container error';
+    }
+
+    // ========== THEME TOGGLE ==========
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the lookup tool when the page loads
+    document.addEventListener('DOMContentLoaded', initializeLookup);
+  </script>
+</body>
+</html>

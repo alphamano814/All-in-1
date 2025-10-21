@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>HTTP Header Viewer — Inspect Request & Response Headers</title>
+  <meta name="description" content="Free online HTTP header viewer to inspect request and response headers, check status codes, analyze redirects, and debug CORS issues.">
+  <meta name="keywords" content="http header viewer, header inspector, http headers, request headers, response headers, cors debugger, http status checker">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/http-header-viewer.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="HTTP Header Viewer — Inspect Request & Response Headers">
+  <meta property="og:description" content="Free online HTTP header viewer to inspect request and response headers, check status codes, and debug CORS issues.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/http-header-viewer-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/http-header-viewer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HTTP Header Viewer — Inspect Request & Response Headers">
+  <meta name="twitter:description" content="Free online HTTP header viewer to inspect request and response headers, check status codes, and debug CORS issues.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/http-header-viewer-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HTTP Header Viewer",
+    "description": "Free online HTTP header viewer to inspect request and response headers, check status codes, and debug CORS issues.",
+    "url": "https://www.prabinpokhrel1.com.np/http-header-viewer.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input {
+      padding-left: 3rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    .help-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* --------- ACTION BUTTONS --------- */
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-lighter);
+      transform: translateY(-3px);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .example-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .example-btn {
+      padding: 0.5rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .example-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* --------- RESULTS SECTION --------- */
+    .results-section {
+      display: none;
+    }
+
+    .results-section.active {
+      display: block;
+    }
+
+    .status-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .status-code {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .status-code.success {
+      color: var(--success);
+    }
+
+    .status-code.redirect {
+      color: var(--warning);
+    }
+
+    .status-code.error {
+      color: var(--error);
+    }
+
+    .timing-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .timing-item {
+      text-align: center;
+    }
+
+    .timing-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .timing-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .headers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .headers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .headers-panel {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .headers-list {
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+
+    .header-item {
+      display: flex;
+      margin-bottom: 0.5rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-name {
+      font-weight: 600;
+      color: var(--primary);
+      min-width: 150px;
+      flex-shrink: 0;
+    }
+
+    .header-value {
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .accordion {
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 1rem 1.5rem;
+      background: var(--bg-light);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-header:hover {
+      background: var(--bg-lighter);
+    }
+
+    .accordion-content {
+      padding: 1.5rem;
+      background: var(--card-bg);
+      display: none;
+    }
+
+    .accordion.active .accordion-content {
+      display: block;
+    }
+
+    .raw-content {
+      background: var(--bg);
+      border-radius: 5px;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    /* --------- HISTORY SECTION --------- */
+    .history-section {
+      margin-top: 2rem;
+    }
+
+    .history-list {
+      margin-top: 1rem;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .history-info {
+      flex: 1;
+    }
+
+    .history-url {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .history-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* --------- ALERT CARDS --------- */
+    .alert-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--warning);
+    }
+
+    .alert-card.warning {
+      border-left-color: var(--warning);
+    }
+
+    .alert-card.error {
+      border-left-color: var(--error);
+    }
+
+    .alert-card.success {
+      border-left-color: var(--success);
+    }
+
+    .alert-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .alert-content {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* --------- TOAST NOTIFICATIONS --------- */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .toast {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      border-left: 4px solid var(--success);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.error {
+      border-left-color: var(--error);
+    }
+
+    .toast.warning {
+      border-left-color: var(--warning);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .history-actions {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="tool-card">
+      <div class="card-header">
+        <i class="fas fa-server" aria-hidden="true"></i>
+        <h1>HTTP Header Viewer</h1>
+        <p>Inspect HTTP request and response headers, check status codes, and debug CORS issues</p>
+      </div>
+
+      <!-- Privacy Notice -->
+      <div class="alert-card warning">
+        <div class="alert-title">
+          <i class="fas fa-shield-alt"></i> Privacy & Security Notice
+        </div>
+        <div class="alert-content">
+          <p><strong>Direct requests</strong> are made from your browser to the target URL. No data is sent to our servers.</p>
+          <p><strong>Proxy usage</strong> (when enabled) sends the URL through a third-party service. Do not use sensitive URLs with public proxies.</p>
+          <p><strong>CORS restrictions</strong> may prevent accessing some headers from cross-origin requests.</p>
+        </div>
+      </div>
+
+      <!-- Input Form -->
+      <div class="form-group">
+        <label for="urlInput" class="required">URL to Inspect</label>
+        <div class="input-with-icon">
+          <i class="fas fa-link"></i>
+          <input type="url" id="urlInput" class="form-control" placeholder="https://example.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="methodSelect">HTTP Method</label>
+          <select id="methodSelect" class="form-control">
+            <option value="HEAD">HEAD</option>
+            <option value="GET">GET</option>
+            <option value="OPTIONS">OPTIONS</option>
+          </select>
+          <div class="help-text">HEAD: headers only, GET: headers + body preview, OPTIONS: CORS preflight</div>
+        </div>
+
+        <div class="form-group">
+          <label for="proxyToggle">Proxy & CORS Settings</label>
+          <div class="checkbox-group">
+            <input type="checkbox" id="followRedirects">
+            <label for="followRedirects">Follow redirects</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="proxyToggle">
+            <label for="proxyToggle">Use proxy if needed</label>
+          </div>
+          <div class="help-text">Proxy helps bypass CORS but sends your URL to third-party servers</div>
+        </div>
+      </div>
+
+      <!-- Example URLs -->
+      <div class="form-group">
+        <label>Quick Test URLs</label>
+        <div class="example-buttons">
+          <button class="example-btn" data-url="https://example.com">example.com</button>
+          <button class="example-btn" data-url="https://httpbin.org/anything">httpbin.org/anything</button>
+          <button class="example-btn" data-url="https://httpbin.org/status/404">httpbin.org/404</button>
+          <button class="example-btn" data-url="https://httpbin.org/redirect/2">httpbin.org/redirect</button>
+          <button class="example-btn" data-url="https://jsonplaceholder.typicode.com/posts/1">JSONPlaceholder</button>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="fetchBtn">
+          <i class="fas fa-search"></i> Fetch Headers
+        </button>
+        <button class="btn btn-secondary" id="clearBtn">
+          <i class="fas fa-trash"></i> Clear Results
+        </button>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div id="loadingIndicator" style="display: none; text-align: center; margin: 2rem 0;">
+        <div class="spinner" style="width: 40px; height: 40px; border: 4px solid var(--bg-light); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+        <p>Fetching headers...</p>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" id="resultsSection">
+      <div class="tool-card">
+        <div class="card-header">
+          <h2>HTTP Header Analysis</h2>
+          <p>Detailed breakdown of request and response headers</p>
+        </div>
+
+        <!-- Status Card -->
+        <div class="status-card" id="statusCard">
+          <div class="status-header">
+            <div>
+              <div class="status-code" id="statusCode">-</div>
+              <div class="help-text" id="statusText">Status will appear here</div>
+            </div>
+            <div class="help-text" id="finalUrl">Final URL after redirects</div>
+          </div>
+
+          <div class="timing-info">
+            <div class="timing-item">
+              <div class="timing-value" id="totalTime">-</div>
+              <div class="timing-label">Total Time</div>
+            </div>
+            <div class="timing-item">
+              <div class="timing-value" id="dnsTime">-</div>
+              <div class="timing-label">DNS Lookup</div>
+            </div>
+            <div class="timing-item">
+              <div class="timing-value" id="connectTime">-</div>
+              <div class="timing-label">Connection</div>
+            </div>
+            <div class="timing-item">
+              <div class="timing-value" id="ttfbTime">-</div>
+              <div class="timing-label">Time to First Byte</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Headers Grid -->
+        <div class="headers-grid">
+          <div class="headers-panel">
+            <div class="panel-header">
+              <div class="panel-title">Request Headers</div>
+              <button class="btn btn-secondary" id="copyRequestBtn">
+                <i class="fas fa-copy"></i> Copy
+              </button>
+            </div>
+            <div class="headers-list" id="requestHeaders">
+              <!-- Request headers will be populated here -->
+            </div>
+          </div>
+
+          <div class="headers-panel">
+            <div class="panel-header">
+              <div class="panel-title">Response Headers</div>
+              <button class="btn btn-secondary" id="copyResponseBtn">
+                <i class="fas fa-copy"></i> Copy
+              </button>
+            </div>
+            <div class="headers-list" id="responseHeaders">
+              <!-- Response headers will be populated here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="accordion" id="redirectAccordion">
+          <div class="accordion-header">
+            <h3><i class="fas fa-exchange-alt"></i> Redirect Chain</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="accordion-content">
+            <div id="redirectChain">
+              <!-- Redirect information will be populated here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion" id="bodyAccordion">
+          <div class="accordion-header">
+            <h3><i class="fas fa-code"></i> Response Body Preview</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="raw-content" id="responseBody">
+              <!-- Response body preview will be populated here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="action-buttons">
+          <button class="btn btn-secondary" id="copyAllBtn">
+            <i class="fas fa-copy"></i> Copy All as JSON
+          </button>
+          <button class="btn btn-secondary" id="downloadBtn">
+            <i class="fas fa-download"></i> Download Results
+          </button>
+          <button class="btn btn-secondary" id="curlBtn">
+            <i class="fas fa-terminal"></i> Generate cURL Command
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="history-section">
+      <div class="tool-card">
+        <div class="card-header">
+          <h2>Request History</h2>
+          <p>Recently inspected URLs (stored locally in your browser)</p>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn btn-secondary" id="clearHistoryBtn">
+            <i class="fas fa-trash"></i> Clear History
+          </button>
+        </div>
+
+        <div class="history-list" id="historyList">
+          <!-- History items will be populated here -->
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-btn">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+    </a>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== CONFIGURATION ==========
+    // CONFIG: If testing remote sites with CORS restrictions, set PROXY_URL to your proxy endpoint
+    // Example free proxies (may be rate-limited): https://cors.bridged.cc/, https://cors-anywhere.herokuapp.com/
+    // Recommended: run your own lightweight proxy and set PROXY_URL = "https://your-proxy.example.com/"
+    const PROXY_URL = ""; // e.g. "https://cors.your-domain.com/"
+    const DEFAULT_METHOD = "HEAD"; // or "GET"
+    const MAX_BODY_PREVIEW_BYTES = 2000; // bytes to show in body preview (if GET used)
+    const MAX_HISTORY_ITEMS = 20; // Number of history items to keep
+
+    // ========== DOM ELEMENTS ==========
+    const urlInput = document.getElementById('urlInput');
+    const methodSelect = document.getElementById('methodSelect');
+    const followRedirects = document.getElementById('followRedirects');
+    const proxyToggle = document.getElementById('proxyToggle');
+    const fetchBtn = document.getElementById('fetchBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const resultsSection = document.getElementById('resultsSection');
+    const statusCard = document.getElementById('statusCard');
+    const statusCode = document.getElementById('statusCode');
+    const statusText = document.getElementById('statusText');
+    const finalUrl = document.getElementById('finalUrl');
+    const totalTime = document.getElementById('totalTime');
+    const dnsTime = document.getElementById('dnsTime');
+    const connectTime = document.getElementById('connectTime');
+    const ttfbTime = document.getElementById('ttfbTime');
+    const requestHeaders = document.getElementById('requestHeaders');
+    const responseHeaders = document.getElementById('responseHeaders');
+    const redirectChain = document.getElementById('redirectChain');
+    const responseBody = document.getElementById('responseBody');
+    const copyRequestBtn = document.getElementById('copyRequestBtn');
+    const copyResponseBtn = document.getElementById('copyResponseBtn');
+    const copyAllBtn = document.getElementById('copyAllBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const curlBtn = document.getElementById('curlBtn');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    const historyList = document.getElementById('historyList');
+    const toastContainer = document.getElementById('toastContainer');
+    const exampleBtns = document.querySelectorAll('.example-btn');
+
+    // ========== STATE MANAGEMENT ==========
+    let currentRequest = null;
+    let requestHistory = JSON.parse(localStorage.getItem('httpHeaderHistory') || '[]');
+
+    // ========== INITIALIZATION ==========
+    function initializeTool() {
+      // Set default method
+      methodSelect.value = DEFAULT_METHOD;
+      
+      // Load history
+      renderHistory();
+      
+      // Add event listeners
+      fetchBtn.addEventListener('click', fetchHeaders);
+      clearBtn.addEventListener('click', clearResults);
+      copyRequestBtn.addEventListener('click', () => copyHeaders('request'));
+      copyResponseBtn.addEventListener('click', () => copyHeaders('response'));
+      copyAllBtn.addEventListener('click', copyAllAsJson);
+      downloadBtn.addEventListener('click', downloadResults);
+      curlBtn.addEventListener('click', generateCurlCommand);
+      clearHistoryBtn.addEventListener('click', clearHistory);
+      
+      // Example URL buttons
+      exampleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          urlInput.value = btn.getAttribute('data-url');
+        });
+      });
+      
+      // Enter key support
+      urlInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') fetchHeaders();
+      });
+    }
+
+    // ========== HEADER FETCHING ==========
+    async function fetchHeaders() {
+      const url = urlInput.value.trim();
+      if (!url) {
+        showToast('Please enter a URL', 'error');
+        return;
+      }
+
+      // Validate URL
+      try {
+        new URL(url);
+      } catch (e) {
+        showToast('Please enter a valid URL', 'error');
+        return;
+      }
+
+      // Show loading state
+      setLoadingState(true);
+      resultsSection.classList.remove('active');
+
+      const method = methodSelect.value;
+      const useProxy = proxyToggle.checked;
+      const follow = followRedirects.checked;
+
+      try {
+        const startTime = performance.now();
+        currentRequest = {
+          url,
+          method,
+          useProxy,
+          follow,
+          timestamp: new Date().toISOString()
+        };
+
+        const response = await makeRequest(url, method, useProxy, follow);
+        const endTime = performance.now();
+        
+        processResponse(response, startTime, endTime);
+        addToHistory(currentRequest);
+        
+      } catch (error) {
+        handleRequestError(error);
+      } finally {
+        setLoadingState(false);
+        resultsSection.classList.add('active');
+      }
+    }
+
+    async function makeRequest(url, method, useProxy, follow) {
+      const requestUrl = useProxy && PROXY_URL ? `${PROXY_URL}${url}` : url;
+      const options = {
+        method: method,
+        mode: 'cors',
+        redirect: follow ? 'follow' : 'manual',
+        headers: {
+          'User-Agent': 'HTTP-Header-Viewer/1.0'
+        }
+      };
+
+      // For GET requests, we might want to see the body
+      if (method === 'GET') {
+        options.method = 'GET'; // Ensure GET method for body retrieval
+      }
+
+      try {
+        const response = await fetch(requestUrl, options);
+        return response;
+      } catch (error) {
+        // If CORS error and proxy not used, suggest using proxy
+        if (error.name === 'TypeError' && !useProxy && PROXY_URL) {
+          throw new Error(`CORS blocked: ${error.message}. Try enabling the proxy.`);
+        }
+        throw error;
+      }
+    }
+
+    function processResponse(response, startTime, endTime) {
+      const totalDuration = (endTime - startTime).toFixed(2);
+      
+      // Update status information
+      const status = response.status;
+      statusCode.textContent = status;
+      statusCode.className = `status-code ${getStatusClass(status)}`;
+      statusText.textContent = response.statusText || 'Unknown status';
+      finalUrl.textContent = response.url;
+
+      // Calculate timing (simplified - real timing would need Performance API)
+      totalTime.textContent = `${totalDuration}ms`;
+      dnsTime.textContent = 'N/A';
+      connectTime.textContent = 'N/A';
+      ttfbTime.textContent = 'N/A';
+
+      // Display headers
+      displayHeaders(response);
+
+      // Handle redirects
+      if (response.redirected) {
+        displayRedirectInfo(response);
+      }
+
+      // Handle response body for GET requests
+      if (methodSelect.value === 'GET') {
+        handleResponseBody(response);
+      }
+
+      // Expand relevant accordions
+      document.getElementById('redirectAccordion').classList.add('active');
+      if (methodSelect.value === 'GET') {
+        document.getElementById('bodyAccordion').classList.add('active');
+      }
+    }
+
+    function displayHeaders(response) {
+      // Clear previous headers
+      requestHeaders.innerHTML = '';
+      responseHeaders.innerHTML = '';
+
+      // Display request headers (simulated - we can't access all actual sent headers)
+      const simulatedRequestHeaders = {
+        'User-Agent': 'HTTP-Header-Viewer/1.0',
+        'Accept': '*/*',
+        'Method': methodSelect.value
+      };
+
+      if (proxyToggle.checked && PROXY_URL) {
+        simulatedRequestHeaders['X-Proxy'] = 'Enabled';
+      }
+
+      Object.entries(simulatedRequestHeaders).forEach(([name, value]) => {
+        const headerItem = createHeaderItem(name, value);
+        requestHeaders.appendChild(headerItem);
+      });
+
+      // Display response headers
+      response.headers.forEach((value, name) => {
+        const headerItem = createHeaderItem(name, value);
+        responseHeaders.appendChild(headerItem);
+      });
+
+      // Handle case where no headers are accessible due to CORS
+      if (response.headers.size === 0) {
+        responseHeaders.innerHTML = '<div class="help-text">No headers accessible due to CORS restrictions. Try enabling the proxy.</div>';
+      }
+    }
+
+    function createHeaderItem(name, value) {
+      const div = document.createElement('div');
+      div.className = 'header-item';
+      div.innerHTML = `
+        <div class="header-name">${escapeHtml(name)}</div>
+        <div class="header-value">${escapeHtml(value)}</div>
+      `;
+      return div;
+    }
+
+    function displayRedirectInfo(response) {
+      redirectChain.innerHTML = `
+        <div class="help-text">
+          Request was redirected. Final URL: ${escapeHtml(response.url)}
+        </div>
+      `;
+    }
+
+    async function handleResponseBody(response) {
+      try {
+        const contentLength = response.headers.get('content-length');
+        const contentType = response.headers.get('content-type') || '';
+        
+        if (contentLength && parseInt(contentLength) > MAX_BODY_PREVIEW_BYTES * 2) {
+          responseBody.textContent = `Response too large (${contentLength} bytes). Preview limited to ${MAX_BODY_PREVIEW_BYTES} bytes.`;
+          return;
+        }
+
+        // Only preview text-based content
+        if (contentType.includes('text/') || contentType.includes('application/json')) {
+          const buffer = await response.arrayBuffer();
+          const decoder = new TextDecoder('utf-8');
+          let text = decoder.decode(buffer);
+          
+          if (text.length > MAX_BODY_PREVIEW_BYTES) {
+            text = text.substring(0, MAX_BODY_PREVIEW_BYTES) + '... [truncated]';
+          }
+          
+          responseBody.textContent = text;
+        } else {
+          responseBody.textContent = `Binary content (${contentType}). Preview not available.`;
+        }
+      } catch (error) {
+        responseBody.textContent = `Error reading response body: ${error.message}`;
+      }
+    }
+
+    function handleRequestError(error) {
+      statusCode.textContent = 'Error';
+      statusCode.className = 'status-code error';
+      statusText.textContent = error.message;
+      finalUrl.textContent = urlInput.value;
+      
+      requestHeaders.innerHTML = '<div class="help-text">Request failed before headers could be sent</div>';
+      responseHeaders.innerHTML = `<div class="help-text">${escapeHtml(error.message)}</div>`;
+      
+      // Reset timing info
+      totalTime.textContent = '-';
+      dnsTime.textContent = '-';
+      connectTime.textContent = '-';
+      ttfbTime.textContent = '-';
+      
+      showToast(`Request failed: ${error.message}`, 'error');
+    }
+
+    // ========== UTILITY FUNCTIONS ==========
+    function getStatusClass(status) {
+      if (status >= 200 && status < 300) return 'success';
+      if (status >= 300 && status < 400) return 'redirect';
+      if (status >= 400) return 'error';
+      return '';
+    }
+
+    function setLoadingState(loading) {
+      fetchBtn.disabled = loading;
+      loadingIndicator.style.display = loading ? 'block' : 'none';
+      if (loading) {
+        fetchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching...';
+      } else {
+        fetchBtn.innerHTML = '<i class="fas fa-search"></i> Fetch Headers';
+      }
+    }
+
+    function clearResults() {
+      resultsSection.classList.remove('active');
+      urlInput.value = '';
+      showToast('Results cleared', 'success');
+    }
+
+    // ========== COPY & EXPORT FUNCTIONS ==========
+    async function copyHeaders(type) {
+      let text = '';
+      
+      if (type === 'request') {
+        text = Array.from(requestHeaders.children)
+          .map(item => {
+            const name = item.querySelector('.header-name').textContent;
+            const value = item.querySelector('.header-value').textContent;
+            return `${name}: ${value}`;
+          })
+          .join('\n');
+      } else {
+        text = Array.from(responseHeaders.children)
+          .map(item => {
+            const name = item.querySelector('.header-name').textContent;
+            const value = item.querySelector('.header-value').textContent;
+            return `${name}: ${value}`;
+          })
+          .join('\n');
+      }
+      
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(`${type === 'request' ? 'Request' : 'Response'} headers copied to clipboard`, 'success');
+      } catch (err) {
+        showToast('Failed to copy headers', 'error');
+      }
+    }
+
+    async function copyAllAsJson() {
+      const requestData = Array.from(requestHeaders.children).map(item => ({
+        name: item.querySelector('.header-name').textContent,
+        value: item.querySelector('.header-value').textContent
+      }));
+      
+      const responseData = Array.from(responseHeaders.children).map(item => ({
+        name: item.querySelector('.header-name').textContent,
+        value: item.querySelector('.header-value').textContent
+      }));
+      
+      const data = {
+        url: urlInput.value,
+        status: statusCode.textContent,
+        statusText: statusText.textContent,
+        finalUrl: finalUrl.textContent,
+        timing: {
+          total: totalTime.textContent,
+          dns: dnsTime.textContent,
+          connect: connectTime.textContent,
+          ttfb: ttfbTime.textContent
+        },
+        requestHeaders: requestData,
+        responseHeaders: responseData,
+        timestamp: new Date().toISOString()
+      };
+      
+      try {
+        await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+        showToast('All data copied as JSON', 'success');
+      } catch (err) {
+        showToast('Failed to copy data', 'error');
+      }
+    }
+
+    function downloadResults() {
+      const requestData = Array.from(requestHeaders.children).map(item => ({
+        name: item.querySelector('.header-name').textContent,
+        value: item.querySelector('.header-value').textContent
+      }));
+      
+      const responseData = Array.from(responseHeaders.children).map(item => ({
+        name: item.querySelector('.header-name').textContent,
+        value: item.querySelector('.header-value').textContent
+      }));
+      
+      const data = {
+        url: urlInput.value,
+        status: statusCode.textContent,
+        statusText: statusText.textContent,
+        finalUrl: finalUrl.textContent,
+        timing: {
+          total: totalTime.textContent,
+          dns: dnsTime.textContent,
+          connect: connectTime.textContent,
+          ttfb: ttfbTime.textContent
+        },
+        requestHeaders: requestData,
+        responseHeaders: responseData,
+        timestamp: new Date().toISOString()
+      };
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const domain = new URL(urlInput.value).hostname;
+      a.href = url;
+      a.download = `headers-${domain}-${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showToast('Results downloaded', 'success');
+    }
+
+    function generateCurlCommand() {
+      const url = urlInput.value;
+      const method = methodSelect.value;
+      
+      let curl = `curl -X ${method} \\\n  "${url}"`;
+      
+      // Add headers
+      Array.from(requestHeaders.children).forEach(item => {
+        const name = item.querySelector('.header-name').textContent;
+        const value = item.querySelector('.header-value').textContent;
+        if (name !== 'Method') {
+          curl += ` \\\n  -H "${name}: ${value}"`;
+        }
+      });
+      
+      curl += ` \\\n  -I`; // Show headers only
+      
+      try {
+        navigator.clipboard.writeText(curl);
+        showToast('cURL command copied to clipboard', 'success');
+      } catch (err) {
+        // Fallback: show in alert
+        alert('cURL command:\n\n' + curl);
+      }
+    }
+
+    // ========== HISTORY MANAGEMENT ==========
+    function addToHistory(request) {
+      // Remove if already exists
+      requestHistory = requestHistory.filter(item => item.url !== request.url);
+      
+      // Add to beginning
+      requestHistory.unshift(request);
+      
+      // Limit history size
+      if (requestHistory.length > MAX_HISTORY_ITEMS) {
+        requestHistory = requestHistory.slice(0, MAX_HISTORY_ITEMS);
+      }
+      
+      // Save to localStorage
+      localStorage.setItem('httpHeaderHistory', JSON.stringify(requestHistory));
+      
+      // Update UI
+      renderHistory();
+    }
+
+    function renderHistory() {
+      historyList.innerHTML = '';
+      
+      if (requestHistory.length === 0) {
+        historyList.innerHTML = '<div class="help-text">No history yet. Fetch some headers to see them here.</div>';
+        return;
+      }
+      
+      requestHistory.forEach((item, index) => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        
+        const date = new Date(item.timestamp).toLocaleString();
+        
+        historyItem.innerHTML = `
+          <div class="history-info">
+            <div class="history-url">${escapeHtml(item.url)}</div>
+            <div class="history-meta">${item.method} • ${date} ${item.useProxy ? '• Proxy' : ''}</div>
+          </div>
+          <div class="history-actions">
+            <button class="btn btn-secondary" onclick="loadFromHistory(${index})">
+              <i class="fas fa-redo"></i> Reload
+            </button>
+            <button class="btn btn-secondary" onclick="removeFromHistory(${index})">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        `;
+        
+        historyList.appendChild(historyItem);
+      });
+    }
+
+    function loadFromHistory(index) {
+      const item = requestHistory[index];
+      urlInput.value = item.url;
+      methodSelect.value = item.method;
+      proxyToggle.checked = item.useProxy;
+      fetchHeaders();
+    }
+
+    function removeFromHistory(index) {
+      requestHistory.splice(index, 1);
+      localStorage.setItem('httpHeaderHistory', JSON.stringify(requestHistory));
+      renderHistory();
+      showToast('Removed from history', 'success');
+    }
+
+    function clearHistory() {
+      requestHistory = [];
+      localStorage.setItem('httpHeaderHistory', '[]');
+      renderHistory();
+      showToast('History cleared', 'success');
+    }
+
+    // ========== TOAST NOTIFICATIONS ==========
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
+        <span>${message}</span>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      // Show toast
+      setTimeout(() => toast.classList.add('show'), 100);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+          }
+        }, 300);
+      }, 5000);
+    }
+
+    // ========== HELPER FUNCTIONS ==========
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ========== THEME TOGGLE ==========
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Make functions available globally for history buttons
+    window.loadFromHistory = loadFromHistory;
+    window.removeFromHistory = removeFromHistory;
+
+    // Initialize the tool when the page loads
+    document.addEventListener('DOMContentLoaded', initializeTool);
+  </script>
+</body>
+</html>

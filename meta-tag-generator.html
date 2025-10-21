@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Meta Tag Generator — Generate SEO & Social Meta Tags</title>
+  <meta name="description" content="Free online meta tag generator for SEO and social media. Create perfect meta tags, Open Graph, Twitter Cards, and structured data for your website.">
+  <meta name="keywords" content="meta tag generator, SEO meta tags, open graph generator, twitter card generator, structured data, meta description, html head generator">
+  <meta name="author" content="Prabin's Toolbox">
+  <link rel="canonical" href="https://www.prabinpokhrel1.com.np/meta-tag-generator.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Meta Tag Generator — Generate SEO & Social Meta Tags">
+  <meta property="og:description" content="Free online meta tag generator for SEO and social media. Create perfect meta tags for your website.">
+  <meta property="og:image" content="https://www.prabinpokhrel1.com.np/images/meta-tag-generator-og.jpg">
+  <meta property="og:url" content="https://www.prabinpokhrel1.com.np/meta-tag-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All-in-One Tools by Prabin">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meta Tag Generator — Generate SEO & Social Meta Tags">
+  <meta name="twitter:description" content="Free online meta tag generator for SEO and social media. Create perfect meta tags for your website.">
+  <meta name="twitter:image" content="https://www.prabinpokhrel1.com.np/images/meta-tag-generator-twitter.jpg">
+  <meta name="twitter:creator" content="@prabinpokhrel">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Meta Tag Generator",
+    "description": "Free online meta tag generator for SEO and social media. Create perfect meta tags for your website.",
+    "url": "https://www.prabinpokhrel1.com.np/meta-tag-generator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Prabin Pokhrel"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prabin's Toolbox"
+    }
+  }
+  </script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7081789084626782"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    /* --------- RESET & VARIABLES --------- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: "Poppins", sans-serif; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --secondary: #f472b6;
+      --accent: #a78bfa;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-lighter: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-light: #e2e8f0;
+      --bg-lighter: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg), var(--bg-light));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.5s ease;
+      padding: 0 1rem;
+    }
+
+    /* --------- HEADER & NAVIGATION --------- */
+    header {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: 60px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-toggle i {
+      position: absolute;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .fa-sun {
+      color: #f59e0b;
+      opacity: 0;
+    }
+
+    .theme-toggle .fa-moon {
+      color: #94a3b8;
+    }
+
+    .light-mode .theme-toggle .fa-sun {
+      opacity: 1;
+    }
+
+    .light-mode .theme-toggle .fa-moon {
+      opacity: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      left: 4px;
+    }
+
+    .light-mode .theme-toggle::after {
+      left: calc(100% - 26px);
+      background: #f59e0b;
+    }
+
+    /* --------- MAIN CONTENT --------- */
+    main {
+      max-width: 1400px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .generator-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+    }
+
+    .card-header i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --------- FORM CONTROLS --------- */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-with-icon input {
+      padding-left: 3rem;
+    }
+
+    .character-count {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .character-count.good {
+      color: var(--success);
+    }
+
+    .character-count.warning {
+      color: var(--warning);
+    }
+
+    .character-count.error {
+      color: var(--error);
+    }
+
+    .help-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .required::after {
+      content: " *";
+      color: var(--error);
+    }
+
+    /* --------- ACCORDION SECTIONS --------- */
+    .accordion {
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 1rem 1.5rem;
+      background: var(--bg-light);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-header:hover {
+      background: var(--bg-lighter);
+    }
+
+    .accordion-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .accordion-content {
+      padding: 1.5rem;
+      background: var(--card-bg);
+      display: none;
+    }
+
+    .accordion.active .accordion-content {
+      display: block;
+    }
+
+    .accordion.active .accordion-header {
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* --------- TEMPLATE SELECTOR --------- */
+    .template-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .template-btn {
+      padding: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .template-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .template-btn i {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* --------- ACTION BUTTONS --------- */
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .action-btn {
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+    }
+
+    .action-btn.secondary {
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .action-btn.secondary:hover {
+      background: var(--bg-lighter);
+    }
+
+    /* --------- PREVIEW SECTION --------- */
+    .preview-section {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .preview-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-tab {
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .preview-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .preview-content {
+      display: none;
+    }
+
+    .preview-content.active {
+      display: block;
+    }
+
+    .code-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+      color: var(--text);
+    }
+
+    .serp-preview {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1.5rem;
+      color: #202124;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .serp-title {
+      color: #1a0dab;
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .serp-url {
+      color: #006621;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .serp-description {
+      color: #4d5156;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .social-preview {
+      background: #f0f2f5;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      color: #1c1e21;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .social-image {
+      background: #ddd;
+      height: 200px;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
+
+    .social-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .social-description {
+      color: #606770;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    /* --------- TOAST NOTIFICATIONS --------- */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .toast {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      border-left: 4px solid var(--success);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.error {
+      border-left-color: var(--error);
+    }
+
+    .toast.warning {
+      border-left-color: var(--warning);
+    }
+
+    /* --------- BACK BUTTON --------- */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    /* --------- FOOTER --------- */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --------- RESPONSIVE DESIGN --------- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .template-selector {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-tabs {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-toolbox" aria-hidden="true"></i>
+        <div>
+          <h1>All-in-One Tools</h1>
+          <p>50+ useful tools for your everyday needs</p>
+        </div>
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" role="button" tabindex="0">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="generator-card">
+      <div class="card-header">
+        <i class="fas fa-code" aria-hidden="true"></i>
+        <h1>Meta Tag Generator</h1>
+        <p>Generate perfect SEO meta tags, Open Graph, Twitter Cards, and structured data for your website</p>
+      </div>
+
+      <!-- Template Selector -->
+      <div class="form-group">
+        <label>Quick Templates</label>
+        <div class="template-selector">
+          <button class="template-btn" data-template="homepage">
+            <i class="fas fa-home"></i>
+            Homepage
+          </button>
+          <button class="template-btn" data-template="blog">
+            <i class="fas fa-blog"></i>
+            Blog Post
+          </button>
+          <button class="template-btn" data-template="product">
+            <i class="fas fa-shopping-cart"></i>
+            Product Page
+          </button>
+          <button class="template-btn" data-template="article">
+            <i class="fas fa-newspaper"></i>
+            Article
+          </button>
+        </div>
+      </div>
+
+      <!-- Basic Meta Tags -->
+      <div class="accordion active">
+        <div class="accordion-header">
+          <h3><i class="fas fa-tags"></i> Basic Meta Tags</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <div class="form-group">
+            <label for="pageTitle" class="required">Page Title</label>
+            <input type="text" id="pageTitle" class="form-control" placeholder="My Awesome Website - Welcome" value="My Awesome Website - Welcome">
+            <div class="character-count good" id="titleCount">0/60 characters</div>
+            <div class="help-text">Recommended: 50-60 characters. This appears in browser tabs and search results.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="metaDescription" class="required">Meta Description</label>
+            <textarea id="metaDescription" class="form-control" placeholder="A brief description of your page content...">This is a sample description of my awesome website that provides valuable content and services to our users.</textarea>
+            <div class="character-count good" id="descriptionCount">0/160 characters</div>
+            <div class="help-text">Recommended: 150-160 characters. This appears in search results below your title.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="metaKeywords">Meta Keywords</label>
+            <input type="text" id="metaKeywords" class="form-control" placeholder="keyword1, keyword2, keyword3" value="website, awesome, content, services">
+            <div class="help-text">Comma-separated list of relevant keywords (less important for SEO today).</div>
+          </div>
+
+          <div class="form-group">
+            <label for="canonicalUrl" class="required">Canonical URL</label>
+            <div class="input-with-icon">
+              <i class="fas fa-link"></i>
+              <input type="url" id="canonicalUrl" class="form-control" placeholder="https://example.com/page" value="https://example.com/page">
+            </div>
+            <div class="help-text">The preferred version of this page (helps avoid duplicate content issues).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Meta -->
+      <div class="accordion">
+        <div class="accordion-header">
+          <h3><i class="fas fa-cog"></i> Technical Meta</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <div class="form-group">
+            <label for="viewport">Viewport</label>
+            <input type="text" id="viewport" class="form-control" value="width=device-width, initial-scale=1.0">
+            <div class="help-text">Controls viewport behavior for responsive design.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="charset">Charset</label>
+            <input type="text" id="charset" class="form-control" value="UTF-8">
+            <div class="help-text">Character encoding for the page.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="robots">Robots Meta</label>
+            <input type="text" id="robots" class="form-control" value="index, follow">
+            <div class="help-text">Instructions for search engine crawlers (index/noindex, follow/nofollow).</div>
+          </div>
+
+          <div class="form-group">
+            <label for="language">Language</label>
+            <input type="text" id="language" class="form-control" value="en">
+            <div class="help-text">Primary language of the page content (e.g., en, es, fr).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Open Graph -->
+      <div class="accordion">
+        <div class="accordion-header">
+          <h3><i class="fab fa-facebook"></i> Open Graph (Facebook)</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <div class="form-group">
+            <label for="ogTitle">OG Title</label>
+            <input type="text" id="ogTitle" class="form-control" placeholder="Open Graph Title">
+            <div class="help-text">Title for social media sharing. Defaults to page title if empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="ogDescription">OG Description</label>
+            <textarea id="ogDescription" class="form-control" placeholder="Open Graph Description"></textarea>
+            <div class="help-text">Description for social media sharing. Defaults to meta description if empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="ogImage">OG Image URL</label>
+            <div class="input-with-icon">
+              <i class="fas fa-image"></i>
+              <input type="url" id="ogImage" class="form-control" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="help-text">Recommended size: 1200×630 pixels. Essential for social sharing.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="ogUrl">OG URL</label>
+            <div class="input-with-icon">
+              <i class="fas fa-link"></i>
+              <input type="url" id="ogUrl" class="form-control" placeholder="https://example.com/page">
+            </div>
+            <div class="help-text">Canonical URL for this content. Defaults to canonical URL if empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="ogType">OG Type</label>
+            <select id="ogType" class="form-control">
+              <option value="website">website</option>
+              <option value="article">article</option>
+              <option value="product">product</option>
+              <option value="profile">profile</option>
+            </select>
+            <div class="help-text">The type of content you're sharing.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Twitter Card -->
+      <div class="accordion">
+        <div class="accordion-header">
+          <h3><i class="fab fa-twitter"></i> Twitter Card</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <div class="form-group">
+            <label for="twitterCard">Card Type</label>
+            <select id="twitterCard" class="form-control">
+              <option value="summary">Summary</option>
+              <option value="summary_large_image">Summary Large Image</option>
+              <option value="app">App</option>
+              <option value="player">Player</option>
+            </select>
+            <div class="help-text">Type of Twitter Card to display.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="twitterSite">Twitter Site</label>
+            <div class="input-with-icon">
+              <i class="fab fa-twitter"></i>
+              <input type="text" id="twitterSite" class="form-control" placeholder="@username">
+            </div>
+            <div class="help-text">Twitter username of website owner.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="twitterTitle">Twitter Title</label>
+            <input type="text" id="twitterTitle" class="form-control" placeholder="Twitter Card Title">
+            <div class="help-text">Title for Twitter Card. Defaults to page title if empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="twitterDescription">Twitter Description</label>
+            <textarea id="twitterDescription" class="form-control" placeholder="Twitter Card Description"></textarea>
+            <div class="help-text">Description for Twitter Card. Defaults to meta description if empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="twitterImage">Twitter Image URL</label>
+            <div class="input-with-icon">
+              <i class="fas fa-image"></i>
+              <input type="url" id="twitterImage" class="form-control" placeholder="https://example.com/twitter-image.jpg">
+            </div>
+            <div class="help-text">Recommended size: 1200×600 pixels for large image cards.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Structured Data -->
+      <div class="accordion">
+        <div class="accordion-header">
+          <h3><i class="fas fa-database"></i> Structured Data (JSON-LD)</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <div class="form-group">
+            <label for="jsonLd">JSON-LD Schema</label>
+            <textarea id="jsonLd" class="form-control" placeholder='{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Page Title",
+  "description": "Page Description"
+}'></textarea>
+            <div class="help-text">Valid JSON-LD structured data for rich results in search.</div>
+          </div>
+          <button class="action-btn secondary" id="validateJson">
+            <i class="fas fa-check"></i> Validate JSON
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="action-btn" id="generateBtn">
+          <i class="fas fa-magic"></i> Generate Meta Tags
+        </button>
+        <button class="action-btn secondary" id="resetBtn">
+          <i class="fas fa-redo"></i> Reset Form
+        </button>
+        <button class="action-btn secondary" id="clearBtn">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="preview-section">
+      <div class="preview-tabs">
+        <button class="preview-tab active" data-tab="code">Code Preview</button>
+        <button class="preview-tab" data-tab="serp">SERP Preview</button>
+        <button class="preview-tab" data-tab="social">Social Preview</button>
+      </div>
+
+      <div class="preview-content active" id="codePreview">
+        <div class="code-preview" id="codeOutput">
+          <!-- Generated code will appear here -->
+        </div>
+        <div class="action-buttons" style="margin-top: 1rem;">
+          <button class="action-btn" id="copyCodeBtn">
+            <i class="fas fa-copy"></i> Copy Code
+          </button>
+          <button class="action-btn secondary" id="downloadBtn">
+            <i class="fas fa-download"></i> Download HTML
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-content" id="serpPreview">
+        <div class="serp-preview">
+          <div class="serp-title" id="serpTitle">Page Title Appears Here</div>
+          <div class="serp-url" id="serpUrl">https://example.com/page-url</div>
+          <div class="serp-description" id="serpDescription">This is where your meta description will appear in search engine results. Make sure it's compelling and accurately describes your page content.</div>
+        </div>
+      </div>
+
+      <div class="preview-content" id="socialPreview">
+        <div class="social-preview">
+          <div class="social-image" id="socialImagePreview">
+            <i class="fas fa-image"></i> Image Preview
+          </div>
+          <div class="social-title" id="socialTitle">Social Media Title</div>
+          <div class="social-description" id="socialDescription">This is how your content will appear when shared on social media platforms like Facebook and Twitter.</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-btn">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
+    </a>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Prabin's Toolbox | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== CONFIGURATION ==========
+    const CONFIG = {
+      titleMaxLength: 60,
+      descriptionMaxLength: 160,
+      templates: {
+        homepage: {
+          title: "My Awesome Website - Home",
+          description: "Welcome to our amazing website featuring the best services and content for our valued users.",
+          keywords: "website, services, content, home",
+          robots: "index, follow",
+          ogType: "website",
+          twitterCard: "summary_large_image"
+        },
+        blog: {
+          title: "Blog Post Title - My Awesome Blog",
+          description: "Read our latest blog post about interesting topics and insights that matter to you.",
+          keywords: "blog, post, article, insights",
+          robots: "index, follow",
+          ogType: "article",
+          twitterCard: "summary_large_image"
+        },
+        product: {
+          title: "Product Name - My Awesome Store",
+          description: "Discover our amazing product with premium features and competitive pricing.",
+          keywords: "product, store, shopping, buy",
+          robots: "index, follow",
+          ogType: "product",
+          twitterCard: "summary_large_image"
+        },
+        article: {
+          title: "Article Title - My Publication",
+          description: "In-depth article covering important topics with expert analysis and insights.",
+          keywords: "article, publication, news, analysis",
+          robots: "index, follow",
+          ogType: "article",
+          twitterCard: "summary"
+        }
+      }
+    };
+
+    // ========== DOM ELEMENTS ==========
+    const pageTitle = document.getElementById('pageTitle');
+    const metaDescription = document.getElementById('metaDescription');
+    const metaKeywords = document.getElementById('metaKeywords');
+    const canonicalUrl = document.getElementById('canonicalUrl');
+    const viewport = document.getElementById('viewport');
+    const charset = document.getElementById('charset');
+    const robots = document.getElementById('robots');
+    const language = document.getElementById('language');
+    const ogTitle = document.getElementById('ogTitle');
+    const ogDescription = document.getElementById('ogDescription');
+    const ogImage = document.getElementById('ogImage');
+    const ogUrl = document.getElementById('ogUrl');
+    const ogType = document.getElementById('ogType');
+    const twitterCard = document.getElementById('twitterCard');
+    const twitterSite = document.getElementById('twitterSite');
+    const twitterTitle = document.getElementById('twitterTitle');
+    const twitterDescription = document.getElementById('twitterDescription');
+    const twitterImage = document.getElementById('twitterImage');
+    const jsonLd = document.getElementById('jsonLd');
+    
+    const titleCount = document.getElementById('titleCount');
+    const descriptionCount = document.getElementById('descriptionCount');
+    
+    const generateBtn = document.getElementById('generateBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const validateJson = document.getElementById('validateJson');
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    
+    const codeOutput = document.getElementById('codeOutput');
+    const serpTitle = document.getElementById('serpTitle');
+    const serpUrl = document.getElementById('serpUrl');
+    const serpDescription = document.getElementById('serpDescription');
+    const socialTitle = document.getElementById('socialTitle');
+    const socialDescription = document.getElementById('socialDescription');
+    const socialImagePreview = document.getElementById('socialImagePreview');
+    
+    const toastContainer = document.getElementById('toastContainer');
+    
+    const accordions = document.querySelectorAll('.accordion');
+    const previewTabs = document.querySelectorAll('.preview-tab');
+    const previewContents = document.querySelectorAll('.preview-content');
+    const templateBtns = document.querySelectorAll('.template-btn');
+
+    // ========== INITIALIZATION ==========
+    function initializeGenerator() {
+      // Set up character counters
+      updateCharacterCount(pageTitle, titleCount, CONFIG.titleMaxLength);
+      updateCharacterCount(metaDescription, descriptionCount, CONFIG.descriptionMaxLength);
+      
+      // Add event listeners
+      pageTitle.addEventListener('input', () => updateCharacterCount(pageTitle, titleCount, CONFIG.titleMaxLength));
+      metaDescription.addEventListener('input', () => updateCharacterCount(metaDescription, descriptionCount, CONFIG.descriptionMaxLength));
+      
+      generateBtn.addEventListener('click', generateMetaTags);
+      resetBtn.addEventListener('click', resetForm);
+      clearBtn.addEventListener('click', clearForm);
+      validateJson.addEventListener('click', validateJsonLd);
+      copyCodeBtn.addEventListener('click', copyCodeToClipboard);
+      downloadBtn.addEventListener('click', downloadHtmlFile);
+      
+      // Accordion functionality
+      accordions.forEach(accordion => {
+        const header = accordion.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+          accordion.classList.toggle('active');
+        });
+      });
+      
+      // Preview tabs functionality
+      previewTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabName = tab.getAttribute('data-tab');
+          
+          // Update active tab
+          previewTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          // Show corresponding content
+          previewContents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === `${tabName}Preview`) {
+              content.classList.add('active');
+            }
+          });
+        });
+      });
+      
+      // Template buttons
+      templateBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const template = btn.getAttribute('data-template');
+          loadTemplate(template);
+        });
+      });
+      
+      // Auto-generate on page load
+      generateMetaTags();
+    }
+
+    // ========== CHARACTER COUNT ==========
+    function updateCharacterCount(input, counter, maxLength) {
+      const length = input.value.length;
+      counter.textContent = `${length}/${maxLength} characters`;
+      
+      // Update color based on length
+      if (length === 0) {
+        counter.className = 'character-count';
+      } else if (length <= maxLength * 0.8) {
+        counter.className = 'character-count good';
+      } else if (length <= maxLength) {
+        counter.className = 'character-count warning';
+      } else {
+        counter.className = 'character-count error';
+      }
+    }
+
+    // ========== TEMPLATE LOADING ==========
+    function loadTemplate(templateName) {
+      const template = CONFIG.templates[templateName];
+      if (!template) return;
+      
+      pageTitle.value = template.title;
+      metaDescription.value = template.description;
+      metaKeywords.value = template.keywords;
+      robots.value = template.robots;
+      ogType.value = template.ogType;
+      twitterCard.value = template.twitterCard;
+      
+      // Update character counts
+      updateCharacterCount(pageTitle, titleCount, CONFIG.titleMaxLength);
+      updateCharacterCount(metaDescription, descriptionCount, CONFIG.descriptionMaxLength);
+      
+      showToast(`Loaded ${templateName} template`, 'success');
+      generateMetaTags();
+    }
+
+    // ========== META TAG GENERATION ==========
+    function generateMetaTags() {
+      // Get values with fallbacks
+      const title = pageTitle.value || 'Untitled Page';
+      const description = metaDescription.value || 'No description provided';
+      const keywords = metaKeywords.value;
+      const canonical = canonicalUrl.value;
+      const viewportValue = viewport.value;
+      const charsetValue = charset.value;
+      const robotsValue = robots.value;
+      const languageValue = language.value;
+      
+      const ogTitleValue = ogTitle.value || title;
+      const ogDescriptionValue = ogDescription.value || description;
+      const ogImageValue = ogImage.value;
+      const ogUrlValue = ogUrl.value || canonical;
+      const ogTypeValue = ogType.value;
+      
+      const twitterCardValue = twitterCard.value;
+      const twitterSiteValue = twitterSite.value;
+      const twitterTitleValue = twitterTitle.value || title;
+      const twitterDescriptionValue = twitterDescription.value || description;
+      const twitterImageValue = twitterImage.value;
+      
+      const jsonLdValue = jsonLd.value;
+      
+      // Generate the code
+      let code = `<!-- Generated by Meta Tag Generator - https://www.prabinpokhrel1.com.np/meta-tag-generator.html -->\n`;
+      
+      // Basic meta tags
+      code += `<title>${escapeHtml(title)}</title>\n`;
+      code += `<meta name="description" content="${escapeHtml(description)}">\n`;
+      
+      if (keywords) {
+        code += `<meta name="keywords" content="${escapeHtml(keywords)}">\n`;
+      }
+      
+      // Technical meta
+      code += `<meta charset="${escapeHtml(charsetValue)}">\n`;
+      code += `<meta name="viewport" content="${escapeHtml(viewportValue)}">\n`;
+      
+      if (robotsValue) {
+        code += `<meta name="robots" content="${escapeHtml(robotsValue)}">\n`;
+      }
+      
+      // Language
+      if (languageValue) {
+        code += `<meta name="language" content="${escapeHtml(languageValue)}">\n`;
+      }
+      
+      // Canonical
+      if (canonical) {
+        code += `<link rel="canonical" href="${escapeHtml(canonical)}">\n`;
+      }
+      
+      // Open Graph
+      if (ogTitleValue || ogDescriptionValue || ogImageValue || ogUrlValue) {
+        code += `\n<!-- Open Graph / Facebook -->\n`;
+        if (ogTitleValue) code += `<meta property="og:title" content="${escapeHtml(ogTitleValue)}">\n`;
+        if (ogDescriptionValue) code += `<meta property="og:description" content="${escapeHtml(ogDescriptionValue)}">\n`;
+        if (ogImageValue) code += `<meta property="og:image" content="${escapeHtml(ogImageValue)}">\n`;
+        if (ogUrlValue) code += `<meta property="og:url" content="${escapeHtml(ogUrlValue)}">\n`;
+        if (ogTypeValue) code += `<meta property="og:type" content="${escapeHtml(ogTypeValue)}">\n`;
+      }
+      
+      // Twitter Card
+      if (twitterCardValue || twitterSiteValue || twitterTitleValue || twitterDescriptionValue || twitterImageValue) {
+        code += `\n<!-- Twitter -->\n`;
+        if (twitterCardValue) code += `<meta name="twitter:card" content="${escapeHtml(twitterCardValue)}">\n`;
+        if (twitterSiteValue) code += `<meta name="twitter:site" content="${escapeHtml(twitterSiteValue)}">\n`;
+        if (twitterTitleValue) code += `<meta name="twitter:title" content="${escapeHtml(twitterTitleValue)}">\n`;
+        if (twitterDescriptionValue) code += `<meta name="twitter:description" content="${escapeHtml(twitterDescriptionValue)}">\n`;
+        if (twitterImageValue) code += `<meta name="twitter:image" content="${escapeHtml(twitterImageValue)}">\n`;
+      }
+      
+      // JSON-LD
+      if (jsonLdValue) {
+        code += `\n<!-- Structured Data -->\n`;
+        code += `<script type="application/ld+json">\n${jsonLdValue}\n</script>\n`;
+      }
+      
+      // Update code preview
+      codeOutput.textContent = code;
+      
+      // Update SERP preview
+      serpTitle.textContent = title;
+      serpUrl.textContent = canonical || 'https://example.com/page-url';
+      serpDescription.textContent = description;
+      
+      // Update social preview
+      socialTitle.textContent = ogTitleValue || title;
+      socialDescription.textContent = ogDescriptionValue || description;
+      
+      if (ogImageValue || twitterImageValue) {
+        const imageUrl = ogImageValue || twitterImageValue;
+        socialImagePreview.innerHTML = `<img src="${imageUrl}" alt="Social preview" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">`;
+      } else {
+        socialImagePreview.innerHTML = '<i class="fas fa-image"></i> No Image Set';
+      }
+    }
+
+    // ========== FORM ACTIONS ==========
+    function resetForm() {
+      pageTitle.value = "My Awesome Website - Welcome";
+      metaDescription.value = "This is a sample description of my awesome website that provides valuable content and services to our users.";
+      metaKeywords.value = "website, awesome, content, services";
+      canonicalUrl.value = "https://example.com/page";
+      viewport.value = "width=device-width, initial-scale=1.0";
+      charset.value = "UTF-8";
+      robots.value = "index, follow";
+      language.value = "en";
+      ogTitle.value = "";
+      ogDescription.value = "";
+      ogImage.value = "";
+      ogUrl.value = "";
+      ogType.value = "website";
+      twitterCard.value = "summary";
+      twitterSite.value = "";
+      twitterTitle.value = "";
+      twitterDescription.value = "";
+      twitterImage.value = "";
+      jsonLd.value = "";
+      
+      updateCharacterCount(pageTitle, titleCount, CONFIG.titleMaxLength);
+      updateCharacterCount(metaDescription, descriptionCount, CONFIG.descriptionMaxLength);
+      
+      showToast('Form reset to defaults', 'success');
+      generateMetaTags();
+    }
+
+    function clearForm() {
+      const inputs = document.querySelectorAll('input, textarea, select');
+      inputs.forEach(input => {
+        if (input.id !== 'viewport' && input.id !== 'charset') {
+          input.value = '';
+        }
+      });
+      
+      updateCharacterCount(pageTitle, titleCount, CONFIG.titleMaxLength);
+      updateCharacterCount(metaDescription, descriptionCount, CONFIG.descriptionMaxLength);
+      
+      showToast('Form cleared', 'success');
+      generateMetaTags();
+    }
+
+    // ========== JSON VALIDATION ==========
+    function validateJsonLd() {
+      const jsonString = jsonLd.value;
+      if (!jsonString.trim()) {
+        showToast('JSON-LD field is empty', 'warning');
+        return;
+      }
+      
+      try {
+        JSON.parse(jsonString);
+        showToast('JSON-LD is valid', 'success');
+      } catch (error) {
+        showToast(`JSON Error: ${error.message}`, 'error');
+      }
+    }
+
+    // ========== CODE ACTIONS ==========
+    function copyCodeToClipboard() {
+      const code = codeOutput.textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Code copied to clipboard!', 'success');
+      }).catch(err => {
+        showToast('Failed to copy code', 'error');
+        console.error('Copy failed:', err);
+      });
+    }
+
+    function downloadHtmlFile() {
+      const code = codeOutput.textContent;
+      const blob = new Blob([code], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'head-snippet.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('HTML file downloaded', 'success');
+    }
+
+    // ========== TOAST NOTIFICATIONS ==========
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
+        <span>${message}</span>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      // Show toast
+      setTimeout(() => toast.classList.add('show'), 100);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+          }
+        }, 300);
+      }, 5000);
+    }
+
+    // ========== HELPER FUNCTIONS ==========
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ========== THEME TOGGLE ==========
+    const themeToggle = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // Check for saved theme preference or use device preference
+    const currentTheme = localStorage.getItem("theme") || 
+                        (prefersDarkScheme.matches ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      
+      // Save theme preference
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+    
+    themeToggle.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        document.body.classList.toggle("light-mode");
+        
+        // Save theme preference
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+      }
+    });
+
+    // Initialize the generator when the page loads
+    document.addEventListener('DOMContentLoaded', initializeGenerator);
+  </script>
+</body>
+</html>
